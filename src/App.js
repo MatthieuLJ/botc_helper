@@ -1,16 +1,17 @@
 import Counter from './Counter.tsx';
-import { useState } from 'react';
 import './App.css';
 import Townsquare from './Townsquare.tsx';
+import GameState from './GameState.tsx';
+import { Provider } from 'react-redux';
 
 function App() {
-  const [numPlayers, setNumPlayers] = useState(3);
-
   return (
+    <Provider store={GameState}>
     <div className="App">
-      <Counter minimum={1} maximum={20} onSet={setNumPlayers}/>
-      <Townsquare numPlayers={numPlayers}/>
+      <Counter/>
+      <Townsquare/>
     </div>
+    </Provider>
   );
 }
 

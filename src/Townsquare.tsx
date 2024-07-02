@@ -1,13 +1,13 @@
 import React from 'react';
 import PlayerToken from './PlayerToken.tsx';
+import { useAppSelector  } from './hooks.ts';
 
-type TownsquareProps = {
-    numPlayers: number
-}
+type TownsquareProps = {}
 
 function Townsquare(props: TownsquareProps) {
+    const numPlayers = useAppSelector(state => state.playerNumber.value);
     const players : number[] = [];
-    for (let i=0; i<props.numPlayers; i++) {
+    for (let i=0; i<numPlayers; i++) {
         players.push(i);
     }
     return <ul>

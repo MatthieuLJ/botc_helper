@@ -1,35 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from './hooks.ts';
+import { decrement, increment, setPlayerNumber } from './PlayerNumberSlice.tsx';
 
-type CounterProps = {
-    maximum: number | null,
-    minimum: number | null,
-    onSet: (value: number) => null | null
-}
+const MINIMUM_PLAYER_NUMBER=3;
+const MAXIMUM_PLAYER_NUMBER=25;
+
+type CounterProps = {}
 
 function Counter(props: CounterProps) {
-    const counterMinimum: number = props.minimum ?? 0;
-    const [value, setValue] = useState(counterMinimum);
+    const numPlayers = useAppSelector(state => state.playerNumber.value);
+    const dispatch = useAppDispatch(); 
 
-    const setCounter = (value : number) => {
-        if (props.onSet) { props.onSet(value);}
-        setValue(value);
-    }
-
-    const onInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let newValue: number = parseInt(event.target.value);
-        if (props.minimum)
-            newValue = Math.max(newValue, props.minimum)
-        if (props.maximum)
-            newValue = Math.min(newValue, props.maximum);
-        setCounter(newValue);
-        
+        newValue = Math.max(newValue, MINIMUM_PLAYER_NUMBER)
+        newValue = Math.min(newValue, MAXIMUM_PLAYER_NUMBER);
+        dispatch(setPlayerNumber(newValue));
     }
 
     return <>
-        <button onClick={() => setCounter(value - 1)} disabled={props.minimum===null || value <= props.minimum}>-</button>
-        <input value={value} type="number" onChange={onInputChange} />
-        <button onClick={() => setCounter(value + 1)} disabled={props.maximum===null || value >= props.maximum}>+</button>
+        <button onClick={() => dispatch(decrement())} disabled={numPlayers <= MINIMUM_PLAYER_NUMBER}>-</button>
+        <input value={numPlayers} type="number" onChange={onInputChange} />
+        <button onClick={() => dispatch(increment())} disabled={numPlayers >= MAXIMUM_PLAYER_NUMBER}>+</button>
     </>;
 }
 
