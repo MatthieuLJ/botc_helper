@@ -8,7 +8,7 @@ const MAXIMUM_PLAYER_NUMBER=25;
 type CounterProps = {}
 
 function Counter(props: CounterProps) {
-    const numPlayers = useAppSelector(state => state.players.num_players);
+    const numPlayers = useAppSelector(state => state.players.players).length;
     const dispatch = useAppDispatch(); 
 
     return <>

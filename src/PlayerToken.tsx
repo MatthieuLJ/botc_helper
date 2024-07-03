@@ -1,11 +1,11 @@
 import React from 'react';
 
 type PlayerTokenProps = {
-    id: number
+    name: string
 }
 
 function PlayerToken(props : PlayerTokenProps) {
-    return <li>Player {props.id}</li>;
+    return <li>{props.name}</li>;
 }
 
 export default PlayerToken;
