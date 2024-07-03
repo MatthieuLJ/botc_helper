@@ -13,7 +13,7 @@ function Counter(props: CounterProps) {
 
     return <>
         <button onClick={() => dispatch(decrementCount())} disabled={numPlayers <= MINIMUM_PLAYER_NUMBER}>-</button>
-        <text>{numPlayers}</text>
+        {numPlayers}
         <button onClick={() => dispatch(incrementCount())} disabled={numPlayers >= MAXIMUM_PLAYER_NUMBER}>+</button>
     </>;
 }
