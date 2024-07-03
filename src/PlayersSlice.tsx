@@ -13,7 +13,7 @@ const initialState: PlayersState = {
 }
 
 const findNextPlayerName = (state: PlayersState): string => {
-    var allNumbers: number[] = [];
+    const allNumbers: number[] = [];
     for (const player of state.players) {
         const numFound = /Player_(?<id>\d+)/.exec(player.name);
         if (numFound != null) {
@@ -21,8 +21,8 @@ const findNextPlayerName = (state: PlayersState): string => {
         }
     }
 
-    var result = 1;
-    while (allNumbers.indexOf(result) !== -1) {
+    let result = 1;
+    while (allNumbers.includes(result)) {
         result++;
     }
 
@@ -30,13 +30,13 @@ const findNextPlayerName = (state: PlayersState): string => {
 }
 
 const findNextId = (state: PlayersState): number => {
-    var allNumbers: number[] = [];
+    const allNumbers: number[] = [];
     for (const player of state.players) {
         allNumbers.push(player.id);
     }
 
-    var result = 0;
-    while (allNumbers.indexOf(result) !== -1) {
+    let result = 0;
+    while (allNumbers.includes(result)) {
         result++;
     }
 
@@ -52,10 +52,14 @@ export const PlayerNumberSlice = createSlice({
         },
         decrementCount: state => {
             state.players.pop();
+        },
+        setName: (state, action) => {
+            const index = state.players.findIndex((element) => element.id === action.payload.id);
+            state.players[index].name = action.payload.name;
         }
     }
 })
 
-export const { incrementCount, decrementCount } = PlayerNumberSlice.actions;
+export const { incrementCount, decrementCount, setName } = PlayerNumberSlice.actions;
 
 export default PlayerNumberSlice.reducer;
