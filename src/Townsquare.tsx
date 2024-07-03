@@ -5,7 +5,7 @@ import { useAppSelector  } from './hooks.ts';
 type TownsquareProps = {}
 
 function Townsquare(props: TownsquareProps) {
-    const numPlayers = useAppSelector(state => state.playerNumber.value);
+    const numPlayers = useAppSelector(state => state.players.num_players);
     const players : number[] = [];
     for (let i=0; i<numPlayers; i++) {
         players.push(i);

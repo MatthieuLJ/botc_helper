@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import playerNumberReducer from './PlayerNumberSlice.tsx'
+import playerNumberReducer from './PlayersSlice.tsx'
 
 export const GameState = configureStore({
     reducer: {
-        playerNumber : playerNumberReducer
+        players : playerNumberReducer
     }
 })
 
