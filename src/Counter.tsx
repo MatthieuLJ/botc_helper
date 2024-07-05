@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from './hooks.ts';
-import { decrementCount, incrementCount } from './PlayersSlice.tsx';
+import { decrementCount, incrementCount } from './game/PlayersSlice.tsx';
 
 const MINIMUM_PLAYER_NUMBER=3;
 const MAXIMUM_PLAYER_NUMBER=25;

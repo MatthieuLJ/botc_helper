@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import type { AppDispatch, RootState } from './GameState'
+import type { AppDispatch, RootState } from './game/GameState'
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
