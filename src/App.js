@@ -1,4 +1,3 @@
-import Counter from './Counter.tsx';
 import './App.css';
 import TownsquareSetup from './TownsquareSetup.tsx';
 import GameState from './game/GameState.tsx';
@@ -8,7 +7,6 @@ function App() {
   return (
     <Provider store={GameState}>
       <div className="App">
-        <Counter />
         <TownsquareSetup />
       </div>
     </Provider>

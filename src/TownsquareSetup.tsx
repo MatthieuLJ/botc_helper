@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import PlayerToken from './PlayerToken.tsx';
 import { useAppDispatch, useAppSelector } from './hooks.ts';
 import { setName } from './game/PlayersSlice.tsx';
+import Counter from './Counter.tsx';
 
-type TownsquareProps = {}
-
-function Townsquare(props: TownsquareProps) {
+function TownsquareSetup() {
     const players = useAppSelector(state => state.players.players)
     const dispatch = useAppDispatch()
 
@@ -17,6 +16,7 @@ function Townsquare(props: TownsquareProps) {
     const acceptNewName = () => { dispatch(setName({ id: currentIndex, name: nameField })); setChangingName(false); }
 
     return <>
+        <Counter />
         <ul>
             {players.map((p, index) => <PlayerToken key={p.id} index={index}
                 tapPlayer={() => {
@@ -37,4 +37,4 @@ function Townsquare(props: TownsquareProps) {
     </>
 }
 
-export default Townsquare;
+export default TownsquareSetup;
