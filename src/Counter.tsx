@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from './hooks.ts';
+import { useAppSelector, useAppDispatch } from './game/hooks.ts';
 import { decrementCount, incrementCount } from './game/PlayersSlice.tsx';
 
 const MINIMUM_PLAYER_NUMBER=3;

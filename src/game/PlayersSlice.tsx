@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 type PlayersState = {
-    players: { id: number, name: string, claims: string[] }[]
+    players: { id: number, name: string, alive: boolean, claims: string[] }[]
 }
 
 const initialState: PlayersState = {
     players: [
-        { id: 0, name: "Player_1", claims: [] },
-        { id: 1, name: "Player_2", claims: [] },
-        { id: 2, name: "Player_3", claims: [] },
+        { id: 0, name: "Player_1", alive: true, claims: [] },
+        { id: 1, name: "Player_2", alive: true, claims: [] },
+        { id: 2, name: "Player_3", alive: true, claims: [] },
     ]
 }
 
@@ -43,12 +43,17 @@ const findNextId = (state: PlayersState): number => {
     return result;
 }
 
-export const PlayerNumberSlice = createSlice({
+export const PlayerSlice = createSlice({
     name: 'playerNumber',
     initialState,
     reducers: {
         incrementCount: state => {
-            state.players.push({ id: findNextId(state), name: findNextPlayerName(state), claims: [] });
+            state.players.push({
+                id: findNextId(state),
+                name: findNextPlayerName(state),
+                alive: true,
+                claims: []
+            });
         },
         decrementCount: state => {
             state.players.pop();
@@ -60,6 +65,6 @@ export const PlayerNumberSlice = createSlice({
     }
 })
 
-export const { incrementCount, decrementCount, setName } = PlayerNumberSlice.actions;
+export const { incrementCount, decrementCount, setName } = PlayerSlice.actions;
 
-export default PlayerNumberSlice.reducer;
+export default PlayerSlice.reducer;

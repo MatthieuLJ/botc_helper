@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerToken from './PlayerToken.tsx';
-import { useAppSelector } from './hooks.ts';
+import { useAppSelector } from './game/hooks.ts';
 
 type TownsquareProps = {}
 

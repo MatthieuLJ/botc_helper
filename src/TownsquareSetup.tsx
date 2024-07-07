@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PlayerToken from './PlayerToken.tsx';
-import { useAppDispatch, useAppSelector } from './hooks.ts';
+import { useAppDispatch, useAppSelector } from './game/hooks.ts';
 import { setName } from './game/PlayersSlice.tsx';
 import Counter from './Counter.tsx';
 
