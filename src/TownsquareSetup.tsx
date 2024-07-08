@@ -63,6 +63,7 @@ function TownsquareSetup() {
         </dialog>
         <label htmlFor="scripts">Choose a script</label>
         <select name="scripts" onChange={selectScript}>
+            { scriptName === "" ? <option value="" key="none" /> : null }
             {scripts.map((s) => <option value={s.file} key={s.name}>{s.name}</option>)}
         </select>
         <p>
