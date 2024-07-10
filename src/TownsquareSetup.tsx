@@ -17,7 +17,7 @@ function TownsquareSetup() {
             disabled={roles.length === 0}>Show script</button>
         <dialog open={showCharacters}
             onClose={() => { setShowCharacters(false); }}>
-            <Characters highlights={[]} />
+            <Characters highlights={null} closeDialog={() => {setShowCharacters(false);}}/>
         </dialog>
         <p>
             <button onClick={() => { return navigate('/play'); }}>Done</button>
