@@ -1,8 +1,9 @@
 import { roleType, CharacterType } from '../game/role.ts';
+import img from './images/icon_scarletwoman.png';
 
 const scarlet_woman: roleType = {
     name: "Scarlet Woman",
-    icon: "icon_scarlet_woman.png",
+    icon: img,
     type: CharacterType.Minion,
     ability: "If there are 5 or more players alive & the Demon dies, you " +
         "become the Demon. (Travellers don't count)",

@@ -1,9 +1,10 @@
 import { roleType, CharacterType } from '../game/role.ts';
 import { gameTime } from "../game/gameTime.ts";
+import img from './images/icon_juggler.png';
 
 const juggler: roleType = {
     name: "Juggler",
-    icon: "icon_juggler.png",
+    icon: img,
     type: CharacterType.Townsfolk,
     ability: "On your 1st day, publicly guess up to 5 players' characters. " +
         "That night, you learn how many you got correct.",

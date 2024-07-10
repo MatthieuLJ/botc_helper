@@ -1,9 +1,10 @@
 import { roleType, CharacterType } from '../game/role.ts';
 import { gameTime } from "../game/gameTime.ts";
+import img from './images/icon_investigator.png';
 
 const investigator: roleType = {
     name: "Investigator",
-    icon: "icon_investigator.png",
+    icon: img,
     type: CharacterType.Townsfolk,
     ability: "You start knowing that 1 of 2 players is a particular Minion.",
 

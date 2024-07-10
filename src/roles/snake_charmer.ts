@@ -1,9 +1,10 @@
 import { roleType, CharacterType } from '../game/role.ts';
 import { gameTime } from "../game/gameTime.ts";
+import img from './images/icon_snakecharmer.png';
 
 const snake_charmer: roleType = {
     name: "Snake Charmer",
-    icon: "icon_snakecharmer.png",
+    icon: img,
     type: CharacterType.Townsfolk,
     ability: "Each night, choose an alive player: a chosen Demon swaps " +
         "characters & alignments with you & is then poisoned.",

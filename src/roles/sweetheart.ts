@@ -1,9 +1,10 @@
 import { roleType, CharacterType } from '../game/role.ts'
 import { gameTime } from "../game/gameTime.ts";
+import img from './images/icon_sweetheart.png';
 
 const sweetheart: roleType = {
     name: "Sweetheart",
-    icon: "icon_sweetheart.png",
+    icon: img,
     type: CharacterType.Outsider,
     ability: "When you die, 1 player is drunk from now on.",
 

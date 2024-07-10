@@ -1,8 +1,9 @@
 import { roleType, CharacterType } from '../game/role.ts'
+import img from './images/icon_mutant.png';
 
 const mutant: roleType = {
     name: "Mutant",
-    icon: "icon_mutant.png",
+    icon: img,
     type: CharacterType.Outsider,
     ability: 'If you are "mad" about being an Outsider, you might be ' +
         'executed.',
