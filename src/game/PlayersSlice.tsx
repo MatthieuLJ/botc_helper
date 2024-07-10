@@ -6,27 +6,10 @@ type PlayersState = {
 
 const initialState: PlayersState = {
     players: [
-        { id: 0, name: "Player_1", alive: true, claims: [] },
-        { id: 1, name: "Player_2", alive: true, claims: [] },
-        { id: 2, name: "Player_3", alive: true, claims: [] },
+        { id: 0, name: "New Player", alive: true, claims: [] },
+        { id: 1, name: "New Player", alive: true, claims: [] },
+        { id: 2, name: "New Player", alive: true, claims: [] },
     ]
-}
-
-const findNextPlayerName = (state: PlayersState): string => {
-    const allNumbers: number[] = [];
-    for (const player of state.players) {
-        const numFound = /Player_(?<id>\d+)/.exec(player.name);
-        if (numFound != null) {
-            allNumbers.push(Number(numFound[1]));
-        }
-    }
-
-    let result = 1;
-    while (allNumbers.includes(result)) {
-        result++;
-    }
-
-    return `Player_${result}`;
 }
 
 const findNextId = (state: PlayersState): number => {
@@ -50,7 +33,7 @@ export const PlayerSlice = createSlice({
         incrementCount: state => {
             state.players.push({
                 id: findNextId(state),
-                name: findNextPlayerName(state),
+                name: "New Player",
                 alive: true,
                 claims: []
             });
