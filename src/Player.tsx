@@ -29,7 +29,7 @@ function Player() {
                     Next
                 </td>
             </tr>
-            <tr>{player_info.name}</tr>
+            <tr><td>{player_info.name}</td></tr>
         </tbody>
     </table>;
 }

@@ -20,7 +20,7 @@ function TownsquareSetup() {
             <Characters highlights={null} closeDialog={() => {setShowCharacters(false);}}/>
         </dialog>
         <p>
-            <button onClick={() => { return navigate('/play'); }}>Done</button>
+            <button onClick={() => { return navigate('/play', { replace: true}); }}>Done</button>
         </p>
     </>;
 }
