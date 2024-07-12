@@ -16,18 +16,20 @@ function Player() {
     return <table>
         <tbody>
             <tr>
-                <td onClick={() => {
+                <td rowSpan={2} onClick={() => {
                     navigate(`/player/${prev_index}`);
                 }}>
                     Previous
                 </td>
-                <td>{player_info.name}</td>
-                <td onClick={() => {
+                <td>{player_info.claims.length === 0 ? "No Claims" :
+                    player_info.claims.join(",")}</td>
+                <td rowSpan={2} onClick={() => {
                     navigate(`/player/${next_index}`);
                 }}>
                     Next
                 </td>
             </tr>
+            <tr>{player_info.name}</tr>
         </tbody>
     </table>;
 }
