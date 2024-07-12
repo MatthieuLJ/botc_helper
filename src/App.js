@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <Townsquare />
   },
   {
-    path: "/player/:playerId",
+    path: "/player/:playerIndex",
     element: <Player />
   }
 

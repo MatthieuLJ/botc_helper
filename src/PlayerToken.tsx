@@ -11,7 +11,6 @@ function PlayerToken(props: PlayerTokenProps) {
 
     return <li onClick={() => props.tapPlayer(props.index)}>
         {player_info.name}
-        
     </li>;
 }
 
