@@ -44,10 +44,14 @@ export const PlayerSlice = createSlice({
         setName: (state, action) => {
             const index = state.players.findIndex((element) => element.id === action.payload.id);
             state.players[index].name = action.payload.name;
+        },
+        setClaims: (state, action) => {
+            const index = state.players.findIndex((element) => element.id === action.payload.id);
+            state.players[index].claims = action.payload.claims;
         }
     }
 })
 
-export const { incrementCount, decrementCount, setName } = PlayerSlice.actions;
+export const { incrementCount, decrementCount, setName, setClaims } = PlayerSlice.actions;
 
 export default PlayerSlice.reducer;

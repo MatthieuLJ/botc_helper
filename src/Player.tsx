@@ -1,6 +1,8 @@
-import React from "react";
-import { useAppSelector } from './game/hooks.ts';
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from './game/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
+import Characters from "./Characters.tsx";
+import { setClaims } from "./game/PlayersSlice.tsx";
 
 function Player() {
     const params = useParams();
@@ -12,8 +14,10 @@ function Player() {
     const next_index = (Number(params.playerIndex) + 1) % num_players;
     const prev_index = (Number(params.playerIndex) - 1) < 0 ? num_players - 1 :
         (Number(params.playerIndex) - 1);
+    const [pickClaims, setPickClaims] = useState(false);
+    const dispatch = useAppDispatch();
 
-    return <table>
+    return <><table>
         <tbody>
             <tr>
                 <td rowSpan={2} onClick={() => {
@@ -21,7 +25,7 @@ function Player() {
                 }}>
                     Previous
                 </td>
-                <td>{player_info.claims.length === 0 ? "No Claims" :
+                <td onClick={() => { setPickClaims(true); }}>{player_info.claims.length === 0 ? "No Claims" :
                     player_info.claims.join(",")}</td>
                 <td rowSpan={2} onClick={() => {
                     navigate(`/player/${next_index}`);
@@ -31,7 +35,14 @@ function Player() {
             </tr>
             <tr><td>{player_info.name}</td></tr>
         </tbody>
-    </table>;
+    </table>
+        <dialog open={pickClaims} onClose={() => { setPickClaims(false); }}>
+            <Characters highlights={player_info.claims} closeDialog={(highlights) => {
+                dispatch(setClaims({ id: player_info.id, claims: highlights }));
+                setPickClaims(false);
+            }} />
+        </dialog>
+    </>;
 }
 
 export default Player;
