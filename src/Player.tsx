@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from './game/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./Characters.tsx";
 import { setClaims } from "./game/PlayersSlice.tsx";
+import { ScriptContext, ScriptContextType } from "./game/ScriptContext.tsx";
 
 function Player() {
     const params = useParams();
@@ -16,6 +17,7 @@ function Player() {
         (Number(params.playerIndex) - 1);
     const [pickClaims, setPickClaims] = useState(false);
     const dispatch = useAppDispatch();
+    const { getRole }: ScriptContextType = useContext(ScriptContext);
 
     return <><table>
         <tbody>
@@ -25,8 +27,11 @@ function Player() {
                 }}>
                     Previous
                 </td>
-                <td onClick={() => { setPickClaims(true); }}>{player_info.claims.length === 0 ? "No Claims" :
-                    player_info.claims.join(",")}</td>
+                <td onClick={() => { setPickClaims(true); }}>
+                    {player_info.claims.length === 0 ? "No Claims" :
+                        player_info.claims.map((r) => {
+                            const role = getRole(r);
+                            return <img src={role?.icon} alt={role?.name}  height="50" width="50" key={role?.name}/>})}</td>
                 <td rowSpan={2} onClick={() => {
                     navigate(`/player/${next_index}`);
                 }}>
