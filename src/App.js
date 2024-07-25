@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TownsquareSetup from './TownsquareSetup.tsx';
-import Townsquare  from './Townsquare.tsx';
+import Playview from './Playview.tsx';
 import GameState from './game/GameState.tsx';
 import Playerview from './components/Playerview.tsx';
 import { Provider } from 'react-redux';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/play",
-    element: <Townsquare />
+    element: <Playview />
   },
   {
     path: "/player/:playerIndex",
