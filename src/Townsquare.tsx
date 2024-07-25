@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerToken from './PlayerToken.tsx';
+import PlayerToken from './components/PlayerToken.tsx';
 import { useAppSelector } from './game/hooks.ts';
 import { useNavigate } from 'react-router-dom';
 

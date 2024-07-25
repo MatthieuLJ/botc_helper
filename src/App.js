@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import TownsquareSetup from './TownsquareSetup.tsx';
-import Townsquare from './Townsquare.tsx';
+import Townsquare  from './Townsquare.tsx';
 import GameState from './game/GameState.tsx';
-import Player from './Player.tsx';
+import Playerview from './components/Playerview.tsx';
 import { Provider } from 'react-redux';
 import { ScriptProvider } from './game/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/player/:playerIndex",
-    element: <Player />
+    element: <Playerview />
   }
 
 ]);

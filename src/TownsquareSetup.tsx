@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { PlayersSetup } from './PlayersSetup.tsx';
 import { ScriptSetup } from './ScriptSetup.tsx';
 import { ScriptContext, ScriptContextType } from './game/ScriptContext.tsx';
-import Characters from './Characters.tsx';
+import Characters from './components/Characters.tsx';
 import { useNavigate } from 'react-router-dom';
 
 function TownsquareSetup() {

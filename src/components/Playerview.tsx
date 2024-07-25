@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { useAppDispatch, useAppSelector } from './game/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../game/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./Characters.tsx";
-import { setClaims } from "./game/PlayersSlice.tsx";
-import { ScriptContext, ScriptContextType } from "./game/ScriptContext.tsx";
+import { setClaims } from "../game/PlayersSlice.tsx";
+import { ScriptContext, ScriptContextType } from "../game/ScriptContext.tsx";
 
-function Player() {
+function Playerview() {
     const params = useParams();
     const player_info = useAppSelector(
         state => state.players.players[Number(params.playerIndex)]);
@@ -50,4 +50,4 @@ function Player() {
     </>;
 }
 
-export default Player;
+export default Playerview;
