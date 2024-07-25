@@ -10,12 +10,12 @@ const barber: roleType = {
         "(not another Demon) to swap characters.",
 
     actions: {
-        "Die": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Die": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

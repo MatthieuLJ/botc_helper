@@ -10,12 +10,12 @@ const witch: roleType = {
         "die. If just 3 players live, you lose this ability.",
 
     actions: {
-        "Picks": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Picks": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

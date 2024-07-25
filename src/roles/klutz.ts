@@ -10,12 +10,12 @@ const klutz: roleType = {
         "if they are evil, your team loses.",
 
     actions: {
-        "Picks": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Picks": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

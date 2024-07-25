@@ -14,12 +14,12 @@ interface role {
     type: CharacterType;
     ability: string;
     actions: {
-        [action: string]: [
-            (time: gameTime) => void, // start
-            (index: number) => void, // tapPlayer
-            (index: number) => void, // tapCharacter
-            () => void // stop
-        ]
+        [action: string]: {
+            start: (time: gameTime) => void, // start
+            tapPlayer: (index: number) => void, // tapPlayer
+            tapCharacter: (index: number) => void, // tapCharacter
+            stop: (bool) => void // stop
+        }
     };
 }
 

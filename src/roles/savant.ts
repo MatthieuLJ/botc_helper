@@ -10,12 +10,12 @@ const savant: roleType = {
         "private: 1 is true & 1 is false.",
 
     actions: {
-        "Learn": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Learn": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

@@ -1,4 +1,4 @@
-import { roleType, CharacterType } from '../game/role.ts'
+import { roleType, CharacterType } from '../game/role.ts';
 import { gameTime } from "../game/gameTime.ts";
 import img from './images/icon_sweetheart.png';
 
@@ -9,13 +9,13 @@ const sweetheart: roleType = {
     ability: "When you die, 1 player is drunk from now on.",
 
     actions: {
-        "Die": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Die": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
-}
+};
 
 export default sweetheart;

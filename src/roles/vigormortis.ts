@@ -10,12 +10,12 @@ const vigormortis: roleType = {
         "their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
 
     actions: {
-        "Kill": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Kill": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

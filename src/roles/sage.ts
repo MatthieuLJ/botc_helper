@@ -9,12 +9,12 @@ const sage: roleType = {
     ability: "If the Demon kills you, you learn that it is 1 of 2 players.",
 
     actions: {
-        "Learn": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Learn": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

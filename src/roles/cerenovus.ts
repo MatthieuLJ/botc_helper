@@ -10,12 +10,12 @@ const cerenovus: roleType = {
         ' they are this character tomorrow, or might be executed.',
 
     actions: {
-        "MakeMad": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "MakeMad": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

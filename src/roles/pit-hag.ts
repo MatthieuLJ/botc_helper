@@ -10,12 +10,12 @@ const pithag: roleType = {
         " in play). If a Demon is made, deaths tonight are arbitrary.",
 
     actions: {
-        "Kill": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Kill": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

@@ -10,12 +10,12 @@ const fanggu: roleType = {
         "kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
 
     actions: {
-        "Kill": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Kill": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

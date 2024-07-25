@@ -10,12 +10,12 @@ const snake_charmer: roleType = {
         "characters & alignments with you & is then poisoned.",
 
     actions: {
-        "Picks": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Picks": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

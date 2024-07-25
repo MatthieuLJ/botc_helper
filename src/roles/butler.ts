@@ -10,12 +10,12 @@ const butler: roleType = {
         "only vote if they are voting too.",
 
     actions: {
-        "ChooseMaster": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "ChooseMaster": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

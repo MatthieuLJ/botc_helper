@@ -10,12 +10,12 @@ const vortox: roleType = {
         "yield false info. Each day, if no-one is executed, evil wins.",
 
     actions: {
-        "Kill": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Kill": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

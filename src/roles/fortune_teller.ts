@@ -10,12 +10,12 @@ const fortune_teller: roleType = {
         "There is a good player that registers as a Demon to you.",
 
     actions: {
-        "Learn": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Learn": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

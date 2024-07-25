@@ -10,12 +10,12 @@ const evil_twin: roleType = {
         "is executed, evil wins. Good can't win if you both live.",
 
     actions: {
-        "Pair": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "Pair": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 

@@ -10,12 +10,12 @@ const philosopher: roleType = {
         "ability. If this character is in play, they are drunk.",
 
     actions: {
-        "GainAbility": [
-            (time: gameTime) => { }, // start
-            (index: number) => { },  // tapPlayer
-            (index: number) => { },  // tapCharacter
-            () => { }                // stop
-        ]
+        "GainAbility": {
+            start: (time: gameTime) => { },
+            tapPlayer: (index: number) => { },
+            tapCharacter: (index: number) => { },
+            stop: () => { }
+        }
     }
 };
 
