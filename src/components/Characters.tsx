@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ScriptContext, ScriptContextType } from '../game/ScriptContext.tsx';
-import { CharacterType, roleType } from "../game/role.ts";
+import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
+import { CharacterType, roleType } from "../state/role.ts";
 
 type CharactersPropType = {
     highlights: string[] | null,

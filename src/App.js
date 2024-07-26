@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 import TownsquareSetup from './TownsquareSetup.tsx';
 import Playview from './Playview.tsx';
-import GameState from './game/GameState.tsx';
+import GameState from './state/GameState.tsx';
 import Playerview from './components/Playerview.tsx';
 import { Provider } from 'react-redux';
-import { ScriptProvider } from './game/ScriptContext.tsx';
+import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
 const router = createBrowserRouter([

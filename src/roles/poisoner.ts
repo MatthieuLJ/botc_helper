@@ -1,5 +1,5 @@
-import { roleType, CharacterType } from '../game/role.ts';
-import { gameTime } from "../game/gameTime.ts";
+import { roleType, CharacterType } from '../state/role.ts';
+import { gameTime } from "../state/gameTime.ts";
 import img from './images/icon_poisoner.png';
 
 const poisoner: roleType = {

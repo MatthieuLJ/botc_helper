@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Counter from "./components/Counter.tsx";
 import PlayerToken from "./components/PlayerToken.tsx";
-import { useAppDispatch, useAppSelector } from "./game/hooks.ts";
-import { setName } from './game/PlayersSlice.tsx';
+import { useAppDispatch, useAppSelector } from "./state/hooks.ts";
+import { setName } from './state/PlayersSlice.tsx';
 
 function PlayersSetup(props) {
     const players = useAppSelector(state => state.players.players);

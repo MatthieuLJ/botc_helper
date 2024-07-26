@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScriptContext, ScriptContextType } from "./game/ScriptContext.tsx";
+import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
 import scripts from './game_scripts/scripts.ts';
 
 function ScriptSetup(props) {

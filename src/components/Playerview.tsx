@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { useAppDispatch, useAppSelector } from '../game/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./Characters.tsx";
-import { setClaims } from "../game/PlayersSlice.tsx";
-import { ScriptContext, ScriptContextType } from "../game/ScriptContext.tsx";
+import { setClaims } from "../state/PlayersSlice.tsx";
+import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 
 function Playerview() {
     const params = useParams();

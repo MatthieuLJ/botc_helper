@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { ScriptContext, ScriptContextType } from "../game/ScriptContext.tsx";
-import { roleType } from "../game/role";
-import { gameTime } from "../game/gameTime";
+import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
+import { roleType } from "../state/role.ts";
+import { gameTime } from "../state/gameTime.ts";
 
 type ActionboxProps = {};
 

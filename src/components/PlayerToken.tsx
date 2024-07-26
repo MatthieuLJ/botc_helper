@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../game/hooks.ts';
+import { useAppSelector } from '../state/hooks.ts';
 
 type PlayerTokenProps = {
     index: number,

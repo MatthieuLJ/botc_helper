@@ -1,4 +1,4 @@
-import { roleType, CharacterType } from '../game/role.ts';
+import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_drunk.png';
 
 const drunk: roleType = {
