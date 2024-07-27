@@ -27,7 +27,7 @@ const findNextId = (state: PlayersState): number => {
 }
 
 export const PlayerSlice = createSlice({
-    name: 'playerNumber',
+    name: 'players',
     initialState,
     reducers: {
         incrementCount: state => {
