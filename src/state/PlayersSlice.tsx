@@ -30,16 +30,20 @@ export const PlayerSlice = createSlice({
     name: 'players',
     initialState,
     reducers: {
-        incrementCount: state => {
-            state.players.push({
-                id: findNextId(state),
-                name: "New Player",
-                alive: true,
-                claims: []
-            });
-        },
-        decrementCount: state => {
-            state.players.pop();
+        setCount: (state, action) => {
+            const new_count = action.payload.count;
+            if (new_count > state.players.length) {
+                const added_players = Array(new_count - state.players.length);
+                added_players.fill({
+                    id: findNextId(state),
+                    name: "New Player",
+                    alive: true,
+                    claims: []
+                });
+                state.players.push(...added_players);
+            } else {
+                state.players = state.players.slice(0, new_count);
+            }
         },
         setName: (state, action) => {
             const index = state.players.findIndex((element) => element.id === action.payload.id);
@@ -52,6 +56,6 @@ export const PlayerSlice = createSlice({
     }
 })
 
-export const { incrementCount, decrementCount, setName, setClaims } = PlayerSlice.actions;
+export const { setCount, setName, setClaims } = PlayerSlice.actions;
 
 export default PlayerSlice.reducer;
