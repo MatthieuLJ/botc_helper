@@ -2,9 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import debounce from "debounce";
 import playerReducer from './PlayersSlice.tsx';
 
+const state_version = 1;
+
 // convert object to string and store in localStorage
 function saveToLocalStorage(state) {
     try {
+        localStorage.setItem("state_version", String(state_version));
         const serialisedState = JSON.stringify(state);
         localStorage.setItem("persistantState", serialisedState);
     } catch (e) {
@@ -15,6 +18,15 @@ function saveToLocalStorage(state) {
 // load string from localStarage and convert into an Object
 // invalid output must be undefined
 function loadFromLocalStorage() {
+    try {
+        const storageVersion = Number(localStorage.getItem("state_version"));
+        if (storageVersion !== state_version) {
+            return undefined;
+        }
+    }
+    catch (e) {
+        return undefined;
+    }
     try {
         const serialisedState = localStorage.getItem("persistantState");
         if (serialisedState === null) return undefined;
