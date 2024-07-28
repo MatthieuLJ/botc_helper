@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
+import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
-import Characters from "./Characters.tsx";
-import { setClaims } from "../state/PlayersSlice.tsx";
-import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
+import Characters from "./components/Characters.tsx";
+import { setClaims } from "./state/PlayersSlice.tsx";
+import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
 
 function Playerview() {
     const params = useParams();
@@ -21,10 +21,10 @@ function Playerview() {
     const dispatch = useAppDispatch();
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(setClaims({ id: player_info.id, claims: playerClaims }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, playerClaims])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, playerClaims]);
 
     return <><table>
         <tbody>
@@ -51,13 +51,14 @@ function Playerview() {
     </table>
         <dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
             <Characters highlights={player_info.claims} closeDialog={(highlights) => {
-                
+
                 if (highlights != null) {
                     setPlayerClaims(highlights);
                 }
                 setOpenClaimsDialog(false);
             }} />
         </dialog>
+        <button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</button>
     </>;
 }
 

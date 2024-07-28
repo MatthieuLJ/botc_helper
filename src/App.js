@@ -3,7 +3,7 @@ import './App.css';
 import TownsquareSetup from './TownsquareSetup.tsx';
 import Playview from './Playview.tsx';
 import GameState from './state/GameState.tsx';
-import Playerview from './components/Playerview.tsx';
+import Playerview from './Playerview.tsx';
 import { Provider } from 'react-redux';
 import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
