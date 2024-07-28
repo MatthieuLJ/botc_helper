@@ -31,13 +31,13 @@ const router = createBrowserRouter([
 function App() {
   return (
     <React.StrictMode>
-      <ScriptProvider>
-        <Provider store={GameState}>
+      <Provider store={GameState}>
+        <ScriptProvider>
           <div className="App">
             <RouterProvider router={router} />
           </div>
-        </Provider>
-      </ScriptProvider>
+        </ScriptProvider>
+      </Provider>
     </React.StrictMode>
   );
 }
