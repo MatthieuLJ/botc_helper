@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./Characters.tsx";
@@ -15,9 +15,16 @@ function Playerview() {
     const next_index = (Number(params.playerIndex) + 1) % num_players;
     const prev_index = (Number(params.playerIndex) - 1) < 0 ? num_players - 1 :
         (Number(params.playerIndex) - 1);
-    const [pickClaims, setPickClaims] = useState(false);
+
+    const [openClaimsDialog, setOpenClaimsDialog] = useState(false);
+    const [playerClaims, setPlayerClaims] = useState<String[]>(player_info.claims);
     const dispatch = useAppDispatch();
     const { getRole }: ScriptContextType = useContext(ScriptContext);
+
+    useEffect( () => {
+        dispatch(setClaims({ id: player_info.id, claims: playerClaims }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, playerClaims])
 
     return <><table>
         <tbody>
@@ -27,11 +34,12 @@ function Playerview() {
                 }}>
                     Previous
                 </td>
-                <td onClick={() => { setPickClaims(true); }}>
+                <td onClick={() => { setOpenClaimsDialog(true); }}>
                     {player_info.claims.length === 0 ? "No Claims" :
                         player_info.claims.map((r) => {
                             const role = getRole(r);
-                            return <img src={role?.icon} alt={role?.name}  height="50" width="50" key={role?.name}/>})}</td>
+                            return <img src={role?.icon} alt={role?.name} height="50" width="50" key={role?.name} />;
+                        })}</td>
                 <td rowSpan={2} onClick={() => {
                     navigate(`/player/${next_index}`);
                 }}>
@@ -41,10 +49,13 @@ function Playerview() {
             <tr><td>{player_info.name}</td></tr>
         </tbody>
     </table>
-        <dialog open={pickClaims} onClose={() => { setPickClaims(false); }}>
+        <dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
             <Characters highlights={player_info.claims} closeDialog={(highlights) => {
-                dispatch(setClaims({ id: player_info.id, claims: highlights }));
-                setPickClaims(false);
+                
+                if (highlights != null) {
+                    setPlayerClaims(highlights);
+                }
+                setOpenClaimsDialog(false);
             }} />
         </dialog>
     </>;
