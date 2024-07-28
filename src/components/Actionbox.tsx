@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
 import { gameTime } from "../state/gameTime.ts";
+import { useAppSelector } from "../state/hooks.ts";
 
 type ActionboxProps = {};
 
@@ -17,7 +18,8 @@ type roleInformationTypeForActions = {
 };
 
 function Actionbox(props: ActionboxProps) {
-    const { roles, getRole, }: ScriptContextType = useContext(ScriptContext);
+    const roles = useAppSelector(state => state.roles.roles);
+    const { getRole }: ScriptContextType = useContext(ScriptContext);
     const role_infos: roleInformationTypeForActions[] = [];
 
     roles.forEach((role) => {

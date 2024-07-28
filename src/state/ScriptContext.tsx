@@ -1,25 +1,18 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { createContext, useState } from 'react';
-import { roleType } from './role.ts';
+import { CharacterType, roleType } from './role.ts';
+import { useAppSelector } from './hooks.ts';
 
 export type ScriptContextType = {
-    roles: string[];
-    addRoles: (new_role: string | string[]) => void;
-    clearRoles: () => void;
     getRole: (role: string) => roleType | null;
+    rolesLoading: boolean;
 };
 
 const initialState: ScriptContextType = {
-    roles: [],
-    addRoles: function (new_role: string | string[]): void {
-        throw new Error('Function not implemented.');
-    },
-    clearRoles: function (): void {
-        throw new Error('Function not implemented.');
-    },
     getRole: function (role: string): roleType | null {
         throw new Error('Function not implemented.');
-    }
+    },
+    rolesLoading: true
 };
 
 const ScriptContext = createContext<ScriptContextType>(initialState);
@@ -27,42 +20,60 @@ const ScriptContext = createContext<ScriptContextType>(initialState);
 const roleCache: { [role: string]: roleType; } = {};
 
 const ScriptProvider = ({ children }) => {
-    const [roles, setRoles] = useState<string[]>([]);
+    const [rolesLoading, setLoading] = useState<boolean>(true);
+    const roles = useAppSelector(state => state.roles.roles);
 
     const loadRole = (role: string) => {
-        import(`../roles/${role}.ts`)
-            .then((module) => {
-                roleCache[role] = module.default;
-            })
-            .catch(error => {
-                console.log(`Error loading role ${role}`);
-                console.log(error);
-            });
+        if (Object.keys(roleCache).indexOf(role) === -1) {
+            import(`../roles/${role}.ts`)
+                .then((module) => {
+                    roleCache[role] = module.default;
+                })
+                .catch(error => {
+                    console.log(`Error loading role ${role}`);
+                    console.log(error);
+                });
+        }
     };
 
-    const addRoles = (new_role: string | string[]): void => {
-        if (Array.isArray(new_role)) {
-            new_role.map((r) => addRoles(r));
+    const loadRoles = useCallback((roles_to_load: string | string[]): void => {
+        if (Array.isArray(roles_to_load)) {
+            const new_roles = roles_to_load.filter((x) => !Object.keys(roleCache).includes(x));
+            if (new_roles.length > 0) {
+                new_roles.map((r) => loadRole(r));
+            }
             return;
         }
-        if (!(new_role in roleCache)) {
-            loadRole(new_role);
+        if (!(roles_to_load in roleCache)) {
+            loadRole(roles_to_load);
         }
 
-        setRoles((roles) => [...roles, new_role]);
-    };
-
-    const clearRoles = (): void => {
-        setRoles([]);
-    };
+        setLoading(false);
+    }, []);
 
     const getRole = (role: string): roleType => {
+        if (rolesLoading) {
+            return {
+                name: "",
+                icon: "",
+                type: CharacterType.Townsfolk,
+                ability: "",
+                actions: {}
+            };
+        }
+        if (Object.keys(roleCache).indexOf(role) === -1) {
+            loadRoles(role);
+        }
         return roleCache[role];
     };
 
+    useEffect( () => {
+        loadRoles(roles);
+        setLoading(false);
+    }, [loadRoles, roles]);
+    
     return <ScriptContext.Provider value={{
-        roles, addRoles, clearRoles,
-        getRole
+        getRole, rolesLoading
     }}>
         {children}
     </ScriptContext.Provider>;

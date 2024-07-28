@@ -1,25 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
+import React, { useEffect, useState } from "react";
 import scripts from './game_scripts/scripts.ts';
+import { useAppDispatch } from "./state/hooks.ts";
+import { addRoles, clearScript, setScript } from "./state/RolesSlice.tsx";
 
 function ScriptSetup(props) {
     // To choose a script
     const [scriptName, setScriptName] = useState("");
-    const { addRoles, clearRoles }: ScriptContextType = useContext(ScriptContext);
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         if (scriptName === "") {
             return;
         }
-        clearRoles();
+        dispatch(clearScript());
+        dispatch(setScript({ script: scriptName }));
         import(`./game_scripts/${scriptName}`)
             .then(module => {
                 const script = module.default;
-                addRoles(script.slice(1));
+                dispatch(addRoles({roles: script.slice(1)}))
             })
             .catch(error => console.log('Error loading script!'));
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [scriptName]);
+    }, [dispatch, scriptName]);
 
     const selectScript = (e) => {
         setScriptName(e.target.value);

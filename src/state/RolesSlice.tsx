@@ -15,12 +15,17 @@ export const RolesSlice = createSlice({
     initialState,
     reducers: {
         setScript: (state, action) => {
-            state.script = "";
+            state.script = action.payload.script;
         },
-        addRole: (state, action) => {
-            state.roles.push(action.payload.role);
+        addRoles: (state, action) => {
+            if (Array.isArray(action.payload.roles)) {
+                state.roles.push(...action.payload.roles);
+            } else {
+                state.roles.push(action.payload.roles);
+            }
+
         },
-        clear: state => {
+        clearScript: state => {
             state.script = "";
             state.roles = [];
         }
@@ -29,6 +34,6 @@ export const RolesSlice = createSlice({
 }
 );
 
-export const { setScript, addRole, clear } = RolesSlice.actions;
+export const { setScript, addRoles, clearScript } = RolesSlice.actions;
 
 export default RolesSlice.reducer;

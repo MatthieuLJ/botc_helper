@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import debounce from "debounce";
 import playerReducer from './PlayersSlice.tsx';
+import rolesReducer from './RolesSlice.tsx';
 
 const state_version = 1;
 
@@ -40,6 +41,7 @@ function loadFromLocalStorage() {
 export const GameState = configureStore({
     reducer: combineReducers({
         players: playerReducer,
+        roles: rolesReducer
     }),
     preloadedState: loadFromLocalStorage()
 }

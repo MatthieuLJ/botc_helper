@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
 import { CharacterType, roleType } from "../state/role.ts";
+import { useAppSelector } from "../state/hooks.ts";
 
 type CharactersPropType = {
     highlights: string[] | null,
@@ -51,7 +52,8 @@ function CharactersRowHighlights(props: CharactersRowHighlightsPropType) {
 }
 
 function Characters(props: CharactersPropType) {
-    const { roles, getRole, }: ScriptContextType = useContext(ScriptContext);
+    const roles = useAppSelector(state => state.roles.roles);
+    const { getRole }: ScriptContextType = useContext(ScriptContext);
     // Only going to be used if we enable highlights, but it needs to be on top
     const [highlights, setHighlights] = useState<string[]>(props?.highlights ?? []);
 
