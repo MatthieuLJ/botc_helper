@@ -52,14 +52,14 @@ function CharactersRowHighlights(props: CharactersRowHighlightsPropType) {
 }
 
 function Characters(props: CharactersPropType) {
-    const roles = useAppSelector(state => state.roles.roles);
+    const roles_in_play = useAppSelector(state => state.roles.roles);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
     // Only going to be used if we enable highlights, but it needs to be on top
     const [highlights, setHighlights] = useState<string[]>(props?.highlights ?? []);
 
     // Get all the roles information
     const role_infos: roleInformationTypeForCharacters[] = [];
-    roles.forEach((role) => {
+    roles_in_play.forEach((role) => {
         const role_info: roleType | null = getRole(role);
         if (role_info != null) {
             role_infos.push([role, role_info, highlights.includes(role)]);
