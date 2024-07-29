@@ -4,13 +4,14 @@ import TownsquareSetup from './TownsquareSetup.tsx';
 import Playview from './Playview.tsx';
 import GameState from './state/GameState.tsx';
 import Playerview from './Playerview.tsx';
+import CheckForSetup from './components/CheckForSetup.tsx';
 import { Provider } from 'react-redux';
 import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
-const router = createBrowserRouter([
+const top_level_router = createBrowserRouter([
   {
-    path: "/",
+    index: true,
     element: <Navigate to="/setup" replace />,
   },
   {
@@ -19,13 +20,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/play",
-    element: <Playview />
-  },
-  {
-    path: "/player/:playerIndex",
-    element: <Playerview />
-  }
+    element: <CheckForSetup />,
+    children: [
 
+      {
+        path: "",
+        element: <Navigate to="/play/townsquare" replace />
+      },
+      {
+        path: "townsquare",
+        element: <Playview />
+      },
+      {
+        path: "player/:playerIndex",
+        element: <Playerview />
+      }
+    ]
+  }
 ]);
 
 function App() {
@@ -34,7 +45,8 @@ function App() {
       <Provider store={GameState}>
         <ScriptProvider>
           <div className="App">
-            <RouterProvider router={router} />
+            <RouterProvider router={top_level_router}>
+            </RouterProvider>
           </div>
         </ScriptProvider>
       </Provider>

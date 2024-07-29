@@ -10,7 +10,7 @@ function Townsquare(props: TownsquareProps) {
     const players = useAppSelector(state => state.players.players)
     return <ul>
         {players.map((p, index) => <PlayerToken key={p.id} index={index}
-            tapPlayer={() => { return navigate(`/player/${index}`)}} />)}
+            tapPlayer={() => { return navigate(`/play/player/${index}`)}} />)}
     </ul>
 }
 

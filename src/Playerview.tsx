@@ -30,7 +30,7 @@ function Playerview() {
         <tbody>
             <tr>
                 <td rowSpan={2} onClick={() => {
-                    navigate(`/player/${prev_index}`);
+                    navigate(`/play/player/${prev_index}`);
                 }}>
                     Previous
                 </td>
@@ -41,7 +41,7 @@ function Playerview() {
                             return <img src={role?.icon} alt={role?.name} height="50" width="50" key={role?.name} />;
                         })}</td>
                 <td rowSpan={2} onClick={() => {
-                    navigate(`/player/${next_index}`);
+                    navigate(`/play/player/${next_index}`);
                 }}>
                     Next
                 </td>
