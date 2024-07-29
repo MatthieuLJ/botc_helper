@@ -23,7 +23,8 @@ function TownsquareSetup() {
                 <Characters highlights={null} closeDialog={() => { setShowCharacters(false); }} />
             </dialog>
             <p>
-                <button onClick={() => { return navigate('/play/townsquare', { replace: true }); }}>Done</button>
+                <button onClick={() => { return navigate('/play/townsquare', { replace: true }); }}
+                    disabled={ rolesLoading || roles.length === 0 }>Done</button>
             </p>
         </div>
     </>;

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { createContext, useState } from 'react';
-import { CharacterType, roleType } from './role.ts';
+import { roleType } from './role.ts';
 import { useAppSelector } from './hooks.ts';
 
 export type ScriptContextType = {
@@ -21,9 +21,10 @@ const roleCache: { [role: string]: roleType; } = {};
 
 const ScriptProvider = ({ children }) => {
     const [rolesLoading, setLoading] = useState<boolean>(true);
+    const [numberRolesToLoad, setNumberRolesToLoad] = useState<number>(0);
     const roles = useAppSelector(state => state.roles.roles);
 
-    const loadRole = (role: string) => {
+    const loadRole = useCallback((role: string) => {
         if (Object.keys(roleCache).indexOf(role) === -1) {
             import(`../roles/${role}.ts`)
                 .then((module) => {
@@ -32,46 +33,44 @@ const ScriptProvider = ({ children }) => {
                 .catch(error => {
                     console.log(`Error loading role ${role}`);
                     console.log(error);
+                }).finally( () => {
+                    setNumberRolesToLoad(prevState => prevState - 1)
                 });
         }
-    };
-
-    const loadRoles = useCallback((roles_to_load: string | string[]): void => {
-        if (Array.isArray(roles_to_load)) {
-            const new_roles = roles_to_load.filter((x) => !Object.keys(roleCache).includes(x));
-            if (new_roles.length > 0) {
-                new_roles.map((r) => loadRole(r));
-            }
-            return;
-        }
-        if (!(roles_to_load in roleCache)) {
-            loadRole(roles_to_load);
-        }
-
-        setLoading(false);
     }, []);
 
-    const getRole = (role: string): roleType => {
-        if (rolesLoading) {
-            return {
-                name: "",
-                icon: "",
-                type: CharacterType.Townsfolk,
-                ability: "",
-                actions: {}
-            };
+    const loadRoles = useCallback((roles_to_load: string[]): void => {
+        const new_roles = roles_to_load.filter((x) => !Object.keys(roleCache).includes(x));
+        if (new_roles.length > 0) {
+            setNumberRolesToLoad(new_roles.length);
+            new_roles.map((r) => loadRole(r));
+        } else {
+            setLoading(false);
         }
+    }, [loadRole]);
+
+    const getRole = (role: string): roleType => {
         if (Object.keys(roleCache).indexOf(role) === -1) {
-            loadRoles(role);
+            // throw an error, we should have loaded before
         }
         return roleCache[role];
     };
 
-    useEffect( () => {
+    useEffect(() => {
+        setLoading(true);
         loadRoles(roles);
-        setLoading(false);
     }, [loadRoles, roles]);
-    
+
+    useEffect(() => {
+        console.log("Got "+numberRolesToLoad+" roles to load");
+        if ((numberRolesToLoad > 0) && !rolesLoading) {
+            setLoading(true);
+        } else if ((numberRolesToLoad === 0) && rolesLoading) {
+            setLoading(false);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [numberRolesToLoad]);
+
     return <ScriptContext.Provider value={{
         getRole, rolesLoading
     }}>
