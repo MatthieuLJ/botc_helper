@@ -52,10 +52,15 @@ export const PlayerSlice = createSlice({
         setClaims: (state, action) => {
             const index = state.players.findIndex((element) => element.id === action.payload.id);
             state.players[index].claims = action.payload.claims;
+        },
+        resetPlayers: (state) => {
+            state.players.forEach((p, index) => { 
+                state.players[index].alive=true;
+                state.players[index].claims=[];})
         }
     }
 })
 
-export const { setCount, setName, setClaims } = PlayerSlice.actions;
+export const { setCount, setName, setClaims, resetPlayers } = PlayerSlice.actions;
 
 export default PlayerSlice.reducer;
