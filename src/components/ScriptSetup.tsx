@@ -12,13 +12,16 @@ function ScriptSetup(props) {
     const script = useAppSelector(state => state.roles.script);
     const dispatch = useAppDispatch();
 
+    // For initializing the select element
     useEffect(() => {
         if (script !== "") {
             setScriptSelectValue(script);
             setScriptName(script);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Load the new script when it changes
     useEffect(() => {
         if (scriptName === "") {
             return;
@@ -33,6 +36,7 @@ function ScriptSetup(props) {
             .catch(error => console.log('Error loading script!'));
     }, [dispatch, scriptName]);
 
+    // Check if we need to show the warning when the selection changes
     const selectScript = (e) => {
         setScriptSelectValue(e.target.value);
         if ((scriptName !== "") && (scriptName !== e.target.value)) {

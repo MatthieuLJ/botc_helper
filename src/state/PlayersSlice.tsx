@@ -54,9 +54,9 @@ export const PlayerSlice = createSlice({
             state.players[index].claims = action.payload.claims;
         },
         resetPlayers: (state) => {
-            state.players.forEach((p, index) => { 
-                state.players[index].alive=true;
-                state.players[index].claims=[];})
+            state.players.forEach((p) => { 
+                p.alive=true;
+                p.claims=[];})
         }
     }
 })
