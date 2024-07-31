@@ -26,7 +26,7 @@ const findNextId = (state: PlayersState): number => {
     return result;
 }
 
-export const PlayerSlice = createSlice({
+export const PlayersSlice = createSlice({
     name: 'players',
     initialState,
     reducers: {
@@ -61,6 +61,6 @@ export const PlayerSlice = createSlice({
     }
 })
 
-export const { setCount, setName, setClaims, resetPlayers } = PlayerSlice.actions;
+export const { setCount, setName, setClaims, resetPlayers } = PlayersSlice.actions;
 
-export default PlayerSlice.reducer;
+export default PlayersSlice.reducer;
