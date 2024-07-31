@@ -32,16 +32,15 @@ export const PlayersSlice = createSlice({
     reducers: {
         setCount: (state, action) => {
             const new_count = action.payload.count;
-            if (new_count > state.players.length) {
-                const added_players = Array(new_count - state.players.length);
-                added_players.fill({
+            while (new_count > state.players.length) {
+                state.players.push({
                     id: findNextId(state),
                     name: "New Player",
                     alive: true,
                     claims: []
                 });
-                state.players.push(...added_players);
-            } else {
+            } 
+            if (new_count < state.players.length) {
                 state.players = state.players.slice(0, new_count);
             }
         },
