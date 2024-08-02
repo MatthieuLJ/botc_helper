@@ -1,5 +1,4 @@
 import { roleType, CharacterType } from '../state/role.ts';
-import { gameTime } from "../state/gameTime.ts";
 import img from './images/icon_poisoner.png';
 
 const poisoner: roleType = {
@@ -11,10 +10,11 @@ const poisoner: roleType = {
 
     actions: {
         "Poison": {
-            start: (time: gameTime) => { },
-            tapPlayer: (index: number) => { },
-            tapCharacter: (index: number) => { },
-            stop: () => { }
+            start: () => {}, // start
+            tapPlayer: (index: number) => {}, // tapPlayer
+            tapCharacter: (role: string) => {}, // tapCharacter
+            tapTime: (time: number) => {}, // tapTime
+            stop: (bool) => {} // stop
         }
     }
 };

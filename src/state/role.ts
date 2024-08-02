@@ -1,5 +1,3 @@
-import { gameTime } from "./gameTime.ts";
-
 enum CharacterType {
     Townsfolk,
     Outsider,
@@ -15,9 +13,10 @@ interface role {
     ability: string;
     actions: {
         [action: string]: {
-            start: (time: gameTime) => void, // start
+            start: () => void, // start
             tapPlayer: (index: number) => void, // tapPlayer
-            tapCharacter: (index: number) => void, // tapCharacter
+            tapCharacter: (role: string) => void, // tapCharacter
+            tapTime: (time: number) => void, // tapTime
             stop: (bool) => void // stop
         }
     };

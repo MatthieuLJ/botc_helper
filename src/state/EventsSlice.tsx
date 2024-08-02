@@ -1,8 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { gameTime } from './gameTime';
+
+enum EventTypes {
+    Player,
+    Role,
+    Time
+}
+
+type Tag = ([EventTypes.Player, number] |
+[EventTypes.Role, string] |
+[EventTypes.Time, number]);
+
+type Event = (string | Tag)[];
 
 type EventState = {
-    events: { id: number, time: gameTime, event: string, tags: string[]; }[];
+    events: { id: number, event: Event, tags: Tag[] }[];
 };
 
 const initialState: EventState = {
@@ -45,7 +56,6 @@ export const EventsSlice = createSlice({
         addEvent: (state, action) => {
             state.events.push({
                 id: findNextId(state),
-                time: action.payload.time,
                 event: action.payload.event,
                 tags: action.payload.tags
             });

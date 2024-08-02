@@ -1,5 +1,4 @@
 import { roleType, CharacterType } from '../state/role.ts';
-import { gameTime } from "../state/gameTime.ts";
 import img from './images/icon_imp.png';
 
 const imp: roleType = {
@@ -10,11 +9,12 @@ const imp: roleType = {
         "this way, a Minion becomes the Imp.",
 
     actions: {
-        "Learn": {
-            start: (time: gameTime) => { },
-            tapPlayer: (index: number) => { },
-            tapCharacter: (index: number) => { },
-            stop: () => { }
+        "Kill": {
+            start: () => {}, // start
+            tapPlayer: (index: number) => {}, // tapPlayer
+            tapCharacter: (role: string) => {}, // tapCharacter
+            tapTime: (time: number) => {}, // tapTime
+            stop: (bool) => {} // stop
         }
     }
 };

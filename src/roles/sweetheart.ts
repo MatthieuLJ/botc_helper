@@ -1,5 +1,4 @@
 import { roleType, CharacterType } from '../state/role.ts';
-import { gameTime } from "../state/gameTime.ts";
 import img from './images/icon_sweetheart.png';
 
 const sweetheart: roleType = {
@@ -10,10 +9,11 @@ const sweetheart: roleType = {
 
     actions: {
         "Die": {
-            start: (time: gameTime) => { },
-            tapPlayer: (index: number) => { },
-            tapCharacter: (index: number) => { },
-            stop: () => { }
+            start: () => {}, // start
+            tapPlayer: (index: number) => {}, // tapPlayer
+            tapCharacter: (role: string) => {}, // tapCharacter
+            tapTime: (time: number) => {}, // tapTime
+            stop: (bool) => {} // stop
         }
     }
 };
