@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-enum EventTypes {
+export enum EventTypes {
     Player,
     Role,
     Time

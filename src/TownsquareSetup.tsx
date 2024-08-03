@@ -4,13 +4,15 @@ import { ScriptSetup } from './components/ScriptSetup.tsx';
 import { ScriptContext, ScriptContextType } from './state/ScriptContext.tsx';
 import Characters from './components/Characters.tsx';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from './state/hooks.ts';
+import { useAppDispatch, useAppSelector } from './state/hooks.ts';
+import { addEvent, EventTypes } from './state/EventsSlice.tsx';
 
 function TownsquareSetup() {
     const { rolesLoading }: ScriptContextType = useContext(ScriptContext);
     const roles = useAppSelector(state => state.roles.roles);
     const [showCharacters, setShowCharacters] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     return <>
         <div>
@@ -23,8 +25,11 @@ function TownsquareSetup() {
                 <Characters highlights={null} closeDialog={() => { setShowCharacters(false); }} />
             </dialog>
             <p>
-                <button onClick={() => { return navigate('/play/townsquare', { replace: true }); }}
-                    disabled={ rolesLoading || roles.length === 0 }>Done</button>
+                <button onClick={() => {
+                    dispatch(addEvent([[EventTypes.Time, 0], "The night has fallen on Ravenswoodbluff"]));
+                    return navigate('/play/townsquare', { replace: true });
+                }}
+                    disabled={rolesLoading || roles.length === 0}>Done</button>
             </p>
         </div>
     </>;
