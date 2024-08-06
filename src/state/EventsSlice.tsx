@@ -6,13 +6,13 @@ export enum EventTypes {
     Time
 }
 
-type Tag = ([EventTypes.Player, number] |
+export type Tag = ([EventTypes.Player, number] |
 [EventTypes.Role, string] |
 [EventTypes.Time, number]);
 
-type Event = (string | Tag)[];
+export type Event = (string | Tag);
 
-type EventState = {
+export type EventState = {
     events: { id: number, event: Event, tags: Tag[] }[];
 };
 
