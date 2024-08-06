@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
-import { gameTime } from "../state/gameTime.ts";
 import { useAppSelector } from "../state/hooks.ts";
 
 type ActionboxProps = {};
@@ -9,10 +8,11 @@ type ActionboxProps = {};
 type roleInformationTypeForActions = {
     [role: string]: {
         [action: string]: {
-            start: (time: gameTime) => void, // start
+            start: () => void, // start
             tapPlayer: (index: number) => void, // tapPlayer
-            tapCharacter: (index: number) => void, // tapCharacter
-            stop: (bool) => void; // stop
+            tapCharacter: (role: string) => void, // tapCharacter
+            tapTime: (time: number) => void, // tapTime
+            stop: (bool) => void // stop
         };
     };
 };
