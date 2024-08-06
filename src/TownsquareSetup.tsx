@@ -26,7 +26,10 @@ function TownsquareSetup() {
             </dialog>
             <p>
                 <button onClick={() => {
-                    dispatch(addEvent([[EventTypes.Time, 0], "The night has fallen on Ravenswoodbluff"]));
+                    dispatch(addEvent({
+                        event: [[EventTypes.Time, 0], "The night has fallen on Ravenswoodbluff"],
+                        tags: [[EventTypes.Time, 0]]
+                    }));
                     return navigate('/play/townsquare', { replace: true });
                 }}
                     disabled={rolesLoading || roles.length === 0}>Done</button>

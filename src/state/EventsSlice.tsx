@@ -10,7 +10,7 @@ export type Tag = ([EventTypes.Player, number] |
 [EventTypes.Role, string] |
 [EventTypes.Time, number]);
 
-export type Event = (string | Tag);
+export type Event = (string | Tag)[];
 
 export type EventState = {
     events: { id: number, event: Event, tags: Tag[] }[];

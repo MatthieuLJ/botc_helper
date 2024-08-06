@@ -3,6 +3,7 @@ import scripts from '../game_scripts/scripts.ts';
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import { addRoles, clearScript, setScript } from "../state/RolesSlice.tsx";
 import { resetPlayers } from "../state/PlayersSlice.tsx";
+import { clearEvents } from "../state/EventsSlice.tsx";
 
 function ScriptSetup(props) {
     // To choose a script
@@ -59,6 +60,7 @@ function ScriptSetup(props) {
                 setScriptName(scriptSelectValue);
                 setshowWarning(false);
                 dispatch(resetPlayers());
+                dispatch(clearEvents());
             }}>OK</button>
             <button onClick={() => {
                 setScriptSelectValue(scriptName);

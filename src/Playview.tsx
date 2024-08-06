@@ -1,13 +1,13 @@
 import React from 'react';
 import Townsquare from './Townsquare.tsx';
-import Actionbox from './components/Actionbox.tsx';
+import EventList from './EventList.tsx';
 
 type PlayviewProps = {}
 
 function Playview(props: PlayviewProps) {
     return <>
     <div><Townsquare/></div>
-    <div><Actionbox/></div>
+    <div><EventList/></div>
     </>
 }
 

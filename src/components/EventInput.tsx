@@ -24,8 +24,8 @@ function getTextWidth(text) {
 }
 
 type EventInputProps = {
-    content: Event[],
-    setContent: (e: Event[]) => void;
+    content: Event,
+    setContent: (e: Event) => void;
 };
 
 export default function EventInput(props: EventInputProps) {
@@ -35,7 +35,7 @@ export default function EventInput(props: EventInputProps) {
 
     useEffect(() => {
         var changed = false;
-        const newContent: Event[] = [...content];
+        const newContent: Event = [...content];
 
         if (newContent.length === 0) {
             newContent.push("");
