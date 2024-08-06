@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
-import { Event } from "../state/EventsSlice";
+import { Event, EventTypes, Tag } from "../state/EventsSlice.tsx";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -81,6 +81,28 @@ export default function EventInput(props: EventInputProps) {
         setContent(newContent);
     }
         */
+
+    function insertTag(tag: Tag) {
+        const newContent = [...content];
+        const previousText = newContent[cursorPosition[0]];
+        if ((cursorPosition[0] === -1) || (typeof (previousText) != "string")) {
+            newContent.splice(
+                newContent.length - 1,
+                0,
+                tag
+            );
+        } else {
+            newContent.splice(
+                cursorPosition[0],
+                1,
+                previousText.substring(0, cursorPosition[1]),
+                tag,
+                previousText.substring(cursorPosition[1])
+            );
+        }
+        setContent(newContent);
+    }
+
     function changeString(index, newString) {
         const newContent = [...content];
         newContent[index] = newString;
@@ -122,21 +144,33 @@ export default function EventInput(props: EventInputProps) {
                 <Button
                     variant="text"
                     onClick={() => {
-                        const newContent = [...content];
-                        const previousText = newContent[cursorPosition[0]];
-                        newContent.splice(
-                            cursorPosition[0],
-                            1,
-                            previousText.substring(0, cursorPosition[1]),
-                            [newtaginputRef.current?.value],
-                            previousText.substring(cursorPosition[1])
-                        );
-                        setContent(newContent);
+                        if (newtaginputRef.current !== undefined)
+                            insertTag([EventTypes.Role, (newtaginputRef.current as HTMLInputElement).value]);
                     }}
                 >
-                    Add tag
+                    Add Role
                 </Button>
-            </div>
+
+                <Button
+                    variant="text"
+                    onClick={() => {
+                        if (newtaginputRef.current !== undefined)
+                            insertTag([EventTypes.Player, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
+                    }}
+                >
+                    Add Player
+                </Button>
+
+                <Button
+                    variant="text"
+                    onClick={() => {
+                        if (newtaginputRef.current !== undefined)
+                            insertTag([EventTypes.Time, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
+                    }}
+                >
+                    Add Time
+                </Button>
+            </div >
         </>
     );
 }
