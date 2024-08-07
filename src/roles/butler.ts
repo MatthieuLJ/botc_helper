@@ -1,3 +1,4 @@
+import { EventTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_butler.png';
 
@@ -9,13 +10,9 @@ const butler: roleType = {
         "only vote if they are voting too.",
 
     actions: {
-        "ChooseMaster": {
-            start: () => {}, // start
-            tapPlayer: (index: number) => {}, // tapPlayer
-            tapCharacter: (role: string) => {}, // tapCharacter
-            tapTime: (time: number) => {}, // tapTime
-            stop: (bool) => {} // stop
-        }
+        "ChooseMaster": ["On", [EventTypes.Time, -1], ", player ",
+            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "butler"],
+            " chose player ", [EventTypes.Player, -1], " as their master "]
     }
 };
 

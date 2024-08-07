@@ -7,13 +7,7 @@ type ActionboxProps = {};
 
 type roleInformationTypeForActions = {
     [role: string]: {
-        [action: string]: {
-            start: () => void, // start
-            tapPlayer: (index: number) => void, // tapPlayer
-            tapCharacter: (role: string) => void, // tapCharacter
-            tapTime: (time: number) => void, // tapTime
-            stop: (bool) => void // stop
-        };
+        [action: string]: Event
     };
 };
 

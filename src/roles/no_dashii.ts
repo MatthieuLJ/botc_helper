@@ -1,3 +1,4 @@
+import { EventTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_nodashii.png';
 
@@ -9,13 +10,9 @@ const nodashii: roleType = {
         "neighbors are poisoned.",
 
     actions: {
-        "Kill": {
-            start: () => {}, // start
-            tapPlayer: (index: number) => {}, // tapPlayer
-            tapCharacter: (role: string) => {}, // tapCharacter
-            tapTime: (time: number) => {}, // tapTime
-            stop: (bool) => {} // stop
-        }
+        "Kill": ["On", [EventTypes.Time, -1], ", player ",
+            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "No Dashii"],
+            " killed player ", [EventTypes.Player, -1]]
     }
 };
 

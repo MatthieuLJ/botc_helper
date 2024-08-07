@@ -1,3 +1,4 @@
+import { EventTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_philosopher.png';
 
@@ -9,13 +10,9 @@ const philosopher: roleType = {
         "ability. If this character is in play, they are drunk.",
 
     actions: {
-        "GainAbility": {
-            start: () => {}, // start
-            tapPlayer: (index: number) => {}, // tapPlayer
-            tapCharacter: (role: string) => {}, // tapCharacter
-            tapTime: (time: number) => {}, // tapTime
-            stop: (bool) => {} // stop
-        }
+        "GainAbility": ["On", [EventTypes.Time, -1], ", player ",
+            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "philosopher"],
+            " gained the ability of ", [EventTypes.Role, ""]]
     }
 };
 

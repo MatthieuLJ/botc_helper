@@ -1,3 +1,6 @@
+
+import { Event } from "./EventsSlice.tsx";
+
 enum CharacterType {
     Townsfolk,
     Outsider,
@@ -12,14 +15,8 @@ interface role {
     type: CharacterType;
     ability: string;
     actions: {
-        [action: string]: {
-            start: () => void, // start
-            tapPlayer: (index: number) => void, // tapPlayer
-            tapCharacter: (role: string) => void, // tapCharacter
-            tapTime: (time: number) => void, // tapTime
-            stop: (bool) => void // stop
-        }
-    };
+        [action: string]: Event;
+    }
 }
 
 export type { role as roleType };
