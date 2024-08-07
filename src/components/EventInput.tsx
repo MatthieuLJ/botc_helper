@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
-import { Event, EventTypes, Tag } from "../state/EventsSlice.tsx";
+import { EventType, TagTypes, Tag } from "../state/EventsSlice.tsx";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -24,8 +24,8 @@ function getTextWidth(text) {
 }
 
 type EventInputProps = {
-    content: Event,
-    setContent: (e: Event) => void;
+    content: EventType,
+    setContent: (e: EventType) => void;
 };
 
 export default function EventInput(props: EventInputProps) {
@@ -35,7 +35,7 @@ export default function EventInput(props: EventInputProps) {
 
     useEffect(() => {
         var changed = false;
-        const newContent: Event = [...content];
+        const newContent: EventType = [...content];
 
         if (newContent.length === 0) {
             newContent.push("");
@@ -145,7 +145,7 @@ export default function EventInput(props: EventInputProps) {
                     variant="text"
                     onClick={() => {
                         if (newtaginputRef.current !== undefined)
-                            insertTag([EventTypes.Role, (newtaginputRef.current as HTMLInputElement).value]);
+                            insertTag([TagTypes.Role, (newtaginputRef.current as HTMLInputElement).value]);
                     }}
                 >
                     Add Role
@@ -155,7 +155,7 @@ export default function EventInput(props: EventInputProps) {
                     variant="text"
                     onClick={() => {
                         if (newtaginputRef.current !== undefined)
-                            insertTag([EventTypes.Player, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
+                            insertTag([TagTypes.Player, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
                     }}
                 >
                     Add Player
@@ -165,7 +165,7 @@ export default function EventInput(props: EventInputProps) {
                     variant="text"
                     onClick={() => {
                         if (newtaginputRef.current !== undefined)
-                            insertTag([EventTypes.Time, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
+                            insertTag([TagTypes.Time, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
                     }}
                 >
                     Add Time

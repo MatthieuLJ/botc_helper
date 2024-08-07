@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export enum EventTypes {
+export enum TagTypes {
     Player,
     Role,
     Time
 }
 
-export type Tag = ([EventTypes.Player, number] |
-[EventTypes.Role, string] |
-[EventTypes.Time, number]);
+export type Tag = ([TagTypes.Player, number] |
+[TagTypes.Role, string] |
+[TagTypes.Time, number]);
 
-export type Event = (string | Tag)[];
+export type EventType = (string | Tag)[];
 
 export type EventState = {
-    events: { id: number, event: Event, tags: Tag[] }[];
+    events: { id: number, event: EventType, tags: Tag[] }[];
 };
 
 const initialState: EventState = {

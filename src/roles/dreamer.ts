@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_dreamer.png';
 
@@ -10,10 +10,10 @@ const dreamer: roleType = {
         "learn 1 good & 1 evil character, 1 of which is correct.",
 
     actions: {
-        "Learn": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "dreamer"],
-            " learned that player ", [EventTypes.Player, -1], " is either ",
-            [EventTypes.Role, ""], " or ", [EventTypes.Role, ""]]
+        "Learn": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "dreamer"],
+            " learned that player ", [TagTypes.Player, -1], " is either ",
+            [TagTypes.Role, ""], " or ", [TagTypes.Role, ""]]
     }
 };
 

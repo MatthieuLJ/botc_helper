@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_ravenkeeper.png';
 
@@ -10,10 +10,10 @@ const ravenkeeper: roleType = {
         "learn their character.",
 
     actions: {
-        "Learn": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "ravenkeeper"],
-            " died and learned that ", [EventTypes.Player, -1], " is the ",
-            [EventTypes.Role, ""]]
+        "Learn": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "ravenkeeper"],
+            " died and learned that ", [TagTypes.Player, -1], " is the ",
+            [TagTypes.Role, ""]]
     }
 };
 

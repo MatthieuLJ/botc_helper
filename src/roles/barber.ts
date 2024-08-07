@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_barber.png';
 
@@ -10,10 +10,10 @@ const barber: roleType = {
         "(not another Demon) to swap characters.",
 
     actions: {
-        "Die": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "barber"],
-            " died, players ", [EventTypes.Player, -1], " and ",
-            [EventTypes.Player, -1], " swapped roles"
+        "Die": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "barber"],
+            " died, players ", [TagTypes.Player, -1], " and ",
+            [TagTypes.Player, -1], " swapped roles"
         ]
     }
 };

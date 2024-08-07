@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_vigormortis.png';
 
@@ -10,9 +10,9 @@ const vigormortis: roleType = {
         "their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
 
     actions: {
-        "Kill": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "Vogormortis"],
-            " killed player ", [EventTypes.Player, -1]]
+        "Kill": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "Vogormortis"],
+            " killed player ", [TagTypes.Player, -1]]
     }
 };
 

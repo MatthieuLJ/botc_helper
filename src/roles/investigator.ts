@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_investigator.png';
 
@@ -9,10 +9,10 @@ const investigator: roleType = {
     ability: "You start knowing that 1 of 2 players is a particular Minion.",
 
     actions: {
-        "Learn": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "investigator"],
-            " learned that either ", [EventTypes.Player, -1], " or ",
-            [EventTypes.Player, -1], " is the ", [EventTypes.Role, ""]]
+        "Learn": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "investigator"],
+            " learned that either ", [TagTypes.Player, -1], " or ",
+            [TagTypes.Player, -1], " is the ", [TagTypes.Role, ""]]
     }
 };
 

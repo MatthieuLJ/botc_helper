@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { EventTypes, Tag } from "../state/EventsSlice.tsx";
+import { TagTypes, Tag } from "../state/EventsSlice.tsx";
 import { useAppSelector } from "../state/hooks.ts";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
@@ -80,11 +80,11 @@ type EventTagProps = {
 
 export default function EventTag(props: EventTagProps) {
     switch (props.value[0]) {
-        case EventTypes.Player:
+        case TagTypes.Player:
             return <PlayerTag id={props.value[1]} />;
-        case EventTypes.Role:
+        case TagTypes.Role:
             return <RoleTag role={props.value[1]} />;
-        case EventTypes.Time:
+        case TagTypes.Time:
             return <TimeTag time={props.value[1]} />;
     }
 }

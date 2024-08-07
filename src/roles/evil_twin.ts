@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_eviltwin.png';
 
@@ -10,10 +10,10 @@ const evil_twin: roleType = {
         "is executed, evil wins. Good can't win if you both live.",
 
     actions: {
-        "Pair": ["On", [EventTypes.Time, -1], ", players ",
-            [EventTypes.Player, -1], " and ", [EventTypes.Player, -1],
+        "Pair": ["On", [TagTypes.Time, -1], ", players ",
+            [TagTypes.Player, -1], " and ", [TagTypes.Player, -1],
             " learn they are in an evil twin pair with role ",
-            [EventTypes.Role, ""]]
+            [TagTypes.Role, ""]]
     }
 };
 

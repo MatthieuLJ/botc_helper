@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_cerenovus.png';
 
@@ -10,10 +10,10 @@ const cerenovus: roleType = {
         ' they are this character tomorrow, or might be executed.',
 
     actions: {
-        "MakeMad": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "cerenovus"],
-            " chose player ", [EventTypes.Player, -1], " to be mad as the ",
-            [EventTypes.Role, ""]]
+        "MakeMad": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "cerenovus"],
+            " chose player ", [TagTypes.Player, -1], " to be mad as the ",
+            [TagTypes.Role, ""]]
     }
 };
 

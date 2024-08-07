@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_slayer.png';
 
@@ -10,9 +10,9 @@ const slayer: roleType = {
         + "they are executed immediately.",
 
     actions: {
-        "Shoot": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "slayer"],
-            " shot ", [EventTypes.Player, -1]]
+        "Shoot": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "slayer"],
+            " shot ", [TagTypes.Player, -1]]
     }
 };
 

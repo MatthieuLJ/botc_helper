@@ -1,4 +1,4 @@
-import { EventTypes } from '../state/EventsSlice.tsx';
+import { TagTypes } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_sweetheart.png';
 
@@ -9,9 +9,9 @@ const sweetheart: roleType = {
     ability: "When you die, 1 player is drunk from now on.",
 
     actions: {
-        "Die": ["On", [EventTypes.Time, -1], ", player ",
-            [EventTypes.Player, -1], " as the ", [EventTypes.Role, "sweetheart"],
-            " died and made ", [EventTypes.Player, -1], " drunk"]
+        "Die": ["On", [TagTypes.Time, -1], ", player ",
+            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "sweetheart"],
+            " died and made ", [TagTypes.Player, -1], " drunk"]
     }
 };
 

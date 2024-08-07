@@ -5,7 +5,7 @@ import { ScriptContext, ScriptContextType } from './state/ScriptContext.tsx';
 import Characters from './components/Characters.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
-import { addEvent, EventTypes } from './state/EventsSlice.tsx';
+import { addEvent, TagTypes } from './state/EventsSlice.tsx';
 
 function TownsquareSetup() {
     const { rolesLoading }: ScriptContextType = useContext(ScriptContext);
@@ -27,8 +27,8 @@ function TownsquareSetup() {
             <p>
                 <button onClick={() => {
                     dispatch(addEvent({
-                        event: [[EventTypes.Time, 0], "The night has fallen on Ravenswoodbluff"],
-                        tags: [[EventTypes.Time, 0]]
+                        event: [[TagTypes.Time, 0], "The night has fallen on Ravenswoodbluff"],
+                        tags: [[TagTypes.Time, 0]]
                     }));
                     return navigate('/play/townsquare', { replace: true });
                 }}
