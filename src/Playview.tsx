@@ -4,22 +4,25 @@ import EventList from './EventList.tsx';
 
 import { Button } from '@mui/material';
 import AddEventDialog from './components/AddEventDialog.tsx';
-import { EventType } from './state/EventsSlice.tsx';
+import { addEvent, EventType } from './state/EventsSlice.tsx';
+import { useAppDispatch } from './state/hooks.ts';
 
 type PlayviewProps = {};
 
 function Playview(props: PlayviewProps) {
     const [newEventOpen, setNewEventOpen] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
 
     function onNewEvent(e: EventType) {
         setNewEventOpen(false);
+        dispatch(addEvent({ event: e }));
     }
 
     return <>
         <div><Townsquare /></div>
         <div><EventList /></div>
         <div>
-            <Button onClick={() => {setNewEventOpen(true)}}>Add event</Button>
+            <Button onClick={() => { setNewEventOpen(true); }}>Add event</Button>
             <AddEventDialog open={newEventOpen} onClose={onNewEvent} />
         </div>
     </>;

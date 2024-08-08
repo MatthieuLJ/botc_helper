@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EventType, Tag, TagTypes } from "../state/EventsSlice.tsx";
 import EventInput from "./EventInput.tsx";
 
@@ -22,6 +22,12 @@ export default function AddEventDialog(props: AddEventDialogProps) {
     function handleClose() {
         onClose(event);
     }
+    useEffect(()=> {
+        if (open) {
+            setEvent([""]);
+        }
+    }, [open]);
+    
     return <Dialog open={open} onClose={handleClose}>
         <EventInput content={event} setContent={setEvent} newTag={newTag} />
         <Accordion>
