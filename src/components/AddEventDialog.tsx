@@ -51,7 +51,8 @@ export default function AddEventDialog(props: AddEventDialogProps) {
                 Add an event based on a role
             </AccordionSummary>
             <AccordionDetails>
-                <Actionbox/>
+                <Actionbox
+                    setEvent={setEvent} />
             </AccordionDetails>
         </Accordion>
         <Accordion>
