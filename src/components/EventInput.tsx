@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
-import { EventType, TagTypes, Tag } from "../state/EventsSlice.tsx";
+import { EventType, Tag } from "../state/EventsSlice.tsx";
 
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 function getTextWidth(text) {
@@ -26,12 +25,12 @@ function getTextWidth(text) {
 type EventInputProps = {
     content: EventType,
     setContent: (e: EventType) => void;
+    newTag: null | Tag;
 };
 
 export default function EventInput(props: EventInputProps) {
-    const { content, setContent } = props;
+    const { content, setContent, newTag } = props;
     const [cursorPosition, setCursorPosition] = useState([-1, -1]);
-    const newtaginputRef = useRef();
 
     useEffect(() => {
         var changed = false;
@@ -62,6 +61,30 @@ export default function EventInput(props: EventInputProps) {
         }
     }, [content, setContent]);
 
+    useEffect(() => {
+        if (newTag != null) {
+            const newContent = [...content];
+            const previousText = newContent[cursorPosition[0]];
+            if ((cursorPosition[0] === -1) || (typeof (previousText) != "string")) {
+                newContent.splice(
+                    newContent.length - 1,
+                    0,
+                    newTag
+                );
+            } else {
+                newContent.splice(
+                    cursorPosition[0],
+                    1,
+                    previousText.substring(0, cursorPosition[1]),
+                    newTag,
+                    previousText.substring(cursorPosition[1])
+                );
+            }
+            setContent(newContent);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newTag]);
+
     /*
     function deleteChip(index) {
         const newContent = [...content];
@@ -81,27 +104,6 @@ export default function EventInput(props: EventInputProps) {
         setContent(newContent);
     }
         */
-
-    function insertTag(tag: Tag) {
-        const newContent = [...content];
-        const previousText = newContent[cursorPosition[0]];
-        if ((cursorPosition[0] === -1) || (typeof (previousText) != "string")) {
-            newContent.splice(
-                newContent.length - 1,
-                0,
-                tag
-            );
-        } else {
-            newContent.splice(
-                cursorPosition[0],
-                1,
-                previousText.substring(0, cursorPosition[1]),
-                tag,
-                previousText.substring(cursorPosition[1])
-            );
-        }
-        setContent(newContent);
-    }
 
     function changeString(index, newString) {
         const newContent = [...content];
@@ -139,38 +141,6 @@ export default function EventInput(props: EventInputProps) {
                     }
                 })}
             </Box>
-            <div>
-                <TextField inputRef={newtaginputRef} type="text" />
-                <Button
-                    variant="text"
-                    onClick={() => {
-                        if (newtaginputRef.current !== undefined)
-                            insertTag([TagTypes.Role, (newtaginputRef.current as HTMLInputElement).value]);
-                    }}
-                >
-                    Add Role
-                </Button>
-
-                <Button
-                    variant="text"
-                    onClick={() => {
-                        if (newtaginputRef.current !== undefined)
-                            insertTag([TagTypes.Player, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
-                    }}
-                >
-                    Add Player
-                </Button>
-
-                <Button
-                    variant="text"
-                    onClick={() => {
-                        if (newtaginputRef.current !== undefined)
-                            insertTag([TagTypes.Time, parseInt((newtaginputRef.current as HTMLInputElement).value)]);
-                    }}
-                >
-                    Add Time
-                </Button>
-            </div >
         </>
     );
 }
