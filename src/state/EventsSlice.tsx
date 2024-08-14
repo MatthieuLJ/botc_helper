@@ -13,7 +13,7 @@ export type Tag = ([TagTypes.Player, number] |
 export type EventType = (string | Tag)[];
 
 export type EventState = {
-    events: { id: number, event: EventType, tags: Tag[] }[];
+    events: { id: number, event: EventType, tags: Tag[]; }[];
 };
 
 const initialState: EventState = {
@@ -48,6 +48,30 @@ export const getFilteredEvents = (state: EventState, filters: string[], and: boo
     return result;
 };
 */
+
+export function catchEventActions(state, action) {
+    switch (action.type) {
+        case 'time/advanceTime':
+            const start_string = (state.time.time % 2 === 0) ? "The night has fallen on Ravenswoodbluff, it is now " : "It is a new day in Ravenswoodbluff, it is now ";
+            const new_event = [start_string, [TagTypes.Time, state.time.time]];
+            const new_state = {
+                ...state,
+                events:
+                {
+                    events:
+                        [...state.events.events,
+                        { id: findNextId(state.events), event: new_event }
+                        ]
+                }
+            };
+            return new_state;
+        default:
+            break;
+    }
+    return state;
+}
+
+
 
 export const EventsSlice = createSlice({
     name: 'events',

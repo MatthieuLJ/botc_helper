@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import AddEventDialog from './components/AddEventDialog.tsx';
 import { addEvent, EventType } from './state/EventsSlice.tsx';
 import { useAppDispatch } from './state/hooks.ts';
+import { advanceTime } from './state/TimeSlice.tsx';
 
 type PlayviewProps = {};
 
@@ -24,6 +25,9 @@ function Playview(props: PlayviewProps) {
         <div>
             <Button onClick={() => { setNewEventOpen(true); }}>Add event</Button>
             <AddEventDialog open={newEventOpen} onClose={onNewEvent} />
+        </div>
+        <div>
+            <Button onClick={() => { dispatch(advanceTime())}}>Move time forward</Button>
         </div>
     </>;
 }

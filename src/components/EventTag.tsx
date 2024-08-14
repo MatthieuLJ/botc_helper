@@ -62,7 +62,7 @@ type TimeTagProps = {
 };
 
 function TimeTag(props: TimeTagProps) {
-    const night: boolean = (props.time % 2 === 0 ? true : false);
+    const night: boolean = (props.time % 2 === 0);
     if (night) {
         return <Chip label={"night " + Math.floor((props.time + 1) / 2)}
             avatar={<Icon path={mdiWeatherNight} />}

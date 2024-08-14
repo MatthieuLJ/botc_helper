@@ -2,9 +2,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import debounce from "debounce";
 import playerReducer from './PlayersSlice.tsx';
 import rolesReducer from './RolesSlice.tsx';
-import eventsReducer from './EventsSlice.tsx';
+import eventsReducer, { catchEventActions } from './EventsSlice.tsx';
+import timeReducer from './TimeSlice.tsx';
 
-const state_version = 2;
+const state_version = 1;
 
 // convert object to string and store in localStorage
 function saveToLocalStorage(state) {
@@ -39,12 +40,23 @@ function loadFromLocalStorage() {
     }
 }
 
+const combinedReducer = combineReducers({
+    players: playerReducer,
+    roles: rolesReducer,
+    events: eventsReducer,
+    time: timeReducer
+});
+
+
+
+function rootReducer(state, action) {
+    const intermediateState = combinedReducer(state, action);
+    const finalState = catchEventActions(intermediateState, action);
+    return finalState;
+}
+
 export const GameState = configureStore({
-    reducer: combineReducers({
-        players: playerReducer,
-        roles: rolesReducer,
-        events: eventsReducer
-    }),
+    reducer: rootReducer,
     preloadedState: loadFromLocalStorage()
 }
 );
