@@ -5,7 +5,7 @@ import { ScriptContext, ScriptContextType } from './state/ScriptContext.tsx';
 import Characters from './components/Characters.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
-import { addEvent, TagTypes } from './state/EventsSlice.tsx';
+import { advanceTime } from './state/TimeSlice.tsx';
 
 function TownsquareSetup() {
     const { rolesLoading }: ScriptContextType = useContext(ScriptContext);
@@ -26,10 +26,7 @@ function TownsquareSetup() {
             </dialog>
             <p>
                 <button onClick={() => {
-                    dispatch(addEvent({
-                        event: [[TagTypes.Time, 0], "The night has fallen on Ravenswoodbluff"],
-                        tags: [[TagTypes.Time, 0]]
-                    }));
+                    dispatch(advanceTime());
                     return navigate('/play/townsquare', { replace: true });
                 }}
                     disabled={rolesLoading || roles.length === 0}>Done</button>

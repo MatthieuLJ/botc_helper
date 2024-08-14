@@ -6,7 +6,7 @@ type TimeState = {
 };
 
 const initialState: TimeState = {
-    time: 0
+    time: -1
 };
 
 
@@ -17,11 +17,13 @@ export const TimeSlice = createSlice({
     reducers: {
         advanceTime: (state) => {
             state.time = state.time + 1;
-
+        },
+        resetTime: (state) => {
+            state.time = -1;
         }
     }
 });
 
-export const { advanceTime } = TimeSlice.actions;
+export const { advanceTime, resetTime } = TimeSlice.actions;
 
 export default TimeSlice.reducer;
