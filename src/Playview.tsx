@@ -4,7 +4,7 @@ import EventList from './EventList.tsx';
 
 import { Button } from '@mui/material';
 import AddEventDialog from './components/AddEventDialog.tsx';
-import { addEvent, EventType } from './state/EventsSlice.tsx';
+import { addEvent, EventSegment } from './state/EventsSlice.tsx';
 import { useAppDispatch } from './state/hooks.ts';
 import { advanceTime } from './state/TimeSlice.tsx';
 
@@ -14,7 +14,7 @@ function Playview(props: PlayviewProps) {
     const [newEventOpen, setNewEventOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
-    function onNewEvent(e: EventType) {
+    function onNewEvent(e: EventSegment) {
         setNewEventOpen(false);
         dispatch(addEvent({ event: e }));
     }

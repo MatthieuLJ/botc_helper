@@ -10,17 +10,17 @@ export type Tag = ([TagTypes.Player, number] |
 [TagTypes.Role, string] |
 [TagTypes.Time, number]);
 
-export type EventType = (string | Tag)[];
+export type EventSegment = (string | Tag)[];
 
-export type EventState = {
-    events: { id: number, event: EventType, tags: Tag[]; }[];
+export type EventList = {
+    events: { id: number, event: EventSegment; }[];
 };
 
-const initialState: EventState = {
+const initialState: EventList = {
     events: []
 };
 
-const findNextId = (state: EventState): number => {
+const findNextId = (state: EventList): number => {
     const allNumbers: number[] = [];
     for (const e of state.events) {
         allNumbers.push(e.id);
@@ -34,20 +34,27 @@ const findNextId = (state: EventState): number => {
     return result;
 };
 
-/* For future use
-export const getFilteredEvents = (state: EventState, filters: string[], and: boolean): EventState => {
-    let result: EventState = { events: []};
+export const getFilteredEvents = (state: EventList, filter: Tag): EventList => {
+    let result: EventList = { events: [] };
+    let found = false;
 
     for (const e of state.events) {
-        if ((!and && filters.some(x => e.tags.includes(x))) ||
-            (and && filters.reduce((so_far, current) => so_far && e.tags.includes(current), true))) {
-                result.events.push(e);
+        found = false;
+        for (const elem of e.event) {
+            if (Array.isArray(elem) &&
+                elem[0] === filter[0] &&
+                elem[1] === filter[1]) {
+                found = true;
+                break;
             }
+        }
+        if (found) {
+            result.events.push(e);
+        }
     }
 
     return result;
 };
-*/
 
 export function catchEventActions(state, action) {
     switch (action.type) {
@@ -71,8 +78,6 @@ export function catchEventActions(state, action) {
     return state;
 }
 
-
-
 export const EventsSlice = createSlice({
     name: 'events',
     initialState,
@@ -80,8 +85,7 @@ export const EventsSlice = createSlice({
         addEvent: (state, action) => {
             state.events.push({
                 id: findNextId(state),
-                event: action.payload.event,
-                tags: action.payload.tags
+                event: action.payload.event
             });
         },
         clearEvents: (state) => {

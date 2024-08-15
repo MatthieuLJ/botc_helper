@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
-import { EventType, Tag } from "../state/EventsSlice.tsx";
+import { EventSegment, Tag } from "../state/EventsSlice.tsx";
 
 import TextField from "@mui/material/TextField";
 
@@ -23,8 +23,8 @@ function getTextWidth(text) {
 }
 
 type EventInputProps = {
-    content: EventType,
-    setContent: (e: EventType) => void;
+    content: EventSegment,
+    setContent: (e: EventSegment) => void;
     newTag: null | Tag;
 };
 
@@ -34,7 +34,7 @@ export default function EventInput(props: EventInputProps) {
 
     useEffect(() => {
         var changed = false;
-        const newContent: EventType = [...content];
+        const newContent: EventSegment = [...content];
 
         if (newContent.length === 0) {
             newContent.push("");

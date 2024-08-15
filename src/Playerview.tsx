@@ -4,22 +4,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./components/Characters.tsx";
 import { setClaims } from "./state/PlayersSlice.tsx";
 import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
+import EventList from "./EventList.tsx";
+import { Tag, TagTypes } from "./state/EventsSlice.tsx";
 
 function Playerview() {
     const params = useParams();
+    const playerIndex = parseInt(params.playerIndex ?? "0");
     const player_info = useAppSelector(
-        state => state.players.players[Number(params.playerIndex)]);
+        state => state.players.players[playerIndex]);
     const navigate = useNavigate();
     const num_players = useAppSelector(
         state => state.players.players.length);
-    const next_index = (Number(params.playerIndex) + 1) % num_players;
-    const prev_index = (Number(params.playerIndex) - 1) < 0 ? num_players - 1 :
-        (Number(params.playerIndex) - 1);
+    const next_index = (playerIndex + 1) % num_players;
+    const prev_index = (playerIndex - 1) < 0 ? num_players - 1 :
+        (Number(playerIndex) - 1);
 
     const [openClaimsDialog, setOpenClaimsDialog] = useState(false);
     const [playerClaims, setPlayerClaims] = useState<String[]>(player_info.claims);
     const dispatch = useAppDispatch();
     const { getRole }: ScriptContextType = useContext(ScriptContext);
+
+    const events_filter: Tag = [TagTypes.Player, playerIndex];
 
     useEffect(() => {
         dispatch(setClaims({ id: player_info.id, claims: playerClaims }));
@@ -58,6 +63,8 @@ function Playerview() {
                 setOpenClaimsDialog(false);
             }} />
         </dialog>
+        {}
+        <div><EventList filter={events_filter}/></div>
         <button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</button>
     </>;
 }
