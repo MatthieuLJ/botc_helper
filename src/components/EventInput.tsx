@@ -114,31 +114,27 @@ export default function EventInput(props: EventInputProps) {
         <>
             <Box>
                 {props.content.map((item, index) => {
-                    if (Array.isArray(item)) {
-                        return (
-                            <EventTag
-                                key={index}
-                                value={item}
-                            //onDelete={() => deleteChip(index)}
-                            />
-                        );
-                    } else {
-                        return (
-                            <TextField
-                                key={index}
-                                value={item}
-                                variant="standard"
-                                style={{ width: getTextWidth(item) }}
-                                onChange={(e) => {
-                                    changeString(index, e.currentTarget.value);
-                                }}
-                                onBlur={(e) => {
-                                    if (e.target.selectionStart != null)
-                                        setCursorPosition([index, e.target.selectionStart]);
-                                }}
-                            />
-                        );
-                    }
+                    return Array.isArray(item) ? (
+                        <EventTag
+                            key={index}
+                            value={item}
+                        //onDelete={() => deleteChip(index)}
+                        />
+                    ) : (
+                        <TextField
+                            key={index}
+                            value={item}
+                            variant="standard"
+                            style={{ width: getTextWidth(item) }}
+                            onChange={(e) => {
+                                changeString(index, e.currentTarget.value);
+                            }}
+                            onBlur={(e) => {
+                                if (e.target.selectionStart != null)
+                                    setCursorPosition([index, e.target.selectionStart]);
+                            }}
+                        />
+                    );
                 })}
             </Box>
         </>

@@ -1,9 +1,9 @@
 import React from "react";
 
 import { List, ListItem } from '@mui/material';
-import { useAppSelector } from "./state/hooks.ts";
-import EventDisplay from "./components/EventDisplay.tsx";
-import { getFilteredEvents, Tag } from "./state/EventsSlice.tsx";
+import { useAppSelector } from "../state/hooks.ts";
+import EventDisplay from "./EventDisplay.tsx";
+import { getFilteredEvents, Tag } from "../state/EventsSlice.tsx";
 
 type EventListProps = {
     filter?: Tag;

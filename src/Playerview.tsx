@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./components/Characters.tsx";
 import { setClaims } from "./state/PlayersSlice.tsx";
 import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
-import EventList from "./EventList.tsx";
+import EventList from "./components/EventList.tsx";
 import { Tag, TagTypes } from "./state/EventsSlice.tsx";
 
 function Playerview() {

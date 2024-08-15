@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Townsquare from './Townsquare.tsx';
-import EventList from './EventList.tsx';
+import EventList from './components/EventList.tsx';
 
 import { Button } from '@mui/material';
 import AddEventDialog from './components/AddEventDialog.tsx';
