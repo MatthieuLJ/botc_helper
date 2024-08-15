@@ -12,8 +12,8 @@ type EventListProps = {
 const EventList: React.FC<EventListProps> = ({ filter = null }) => {
     const events = useAppSelector(state => state.events);
     const filtered_events = filter === null ?
-        events.events :
-        getFilteredEvents(events, filter).events;
+        events :
+        getFilteredEvents(events, filter);
 
     return <List>
         {filtered_events.map((e) =>

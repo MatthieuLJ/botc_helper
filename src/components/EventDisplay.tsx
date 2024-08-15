@@ -2,10 +2,10 @@ import React from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
-import { EventSegment } from "../state/EventsSlice.tsx";
+import { EventSegments } from "../state/EventsSlice.tsx";
 
 type EventDisplayProps = {
-    content: EventSegment;
+    content: EventSegments;
 };
 
 export default function EventDisplay(props: EventDisplayProps) {

@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
 import { useAppSelector } from "../state/hooks.ts";
-import { EventType } from "../state/EventsSlice.tsx";
+import { EventSegments } from "../state/EventsSlice.tsx";
 import { Avatar, Button } from "@mui/material";
 
 type ActionboxProps = {
-    setEvent: (event: EventType) => void;
+    setEvent: (event: EventSegments) => void;
 };
 
 type roleInformationTypeForActions = {
     [role: string]: {
-        [action: string]: Event;
+        [action: string]: EventSegments;
     };
 };
 

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { EventType, Tag, TagTypes } from "../state/EventsSlice.tsx";
+import { EventSegments, Tag, TagTypes } from "../state/EventsSlice.tsx";
 import EventInput from "./EventInput.tsx";
 
 import { Button, Dialog } from "@mui/material";
@@ -11,23 +11,23 @@ import Actionbox from "./Actionbox.tsx";
 
 type AddEventDialogProps = {
     open: boolean,
-    onClose: (event: EventType) => void,
+    onClose: (event: EventSegments) => void,
 };
 
 export default function AddEventDialog(props: AddEventDialogProps) {
     const { open, onClose } = props;
-    const [event, setEvent] = useState<EventType>([]);
+    const [event, setEvent] = useState<EventSegments>([]);
     const [newTag, setNewTag] = useState<Tag | null>(null);
 
     function handleClose() {
         onClose(event);
     }
-    useEffect(()=> {
+    useEffect(() => {
         if (open) {
             setEvent([""]);
         }
     }, [open]);
-    
+
     return <Dialog open={open} onClose={handleClose}>
         <EventInput content={event} setContent={setEvent} newTag={newTag} />
         <Accordion>

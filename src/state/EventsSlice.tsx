@@ -10,19 +10,15 @@ export type Tag = ([TagTypes.Player, number] |
 [TagTypes.Role, string] |
 [TagTypes.Time, number]);
 
-export type EventSegment = (string | Tag)[];
+export type EventSegments = (string | Tag)[];
 
-export type EventList = {
-    events: { id: number, event: EventSegment; }[];
-};
+export type EventList = { id: number, event: EventSegments; }[];
 
-const initialState: EventList = {
-    events: []
-};
+const initialState: EventList = [];
 
 const findNextId = (state: EventList): number => {
     const allNumbers: number[] = [];
-    for (const e of state.events) {
+    for (const e of state) {
         allNumbers.push(e.id);
     }
 
@@ -35,10 +31,10 @@ const findNextId = (state: EventList): number => {
 };
 
 export const getFilteredEvents = (state: EventList, filter: Tag): EventList => {
-    let result: EventList = { events: [] };
+    let result: EventList = [];
     let found = false;
 
-    for (const e of state.events) {
+    for (const e of state) {
         found = false;
         for (const elem of e.event) {
             if (Array.isArray(elem) &&
@@ -49,7 +45,7 @@ export const getFilteredEvents = (state: EventList, filter: Tag): EventList => {
             }
         }
         if (found) {
-            result.events.push(e);
+            result.push(e);
         }
     }
 
@@ -64,12 +60,9 @@ export function catchEventActions(state, action) {
             const new_state = {
                 ...state,
                 events:
-                {
-                    events:
-                        [...state.events.events,
-                        { id: findNextId(state.events), event: new_event }
-                        ]
-                }
+                    [...state.events,
+                    { id: findNextId(state.events), event: new_event }
+                    ]
             };
             return new_state;
         default:
@@ -83,13 +76,13 @@ export const EventsSlice = createSlice({
     initialState,
     reducers: {
         addEvent: (state, action) => {
-            state.events.push({
+            state.push({
                 id: findNextId(state),
                 event: action.payload.event
             });
         },
         clearEvents: (state) => {
-            state.events = [];
+            state = [];
         }
     }
 });
