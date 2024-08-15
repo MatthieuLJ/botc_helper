@@ -20,7 +20,7 @@ function Actionbox(props: ActionboxProps) {
     const { getRole }: ScriptContextType = useContext(ScriptContext);
     const role_infos: roleInformationTypeForActions[] = [];
 
-    roles.forEach((role) => {
+    roles.forEach((role: string) => {
         const role_info: roleType | null = getRole(role);
         if (role_info != null) {
             role_infos[role] = role_info.actions;
@@ -31,9 +31,9 @@ function Actionbox(props: ActionboxProps) {
         {Object.keys(role_infos).map((role) =>
             Object.keys(role_infos[role]).map((action) =>
                 <li key={role + action}>
-                    <Button 
-                    startIcon={<Avatar src={getRole(role)?.icon} />}
-                    onClick={()=> {props.setEvent(role_infos[role][action])}}
+                    <Button
+                        startIcon={<Avatar src={getRole(role)?.icon} />}
+                        onClick={() => { props.setEvent(role_infos[role][action]); }}
                     >
                         {role_infos[role].name}: {action}
                     </Button>
