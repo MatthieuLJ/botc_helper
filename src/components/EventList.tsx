@@ -17,8 +17,8 @@ const EventList: React.FC<EventListProps> = ({ filter = null }) => {
 
     return <List>
         {filtered_events.map((e) =>
-            <ListItem>
-                <EventDisplay content={e.event} key={e.id} />
+            <ListItem  key={e.id}>
+                <EventDisplay content={e.event} />
             </ListItem>)}
     </List>;
 };

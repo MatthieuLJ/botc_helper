@@ -18,9 +18,12 @@ type PlayerTagProps = {
 };
 
 function PlayerTag(props: PlayerTagProps) {
+    // TODO: the console is showing some warning about this selector:
+    // Selector unknown returned a different result when called with the same parameters. This can lead to unnecessary rerenders.Selectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization [object Object] 
     const player = useAppSelector(
         state =>
-            state.players.players.filter(p => p.id === props.id));
+            // TODO: change the type of p based on a type defined in PlayersSlice
+            state.players.players.filter((p: { id: number, name: string, alive: boolean, claims: string[] }) => p.id === props.id));
     if (player.length === 0) {
         return <Chip
             label="player"

@@ -21,7 +21,10 @@ export default function EventDisplay(props: EventDisplayProps) {
                     );
                 } else {
                     return (
-                        <> {item} </>
+                        <div
+                            key={index}>
+                            {item}
+                        </div>
                     );
                 }
             })}
