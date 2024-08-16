@@ -82,10 +82,9 @@ export default function EventInput(props: EventInputProps) {
             }
             setContent(newContent);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newTag]);
 
-    /*
     function deleteChip(index) {
         const newContent = [...content];
         if (
@@ -103,7 +102,6 @@ export default function EventInput(props: EventInputProps) {
         }
         setContent(newContent);
     }
-        */
 
     function changeString(index, newString) {
         const newContent = [...content];
@@ -118,7 +116,7 @@ export default function EventInput(props: EventInputProps) {
                         <EventTag
                             key={index}
                             value={item}
-                        //onDelete={() => deleteChip(index)}
+                            onDelete={() => deleteChip(index)}
                         />
                     ) : (
                         <TextField

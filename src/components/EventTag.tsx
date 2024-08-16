@@ -14,6 +14,7 @@ import Icon from '@mdi/react';
 
 type PlayerTagProps = {
     id: Number;
+    onDelete?: (event: any) => void;
 };
 
 function PlayerTag(props: PlayerTagProps) {
@@ -24,7 +25,8 @@ function PlayerTag(props: PlayerTagProps) {
         return <Chip
             label="player"
             avatar={<Icon path={mdiFaceManOutline} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     } else if (player.length > 1) {
         console.log("Something weird with getting a player by id");
         return <Chip label="Error" />;
@@ -32,12 +34,14 @@ function PlayerTag(props: PlayerTagProps) {
         return <Chip
             label={player[0].name}
             avatar={<Icon path={mdiFaceManOutline} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     }
 }
 
 type RoleTagProps = {
     role: string;
+    onDelete?: (event: any) => void;
 };
 
 function RoleTag(props: RoleTagProps) {
@@ -48,17 +52,20 @@ function RoleTag(props: RoleTagProps) {
         return <Chip
             label={role_info.name}
             avatar={<Avatar alt="" src={role_info.icon} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     } else {
         return <Chip
             label="role"
             avatar={<Icon path={mdiScriptTextOutline} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     }
 }
 
 type TimeTagProps = {
     time: number;
+    onDelete?: (event: any) => void;
 };
 
 function TimeTag(props: TimeTagProps) {
@@ -66,25 +73,28 @@ function TimeTag(props: TimeTagProps) {
     if (night) {
         return <Chip label={"night " + Math.floor((props.time + 1) / 2)}
             avatar={<Icon path={mdiWeatherNight} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     } else {
         return <Chip label={"day " + Math.floor((props.time + 1) / 2)}
             avatar={<Icon path={mdiWeatherSunny} />}
-            variant="outlined" />;
+            variant="outlined"
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     }
 }
 
 type EventTagProps = {
     value: Tag;
+    onDelete?: (event: any) => void;
 };
 
 export default function EventTag(props: EventTagProps) {
     switch (props.value[0]) {
         case TagTypes.Player:
-            return <PlayerTag id={props.value[1]} />;
+            return <PlayerTag id={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
         case TagTypes.Role:
-            return <RoleTag role={props.value[1]} />;
+            return <RoleTag role={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
         case TagTypes.Time:
-            return <TimeTag time={props.value[1]} />;
+            return <TimeTag time={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     }
 }
