@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
 import EventTag from "./EventTag.tsx";
@@ -15,9 +15,11 @@ function getTextWidth(text) {
     }
 
     context.font = getComputedStyle(document.body).font;
+    /*
     console.log(
         "Computed for " + text + " is " + context.measureText(text).width
     );
+    */
 
     return (10 + context.measureText(text).width).toString() + "px";
 }
@@ -30,10 +32,13 @@ type EventInputProps = {
 
 export default function EventInput(props: EventInputProps) {
     const { content, setContent, newTag } = props;
-    const [cursorPosition, setCursorPosition] = useState([-1, -1]);
+    const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
+    const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
+    const [contentChanged, setContentChanged] = useState(0); // -1 for deleted tag, +1 for inserted tag
 
+    // when the content changes
     useEffect(() => {
-        var changed = false;
+        let changed = false;
         const newContent: EventSegments = [...content];
 
         if (newContent.length === 0) {
@@ -49,6 +54,11 @@ export default function EventInput(props: EventInputProps) {
                     // insert an empty string to be able to insert text between tags
                     newContent.splice(i + 1, 0, "");
                     changed = true;
+                } else if (!Array.isArray(newContent[i]) && !Array.isArray(newContent[i + 1])) {
+                    // merge the two strings together
+                    newContent[i] = newContent[i] + " " + newContent[i + 1];
+                    newContent.splice(i + 1, 1);
+                    changed = true;
                 }
             }
             if (Array.isArray(newContent[content.length - 1])) {
@@ -59,8 +69,29 @@ export default function EventInput(props: EventInputProps) {
         if (changed) {
             setContent(newContent);
         }
+        itemsRef.current = itemsRef.current.slice(0, newContent.length);
+        if ((!changed) && (contentChanged === -1) && (cursorPosition[0] !== -1)) {
+            // we deleted a tag and everything should be stable now, place the
+            // cursor where the tag was
+            const inputRef = itemsRef.current[cursorPosition[0]]?.getElementsByTagName("input");
+            if (inputRef !== undefined) {
+                inputRef[0]?.setSelectionRange(cursorPosition[1], cursorPosition[1]);
+                inputRef[0]?.focus();
+            }
+            setContentChanged(0);
+        } else if ((!changed) && (contentChanged === 1) && (cursorPosition[0] !== -1)) {
+            // we inserted a tag and everything should be stable now, place the
+            // cursor right after the new tag
+            const inputRef = itemsRef.current[cursorPosition[0] + 2]?.getElementsByTagName("input");
+            if (inputRef !== undefined) {
+                inputRef[0]?.setSelectionRange(0, 0);
+                inputRef[0]?.focus();
+            }
+            setContentChanged(0);
+        }
     }, [content, setContent]);
 
+    // inserting a new tag through the props
     useEffect(() => {
         if (newTag != null) {
             const newContent = [...content];
@@ -80,6 +111,7 @@ export default function EventInput(props: EventInputProps) {
                     previousText.substring(cursorPosition[1])
                 );
             }
+            setContentChanged(1);
             setContent(newContent);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,14 +125,29 @@ export default function EventInput(props: EventInputProps) {
             typeof content[index - 1] == "string" &&
             typeof content[index + 1] == "string"
         ) {
+            const previousLength = newContent[index - 1].length;
             newContent[index - 1] =
                 newContent[index - 1] + " " + newContent[index + 1];
             newContent.splice(index, 2);
-            console.log(newContent);
+            //itemsRef.current[index-1]?.focus();
+            setCursorPosition([index - 1, previousLength]);
         } else {
             newContent.splice(index, 1);
         }
+        setContentChanged(-1);
         setContent(newContent);
+    }
+
+    function handleKeyDown(index, event) {
+        // Only need to handle if key is backspace or delete while at the start
+        // or end of the field
+        if ((event.key === 'Backspace') && (event.target.selectionStart === 0) && (index > 0)) {
+            deleteChip(index - 1);
+            event.preventDefault();
+        } else if ((event.key === 'Delete') && (event.target.selectionStart === content[index].length) && (index < content.length)) {
+            deleteChip(index + 1);
+            event.preventDefault();
+        }
     }
 
     function changeString(index, newString) {
@@ -108,20 +155,24 @@ export default function EventInput(props: EventInputProps) {
         newContent[index] = newString;
         setContent(newContent);
     }
+
     return (
         <>
             <Box>
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
-                        <EventTag
-                            key={index}
-                            value={item}
-                            onDelete={() => deleteChip(index)}
-                        />
+                        <div ref={(el) => itemsRef.current[index] = el}>
+                            <EventTag
+                                key={index}
+                                value={item}
+                                onDelete={() => deleteChip(index)}
+                            />
+                        </div>
                     ) : (
                         <TextField
                             key={index}
                             value={item}
+                            ref={(el) => itemsRef.current[index] = el}
                             variant="standard"
                             style={{ width: getTextWidth(item) }}
                             onChange={(e) => {
@@ -131,10 +182,13 @@ export default function EventInput(props: EventInputProps) {
                                 if (e.target.selectionStart != null)
                                     setCursorPosition([index, e.target.selectionStart]);
                             }}
+                            onKeyDown={(e) => {
+                                handleKeyDown(index, e);
+                            }}
                         />
                     );
                 })}
-            </Box>
+            </Box >
         </>
     );
 }
