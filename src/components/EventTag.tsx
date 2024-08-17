@@ -23,7 +23,7 @@ function PlayerTag(props: PlayerTagProps) {
     const player = useAppSelector(
         state =>
             // TODO: change the type of p based on a type defined in PlayersSlice
-            state.players.players.filter((p: { id: number, name: string, alive: boolean, claims: string[] }) => p.id === props.id));
+            state.players.players.filter((p: { id: number, name: string, alive: boolean, claims: string[]; }) => p.id === props.id));
     if (player.length === 0) {
         return <Chip
             label="player"
@@ -74,12 +74,12 @@ type TimeTagProps = {
 function TimeTag(props: TimeTagProps) {
     const night: boolean = (props.time % 2 === 0);
     if (night) {
-        return <Chip label={"night " + Math.floor((props.time + 1) / 2)}
+        return <Chip label={"night " + Math.floor((props.time / 2) + 1)}
             avatar={<Icon path={mdiWeatherNight} />}
             variant="outlined"
             {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     } else {
-        return <Chip label={"day " + Math.floor((props.time + 1) / 2)}
+        return <Chip label={"day " + Math.floor((props.time / 2) + 1)}
             avatar={<Icon path={mdiWeatherSunny} />}
             variant="outlined"
             {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
