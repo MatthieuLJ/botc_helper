@@ -89,6 +89,8 @@ export default function EventInput(props: EventInputProps) {
             }
             setContentChanged(0);
         }
+        // We only want this effect to trigger when the content is changed
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [content, setContent]);
 
     // inserting a new tag through the props
