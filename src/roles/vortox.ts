@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_vortox.png';
 
@@ -10,9 +10,9 @@ const vortox: roleType = {
         "yield false info. Each day, if no-one is executed, evil wins.",
 
     actions: {
-        "Kill": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "Vortox"],
-            " killed player ", [TagTypes.Player, -1]]
+        "Kill": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "Vortox"],
+            " killed player ", [ChipType.Player, -1]]
     }
 };
 

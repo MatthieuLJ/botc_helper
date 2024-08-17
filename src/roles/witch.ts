@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_witch.png';
 
@@ -10,9 +10,9 @@ const witch: roleType = {
         "die. If just 3 players live, you lose this ability.",
 
     actions: {
-        "Picks": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "witch"],
-            " cursed ", [TagTypes.Player, -1]]
+        "Picks": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "witch"],
+            " cursed ", [ChipType.Player, -1]]
     }
 };
 

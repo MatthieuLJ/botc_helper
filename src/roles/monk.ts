@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_monk.png';
 
@@ -10,9 +10,9 @@ const monk: roleType = {
         + "the Demon tonight.",
 
     actions: {
-        "Protect": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "monk"],
-            " protected ", [TagTypes.Player, -1]]
+        "Protect": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "monk"],
+            " protected ", [ChipType.Player, -1]]
     }
 };
 

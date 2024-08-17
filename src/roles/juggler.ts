@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_juggler.png';
 
@@ -10,14 +10,14 @@ const juggler: roleType = {
         "That night, you learn how many you got correct.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "juggler"],
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "juggler"],
             " learned a ? when checking ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, ""], " and ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, ""], " and ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, ""], " and ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, ""], " and ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, ""]]
+            [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, ""]]
     }
 };
 

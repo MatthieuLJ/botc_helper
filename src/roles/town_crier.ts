@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_towncrier.png';
 
@@ -9,8 +9,8 @@ const town_crier: roleType = {
     ability: "Each night*, you learn if a Minion nominated today.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "town crier"],
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "town crier"],
             " learned ?"]
     }
 };

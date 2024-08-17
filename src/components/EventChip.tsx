@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { TagTypes, Tag } from "../state/EventsSlice.tsx";
+import { ChipType, ChipSegment } from "../state/EventsSlice.tsx";
 import { useAppSelector } from "../state/hooks.ts";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
@@ -12,12 +12,12 @@ import { mdiScriptTextOutline, mdiFaceManOutline, mdiWeatherNight, mdiWeatherSun
 import Icon from '@mdi/react';
 
 
-type PlayerTagProps = {
+type PlayerChipProps = {
     id: Number;
     onDelete?: (event: any) => void;
 };
 
-function PlayerTag(props: PlayerTagProps) {
+function PlayerChip(props: PlayerChipProps) {
     // TODO: the console is showing some warning about this selector:
     // Selector unknown returned a different result when called with the same parameters. This can lead to unnecessary rerenders.Selectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization [object Object] 
     const player = useAppSelector(
@@ -42,12 +42,12 @@ function PlayerTag(props: PlayerTagProps) {
     }
 }
 
-type RoleTagProps = {
+type RoleChipProps = {
     role: string;
     onDelete?: (event: any) => void;
 };
 
-function RoleTag(props: RoleTagProps) {
+function RoleChip(props: RoleChipProps) {
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
     const role_info: roleType | null = getRole(props.role);
@@ -66,12 +66,12 @@ function RoleTag(props: RoleTagProps) {
     }
 }
 
-type TimeTagProps = {
+type TimeChipProps = {
     time: number;
     onDelete?: (event: any) => void;
 };
 
-function TimeTag(props: TimeTagProps) {
+function TimeChip(props: TimeChipProps) {
     const night: boolean = (props.time % 2 === 0);
     if (night) {
         return <Chip label={"night " + Math.floor((props.time / 2) + 1)}
@@ -86,18 +86,18 @@ function TimeTag(props: TimeTagProps) {
     }
 }
 
-type EventTagProps = {
-    value: Tag;
+type EventChipProps = {
+    value: ChipSegment;
     onDelete?: (event: any) => void;
 };
 
-export default function EventTag(props: EventTagProps) {
+export default function EventChip(props: EventChipProps) {
     switch (props.value[0]) {
-        case TagTypes.Player:
-            return <PlayerTag id={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
-        case TagTypes.Role:
-            return <RoleTag role={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
-        case TagTypes.Time:
-            return <TimeTag time={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+        case ChipType.Player:
+            return <PlayerChip id={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+        case ChipType.Role:
+            return <RoleChip role={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+        case ChipType.Time:
+            return <TimeChip time={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
     }
 }

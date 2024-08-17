@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_chef.png';
 
@@ -9,8 +9,8 @@ const chef: roleType = {
     ability: "You start knowing how many pairs of evil players there are.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "chef"],
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "chef"],
             " learned a ?"]
     }
 };

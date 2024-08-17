@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 
-import EventTag from "./EventTag.tsx";
+import EventChip from "./EventChip.tsx";
 import { EventSegments } from "../state/EventsSlice.tsx";
 
 type EventDisplayProps = {
@@ -14,7 +14,7 @@ export default function EventDisplay(props: EventDisplayProps) {
             {props.content.map((item, index) => {
                 if (Array.isArray(item)) {
                     return (
-                        <EventTag
+                        <EventChip
                             key={index}
                             value={item}
                         />

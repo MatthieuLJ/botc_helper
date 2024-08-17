@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_pithag.png';
 
@@ -10,9 +10,9 @@ const pithag: roleType = {
         " in play). If a Demon is made, deaths tonight are arbitrary.",
 
     actions: {
-        "Kill": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "pit hag"],
-            " changed ", [TagTypes.Player, -1], " into ", [TagTypes.Role, ""]]
+        "Kill": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "pit hag"],
+            " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]]
     }
 };
 

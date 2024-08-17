@@ -5,7 +5,7 @@ import Characters from "./components/Characters.tsx";
 import { setClaims } from "./state/PlayersSlice.tsx";
 import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
 import EventList from "./components/EventList.tsx";
-import { Tag, TagTypes } from "./state/EventsSlice.tsx";
+import { ChipSegment, ChipType } from "./state/EventsSlice.tsx";
 
 function Playerview() {
     const params = useParams();
@@ -24,7 +24,7 @@ function Playerview() {
     const dispatch = useAppDispatch();
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
-    const events_filter: Tag = [TagTypes.Player, playerIndex];
+    const events_filter: ChipSegment = [ChipType.Player, playerIndex];
 
     useEffect(() => {
         dispatch(setClaims({ id: player_info.id, claims: playerClaims }));

@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_imp.png';
 
@@ -10,9 +10,9 @@ const imp: roleType = {
         "this way, a Minion becomes the Imp.",
 
     actions: {
-        "Kill": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "Imp"],
-            " killed player ", [TagTypes.Player, -1]]
+        "Kill": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "Imp"],
+            " killed player ", [ChipType.Player, -1]]
     }
 };
 

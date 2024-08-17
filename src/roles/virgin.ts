@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_virgin.png';
 
@@ -10,9 +10,9 @@ const virgin: roleType = {
         + " they are executed immediately.",
 
     actions: {
-        "GetNominated": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "virgin"],
-            " was nominated by ", [TagTypes.Player, -1]]
+        "GetNominated": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "virgin"],
+            " was nominated by ", [ChipType.Player, -1]]
     }
 };
 

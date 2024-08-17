@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_undertaker.png';
 
@@ -9,10 +9,10 @@ const undertaker: roleType = {
     ability: "Each night*, you learn which character died by execution today.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "undertaker"],
-            " learned that ", [TagTypes.Player, -1], " is ",
-            [TagTypes.Role, ""],]
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "undertaker"],
+            " learned that ", [ChipType.Player, -1], " is ",
+            [ChipType.Role, ""],]
     }
 };
 

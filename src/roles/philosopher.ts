@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_philosopher.png';
 
@@ -10,9 +10,9 @@ const philosopher: roleType = {
         "ability. If this character is in play, they are drunk.",
 
     actions: {
-        "GainAbility": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "philosopher"],
-            " gained the ability of ", [TagTypes.Role, ""]]
+        "GainAbility": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "philosopher"],
+            " gained the ability of ", [ChipType.Role, ""]]
     }
 };
 

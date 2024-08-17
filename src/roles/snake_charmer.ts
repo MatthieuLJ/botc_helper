@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_snakecharmer.png';
 
@@ -10,9 +10,9 @@ const snake_charmer: roleType = {
         "characters & alignments with you & is then poisoned.",
 
     actions: {
-        "Picks": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "snake charmer"],
-            " picked ", [TagTypes.Player, -1]]
+        "Picks": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "snake charmer"],
+            " picked ", [ChipType.Player, -1]]
     }
 };
 

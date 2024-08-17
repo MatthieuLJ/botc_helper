@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
-import EventTag from "./EventTag.tsx";
-import { EventSegments, Tag } from "../state/EventsSlice.tsx";
+import EventChip from "./EventChip.tsx";
+import { EventSegments, ChipSegment } from "../state/EventsSlice.tsx";
 
 import TextField from "@mui/material/TextField";
 
@@ -27,14 +27,14 @@ function getTextWidth(text) {
 type EventInputProps = {
     content: EventSegments,
     setContent: (e: EventSegments) => void;
-    newTag: null | Tag;
+    newChip: null | ChipSegment;
 };
 
 export default function EventInput(props: EventInputProps) {
-    const { content, setContent, newTag } = props;
+    const { content, setContent, newChip: newChip } = props;
     const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
     const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
-    const [contentChanged, setContentChanged] = useState(0); // -1 for deleted tag, +1 for inserted tag
+    const [contentChanged, setContentChanged] = useState(0); // -1 for deleted chip, +1 for inserted chip
 
     // when the content changes
     useEffect(() => {
@@ -51,7 +51,7 @@ export default function EventInput(props: EventInputProps) {
             }
             for (var i = 0; i < newContent.length - 1; i++) {
                 if (Array.isArray(newContent[i]) && Array.isArray(newContent[i + 1])) {
-                    // insert an empty string to be able to insert text between tags
+                    // insert an empty string to be able to insert text between chips
                     newContent.splice(i + 1, 0, "");
                     changed = true;
                 } else if (!Array.isArray(newContent[i]) && !Array.isArray(newContent[i + 1])) {
@@ -71,8 +71,8 @@ export default function EventInput(props: EventInputProps) {
         }
         itemsRef.current = itemsRef.current.slice(0, newContent.length);
         if ((!changed) && (contentChanged === -1) && (cursorPosition[0] !== -1)) {
-            // we deleted a tag and everything should be stable now, place the
-            // cursor where the tag was
+            // we deleted a chip and everything should be stable now, place the
+            // cursor where the chip was
             const inputRef = itemsRef.current[cursorPosition[0]]?.getElementsByTagName("input");
             if (inputRef !== undefined) {
                 inputRef[0]?.setSelectionRange(cursorPosition[1], cursorPosition[1]);
@@ -80,8 +80,8 @@ export default function EventInput(props: EventInputProps) {
             }
             setContentChanged(0);
         } else if ((!changed) && (contentChanged === 1) && (cursorPosition[0] !== -1)) {
-            // we inserted a tag and everything should be stable now, place the
-            // cursor right after the new tag
+            // we inserted a chip and everything should be stable now, place the
+            // cursor right after the new chip
             const inputRef = itemsRef.current[cursorPosition[0] + 2]?.getElementsByTagName("input");
             if (inputRef !== undefined) {
                 inputRef[0]?.setSelectionRange(0, 0);
@@ -93,23 +93,23 @@ export default function EventInput(props: EventInputProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [content, setContent]);
 
-    // inserting a new tag through the props
+    // inserting a new chip through the props
     useEffect(() => {
-        if (newTag != null) {
+        if (newChip != null) {
             const newContent = [...content];
             const previousText = newContent[cursorPosition[0]];
             if ((cursorPosition[0] === -1) || (typeof (previousText) != "string")) {
                 newContent.splice(
                     newContent.length - 1,
                     0,
-                    newTag
+                    newChip
                 );
             } else {
                 newContent.splice(
                     cursorPosition[0],
                     1,
                     previousText.substring(0, cursorPosition[1]),
-                    newTag,
+                    newChip,
                     previousText.substring(cursorPosition[1])
                 );
             }
@@ -117,7 +117,7 @@ export default function EventInput(props: EventInputProps) {
             setContent(newContent);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newTag]);
+    }, [newChip]);
 
     function deleteChip(index) {
         const newContent = [...content];
@@ -164,7 +164,7 @@ export default function EventInput(props: EventInputProps) {
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
                         <div ref={(el) => itemsRef.current[index] = el}>
-                            <EventTag
+                            <EventChip
                                 key={index}
                                 value={item}
                                 onDelete={() => deleteChip(index)}

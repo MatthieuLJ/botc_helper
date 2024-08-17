@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_poisoner.png';
 
@@ -10,9 +10,9 @@ const poisoner: roleType = {
         "tomorrow day.",
 
     actions: {
-        "Poison": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "poisoner"],
-            " poisoned ", [TagTypes.Player, -1]]
+        "Poison": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "poisoner"],
+            " poisoned ", [ChipType.Player, -1]]
     }
 };
 

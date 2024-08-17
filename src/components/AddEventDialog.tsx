@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { EventSegments, Tag, TagTypes } from "../state/EventsSlice.tsx";
+import { EventSegments, ChipSegment, ChipType } from "../state/EventsSlice.tsx";
 import EventInput from "./EventInput.tsx";
 
 import { Button, Dialog } from "@mui/material";
@@ -17,7 +17,7 @@ type AddEventDialogProps = {
 export default function AddEventDialog(props: AddEventDialogProps) {
     const { open, onClose } = props;
     const [event, setEvent] = useState<EventSegments>([]);
-    const [newTag, setNewTag] = useState<Tag | null>(null);
+    const [newChip, setNewChip] = useState<ChipSegment | null>(null);
 
     function handleClose() {
         onClose(event);
@@ -29,24 +29,24 @@ export default function AddEventDialog(props: AddEventDialogProps) {
     }, [open]);
 
     return <Dialog open={open} onClose={handleClose}>
-        <EventInput content={event} setContent={setEvent} newTag={newTag} />
+        <EventInput content={event} setContent={setEvent} newChip={newChip} />
         <Accordion>
             <AccordionSummary>
-                Add a tag
+                Add a chip
             </AccordionSummary>
             <AccordionDetails>
                 <Button onClick={() => {
-                    setNewTag([TagTypes.Time, 0]);
+                    setNewChip([ChipType.Time, 0]);
                 }}>
                     Add a time
                 </Button>
                 <Button onClick={() => {
-                    setNewTag([TagTypes.Player, -1]);
+                    setNewChip([ChipType.Player, -1]);
                 }}>
                     Add a player
                 </Button>
                 <Button onClick={() => {
-                    setNewTag([TagTypes.Role, ""]);
+                    setNewChip([ChipType.Role, ""]);
                 }}>
                     Add a role
                 </Button>

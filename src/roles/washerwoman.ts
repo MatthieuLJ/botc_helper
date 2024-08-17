@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_washerwoman.png';
 
@@ -10,10 +10,10 @@ const washerwoman: roleType = {
         "Townsfolk.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "washerwoman"],
-            " learned that either ", [TagTypes.Player, -1], " or ",
-            [TagTypes.Player, -1], " is the ", [TagTypes.Role, ""]]
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "washerwoman"],
+            " learned that either ", [ChipType.Player, -1], " or ",
+            [ChipType.Player, -1], " is the ", [ChipType.Role, ""]]
     }
 };
 

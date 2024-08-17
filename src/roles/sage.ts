@@ -1,4 +1,4 @@
-import { TagTypes } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/EventsSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_sage.png';
 
@@ -9,10 +9,10 @@ const sage: roleType = {
     ability: "If the Demon kills you, you learn that it is 1 of 2 players.",
 
     actions: {
-        "Learn": ["On", [TagTypes.Time, -1], ", player ",
-            [TagTypes.Player, -1], " as the ", [TagTypes.Role, "sage"],
-            " died and learned that the demon is either ", [TagTypes.Player, -1],
-            " or ", [TagTypes.Player, -1]]
+        "Learn": ["On", [ChipType.Time, -1], ", player ",
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "sage"],
+            " died and learned that the demon is either ", [ChipType.Player, -1],
+            " or ", [ChipType.Player, -1]]
     }
 };
 

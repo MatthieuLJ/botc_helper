@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export enum TagTypes {
+export enum ChipType {
     Player,
     Role,
     Time
 }
 
-export type Tag = ([TagTypes.Player, number] |
-[TagTypes.Role, string] |
-[TagTypes.Time, number]);
+export type ChipSegment = ([ChipType.Player, number] |
+[ChipType.Role, string] |
+[ChipType.Time, number]);
 
-export type EventSegments = (string | Tag)[];
+export type EventSegments = (string | ChipSegment)[];
 
 export type EventList = { id: number, event: EventSegments; }[];
 
@@ -30,7 +30,7 @@ const findNextId = (state: EventList): number => {
     return result;
 };
 
-export const getFilteredEvents = (state: EventList, filter: Tag): EventList => {
+export const getFilteredEvents = (state: EventList, filter: ChipSegment): EventList => {
     let result: EventList = [];
     let found = false;
 
@@ -56,7 +56,7 @@ export function catchEventActions(state, action) {
     switch (action.type) {
         case 'time/advanceTime':
             const start_string = (state.time.time % 2 === 0) ? "The night has fallen on Ravenswoodbluff, it is now " : "It is a new day in Ravenswoodbluff, it is now ";
-            const new_event = [start_string, [TagTypes.Time, state.time.time]];
+            const new_event = [start_string, [ChipType.Time, state.time.time]];
             const new_state = {
                 ...state,
                 events:

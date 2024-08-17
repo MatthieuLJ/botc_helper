@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { List, ListItemButton } from '@mui/material';
 import { useAppSelector } from "../state/hooks.ts";
 import EventDisplay from "./EventDisplay.tsx";
-import { getFilteredEvents, Tag } from "../state/EventsSlice.tsx";
+import { getFilteredEvents, ChipSegment } from "../state/EventsSlice.tsx";
 
 type EventListProps = {
-    filter?: Tag;
+    filter?: ChipSegment;
 };
 
 const EventList: React.FC<EventListProps> = ({ filter = null }) => {
