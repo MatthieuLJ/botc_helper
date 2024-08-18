@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 
-import { List, ListItemButton } from '@mui/material';
-import { useAppSelector } from "../state/hooks.ts";
+import { Box, List, ListItemButton, ButtonGroup, Button } from '@mui/material';
+import { mdiNotePlusOutline } from '@mdi/js';
+import Icon from '@mdi/react';
+
+import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import EventDisplay from "./EventDisplay.tsx";
-import { getFilteredEvents, ChipSegment } from "../state/EventsSlice.tsx";
+import { getFilteredEvents, ChipSegment, EventSegments, addEvent } from "../state/EventsSlice.tsx";
+import AddEventDialog from "./AddEventDialog.tsx";
 
 type EventListProps = {
     filter?: ChipSegment;
 };
 
 const EventList: React.FC<EventListProps> = ({ filter = null }) => {
+    const [newEventOpen, setNewEventOpen] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
+    function onNewEvent(e: EventSegments) {
+        setNewEventOpen(false);
+        dispatch(addEvent({ event: e }));
+    }
+
     const events = useAppSelector(state => state.events);
     const filtered_events = filter === null ?
         events :
@@ -24,14 +36,21 @@ const EventList: React.FC<EventListProps> = ({ filter = null }) => {
         }
     }
 
-    return <List>
-        {filtered_events.map((e, index) =>
-            <ListItemButton key={e.id}
-                selected={index === selected}
-                onClick={(event) => handleListItemClick(event, index)}>
-                <EventDisplay content={e.event} />
-            </ListItemButton>)}
-    </List>;
+    return <><Box>
+        <ButtonGroup>
+            <Button onClick={() => { setNewEventOpen(true); }}><Icon path={mdiNotePlusOutline} size={1} /></Button>
+        </ButtonGroup>
+        <List>
+            {filtered_events.map((e, index) =>
+                <ListItemButton key={e.id}
+                    selected={index === selected}
+                    onClick={(event) => handleListItemClick(event, index)}>
+                    <EventDisplay content={e.event} />
+                </ListItemButton>)}
+        </List>
+    </Box>
+        <AddEventDialog open={newEventOpen} onClose={onNewEvent} />
+    </>;
 };
 
 export default EventList;

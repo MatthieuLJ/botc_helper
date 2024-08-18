@@ -31,9 +31,9 @@ type EventInputProps = {
 };
 
 export default function EventInput(props: EventInputProps) {
-    const { content, setContent, newChip: newChip } = props;
+    const { content, setContent, newChip } = props;
     const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
-    const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
+    const itemsRef = useRef<Array<HTMLSpanElement | null>>([]);
     const [contentChanged, setContentChanged] = useState(0); // -1 for deleted chip, +1 for inserted chip
 
     // when the content changes
@@ -163,13 +163,13 @@ export default function EventInput(props: EventInputProps) {
             <Box>
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
-                        <div ref={(el) => itemsRef.current[index] = el}>
+                        <span ref={(el) => itemsRef.current[index] = el}>
                             <EventChip
                                 key={index}
                                 value={item}
                                 onDelete={() => deleteChip(index)}
                             />
-                        </div>
+                        </span>
                     ) : (
                         <TextField
                             key={index}
