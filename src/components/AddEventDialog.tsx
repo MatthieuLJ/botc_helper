@@ -12,21 +12,21 @@ import Actionbox from "./Actionbox.tsx";
 type AddEventDialogProps = {
     open: boolean,
     onClose: (event: EventSegments) => void,
+    initialContent?: EventSegments,
 };
 
 export default function AddEventDialog(props: AddEventDialogProps) {
-    const { open, onClose } = props;
+    const { open, onClose, initialContent = [""] } = props;
     const [event, setEvent] = useState<EventSegments>([]);
     const [newChip, setNewChip] = useState<ChipSegment | null>(null);
 
     function handleClose() {
         onClose(event);
     }
+
     useEffect(() => {
-        if (open) {
-            setEvent([""]);
-        }
-    }, [open]);
+        setEvent(initialContent);
+    }, [initialContent]);
 
     return <Dialog open={open} onClose={handleClose}>
         <EventInput content={event} setContent={setEvent} newChip={newChip} />
