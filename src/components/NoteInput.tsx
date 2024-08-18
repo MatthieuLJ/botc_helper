@@ -163,9 +163,8 @@ export default function NoteInput(props: NoteInputProps) {
             <Box>
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
-                        <span ref={(el) => itemsRef.current[index] = el}>
+                        <span key={index} ref={(el) => itemsRef.current[index] = el}>
                             <NoteChip
-                                key={index}
                                 value={item}
                                 onDelete={() => deleteChip(index)}
                             />
