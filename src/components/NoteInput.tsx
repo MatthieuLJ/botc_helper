@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
-import EventChip from "./EventChip.tsx";
-import { EventSegments, ChipSegment } from "../state/EventsSlice.tsx";
+import NoteChip from "./NoteChip.tsx";
+import { NoteSegments, ChipSegment } from "../state/NotesSlice.tsx";
 
 import TextField from "@mui/material/TextField";
 
@@ -24,13 +24,13 @@ function getTextWidth(text) {
     return (10 + context.measureText(text).width).toString() + "px";
 }
 
-type EventInputProps = {
-    content: EventSegments,
-    setContent: (e: EventSegments) => void;
+type NoteInputProps = {
+    content: NoteSegments,
+    setContent: (e: NoteSegments) => void;
     newChip: null | ChipSegment;
 };
 
-export default function EventInput(props: EventInputProps) {
+export default function NoteInput(props: NoteInputProps) {
     const { content, setContent, newChip } = props;
     const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
     const itemsRef = useRef<Array<HTMLSpanElement | null>>([]);
@@ -39,7 +39,7 @@ export default function EventInput(props: EventInputProps) {
     // when the content changes
     useEffect(() => {
         let changed = false;
-        const newContent: EventSegments = [...content];
+        const newContent: NoteSegments = [...content];
 
         if (newContent.length === 0) {
             newContent.push("");
@@ -164,7 +164,7 @@ export default function EventInput(props: EventInputProps) {
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
                         <span ref={(el) => itemsRef.current[index] = el}>
-                            <EventChip
+                            <NoteChip
                                 key={index}
                                 value={item}
                                 onDelete={() => deleteChip(index)}

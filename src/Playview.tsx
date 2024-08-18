@@ -1,6 +1,6 @@
 import React from 'react';
 import Townsquare from './Townsquare.tsx';
-import EventList from './components/EventList.tsx';
+import NoteList from './components/NoteList.tsx';
 
 import { Button } from '@mui/material';
 import { advanceTime } from './state/TimeSlice.tsx';
@@ -13,7 +13,7 @@ function Playview(props: PlayviewProps) {
 
     return <>
         <div><Townsquare /></div>
-        <div><EventList /></div>
+        <div><NoteList /></div>
         <div>
             <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
         </div>

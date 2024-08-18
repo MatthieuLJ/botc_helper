@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import debounce from "debounce";
 import playerReducer from './PlayersSlice.tsx';
 import rolesReducer from './RolesSlice.tsx';
-import eventsReducer, { catchEventActions } from './EventsSlice.tsx';
+import notesReducer, { catchNoteActions } from './NotesSlice.tsx';
 import timeReducer from './TimeSlice.tsx';
 
 const state_version = 1;
@@ -43,7 +43,7 @@ function loadFromLocalStorage() {
 const combinedReducer = combineReducers({
     players: playerReducer,
     roles: rolesReducer,
-    events: eventsReducer,
+    notes: notesReducer,
     time: timeReducer
 });
 
@@ -51,7 +51,7 @@ const combinedReducer = combineReducers({
 
 function rootReducer(state, action) {
     const intermediateState = combinedReducer(state, action);
-    const finalState = catchEventActions(intermediateState, action);
+    const finalState = catchNoteActions(intermediateState, action);
     return finalState;
 }
 

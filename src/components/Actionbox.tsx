@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
 import { useAppSelector } from "../state/hooks.ts";
-import { EventSegments } from "../state/EventsSlice.tsx";
+import { NoteSegments } from "../state/NotesSlice.tsx";
 import { Avatar, Button } from "@mui/material";
 
 type ActionboxProps = {
-    setEvent: (event: EventSegments) => void;
+    setNote: (note: NoteSegments) => void;
 };
 
 type roleInformationTypeForActions = {
     [role: string]: {
-        [action: string]: EventSegments;
+        [action: string]: NoteSegments;
     };
 };
 
@@ -33,7 +33,7 @@ function Actionbox(props: ActionboxProps) {
                 <li key={role + action}>
                     <Button
                         startIcon={<Avatar src={getRole(role)?.icon} />}
-                        onClick={() => { props.setEvent(role_infos[role][action]); }}
+                        onClick={() => { props.setNote(role_infos[role][action]); }}
                     >
                         {role_infos[role].name}: {action}
                     </Button>

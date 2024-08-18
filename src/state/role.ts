@@ -1,5 +1,5 @@
 
-import { EventSegments } from "./EventsSlice.tsx";
+import { NoteSegments } from "./NotesSlice.tsx";
 
 enum CharacterType {
     Townsfolk,
@@ -15,7 +15,7 @@ interface role {
     type: CharacterType;
     ability: string;
     actions: {
-        [action: string]: EventSegments;
+        [action: string]: NoteSegments;
     }
 }
 

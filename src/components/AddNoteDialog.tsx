@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import { EventSegments, ChipSegment, ChipType } from "../state/EventsSlice.tsx";
-import EventInput from "./EventInput.tsx";
+import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
+import NoteInput from "./NoteInput.tsx";
 
 import { Button, Dialog } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
@@ -9,27 +9,27 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Actionbox from "./Actionbox.tsx";
 
-type AddEventDialogProps = {
+type AddNoteDialogProps = {
     open: boolean,
-    onClose: (event: EventSegments) => void,
-    initialContent?: EventSegments,
+    onClose: (note: NoteSegments) => void,
+    initialContent?: NoteSegments,
 };
 
-export default function AddEventDialog(props: AddEventDialogProps) {
+export default function AddNoteDialog(props: AddNoteDialogProps) {
     const { open, onClose, initialContent = [""] } = props;
-    const [event, setEvent] = useState<EventSegments>([]);
+    const [note, setNote] = useState<NoteSegments>([]);
     const [newChip, setNewChip] = useState<ChipSegment | null>(null);
 
     function handleClose() {
-        onClose(event);
+        onClose(note);
     }
 
     useEffect(() => {
-        setEvent(initialContent);
+        setNote(initialContent);
     }, [initialContent]);
 
     return <Dialog open={open} onClose={handleClose}>
-        <EventInput content={event} setContent={setEvent} newChip={newChip} />
+        <NoteInput content={note} setContent={setNote} newChip={newChip} />
         <Accordion>
             <AccordionSummary>
                 Add a chip
@@ -54,16 +54,16 @@ export default function AddEventDialog(props: AddEventDialogProps) {
         </Accordion>
         <Accordion>
             <AccordionSummary>
-                Add an event based on a role
+                Add a note based on a role
             </AccordionSummary>
             <AccordionDetails>
                 <Actionbox
-                    setEvent={setEvent} />
+                    setNote={setNote} />
             </AccordionDetails>
         </Accordion>
         <Accordion>
             <AccordionSummary>
-                Add a standard event
+                Add a standard note
             </AccordionSummary>
             <AccordionDetails>
                 <Button>

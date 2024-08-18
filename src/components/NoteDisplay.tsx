@@ -1,20 +1,20 @@
 import React from "react";
 import Box from "@mui/material/Box";
 
-import EventChip from "./EventChip.tsx";
-import { EventSegments } from "../state/EventsSlice.tsx";
+import NoteChip from "./NoteChip.tsx";
+import { NoteSegments } from "../state/NotesSlice.tsx";
 
-type EventDisplayProps = {
-    content: EventSegments;
+type NoteDisplayProps = {
+    content: NoteSegments;
 };
 
-export default function EventDisplay(props: EventDisplayProps) {
+export default function NoteDisplay(props: NoteDisplayProps) {
     return (
         <Box>
             {props.content.map((item, index) => {
                 if (Array.isArray(item)) {
                     return (
-                        <EventChip
+                        <NoteChip
                             key={index}
                             value={item}
                         />

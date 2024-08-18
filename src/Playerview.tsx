@@ -4,8 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./components/Characters.tsx";
 import { setClaims } from "./state/PlayersSlice.tsx";
 import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
-import EventList from "./components/EventList.tsx";
-import { ChipSegment, ChipType } from "./state/EventsSlice.tsx";
+import NoteList from "./components/NoteList.tsx";
+import { ChipSegment, ChipType } from "./state/NotesSlice.tsx";
 
 function Playerview() {
     const params = useParams();
@@ -24,7 +24,7 @@ function Playerview() {
     const dispatch = useAppDispatch();
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
-    const events_filter: ChipSegment = [ChipType.Player, playerIndex];
+    const notes_filter: ChipSegment = [ChipType.Player, playerIndex];
 
     useEffect(() => {
         dispatch(setClaims({ id: player_info.id, claims: playerClaims }));
@@ -64,7 +64,7 @@ function Playerview() {
             }} />
         </dialog>
         {}
-        <div><EventList filter={events_filter}/></div>
+        <div><NoteList filter={notes_filter}/></div>
         <button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</button>
     </>;
 }

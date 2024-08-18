@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { ChipType, ChipSegment } from "../state/EventsSlice.tsx";
+import { ChipType, ChipSegment } from "../state/NotesSlice.tsx";
 import { useAppSelector } from "../state/hooks.ts";
 import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 import { roleType } from "../state/role.ts";
@@ -14,7 +14,7 @@ import Icon from '@mdi/react';
 
 type PlayerChipProps = {
     id: Number;
-    onDelete?: (event: any) => void;
+    onDelete?: (note: any) => void;
 };
 
 function PlayerChip(props: PlayerChipProps) {
@@ -44,7 +44,7 @@ function PlayerChip(props: PlayerChipProps) {
 
 type RoleChipProps = {
     role: string;
-    onDelete?: (event: any) => void;
+    onDelete?: (note: any) => void;
 };
 
 function RoleChip(props: RoleChipProps) {
@@ -68,7 +68,7 @@ function RoleChip(props: RoleChipProps) {
 
 type TimeChipProps = {
     time: number;
-    onDelete?: (event: any) => void;
+    onDelete?: (note: any) => void;
 };
 
 function TimeChip(props: TimeChipProps) {
@@ -86,12 +86,12 @@ function TimeChip(props: TimeChipProps) {
     }
 }
 
-type EventChipProps = {
+type NoteChipProps = {
     value: ChipSegment;
-    onDelete?: (event: any) => void;
+    onDelete?: (note: any) => void;
 };
 
-export default function EventChip(props: EventChipProps) {
+export default function NoteChip(props: NoteChipProps) {
     switch (props.value[0]) {
         case ChipType.Player:
             return <PlayerChip id={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;

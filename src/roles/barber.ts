@@ -1,4 +1,4 @@
-import { ChipType } from '../state/EventsSlice.tsx';
+import { ChipType } from '../state/NotesSlice.tsx';
 import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_barber.png';
 

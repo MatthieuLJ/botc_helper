@@ -3,7 +3,7 @@ import scripts from '../game_scripts/scripts.ts';
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import { addRoles, clearScript, setScript } from "../state/RolesSlice.tsx";
 import { resetPlayers } from "../state/PlayersSlice.tsx";
-import { clearEvents } from "../state/EventsSlice.tsx";
+import { clearNotes } from "../state/NotesSlice.tsx";
 import { resetTime } from "../state/TimeSlice.tsx";
 
 function ScriptSetup(props) {
@@ -61,7 +61,7 @@ function ScriptSetup(props) {
                 setScriptName(scriptSelectValue);
                 setshowWarning(false);
                 dispatch(resetPlayers());
-                dispatch(clearEvents());
+                dispatch(clearNotes());
                 dispatch(resetTime())
             }}>OK</button>
             <button onClick={() => {

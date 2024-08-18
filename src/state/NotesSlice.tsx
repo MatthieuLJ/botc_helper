@@ -10,13 +10,13 @@ export type ChipSegment = ([ChipType.Player, number] |
 [ChipType.Role, string] |
 [ChipType.Time, number]);
 
-export type EventSegments = (string | ChipSegment)[];
+export type NoteSegments = (string | ChipSegment)[];
 
-export type EventList = { id: number, event: EventSegments; }[];
+export type NoteList = { id: number, note: NoteSegments; }[];
 
-const initialState: EventList = [];
+const initialState: NoteList = [];
 
-const findNextId = (state: EventList): number => {
+const findNextId = (state: NoteList): number => {
     const allNumbers: number[] = [];
     for (const e of state) {
         allNumbers.push(e.id);
@@ -30,13 +30,13 @@ const findNextId = (state: EventList): number => {
     return result;
 };
 
-export const getFilteredEvents = (state: EventList, filter: ChipSegment): EventList => {
-    let result: EventList = [];
+export const getFilteredNotes = (state: NoteList, filter: ChipSegment): NoteList => {
+    let result: NoteList = [];
     let found = false;
 
     for (const e of state) {
         found = false;
-        for (const elem of e.event) {
+        for (const elem of e.note) {
             if (Array.isArray(elem) &&
                 elem[0] === filter[0] &&
                 elem[1] === filter[1]) {
@@ -52,16 +52,16 @@ export const getFilteredEvents = (state: EventList, filter: ChipSegment): EventL
     return result;
 };
 
-export function catchEventActions(state, action) {
+export function catchNoteActions(state, action) {
     switch (action.type) {
         case 'time/advanceTime':
             const start_string = (state.time.time % 2 === 0) ? "The night has fallen on Ravenswoodbluff, it is now " : "It is a new day in Ravenswoodbluff, it is now ";
-            const new_event = [start_string, [ChipType.Time, state.time.time]];
+            const new_note = [start_string, [ChipType.Time, state.time.time]];
             const new_state = {
                 ...state,
-                events:
-                    [...state.events,
-                    { id: findNextId(state.events), event: new_event }
+                notes:
+                    [...state.notes,
+                    { id: findNextId(state.notes), note: new_note }
                     ]
             };
             return new_state;
@@ -71,30 +71,30 @@ export function catchEventActions(state, action) {
     return state;
 }
 
-export const EventsSlice = createSlice({
-    name: 'events',
+export const NotesSlice = createSlice({
+    name: 'notes',
     initialState,
     reducers: {
-        addEvent: (state, action) => {
+        addNote: (state, action) => {
             state.push({
                 id: findNextId(state),
-                event: action.payload.event
+                note: action.payload.note
             });
         },
-        editEvent: (state, action) => {
+        editNote: (state, action) => {
             for (var ev of state) {
                 if (ev.id === action.payload.id) {
-                    ev.event = action.payload.event;
+                    ev.note = action.payload.note;
                 }
             }
 
         },
-        clearEvents: (state) => {
+        clearNotes: (state) => {
             state = [];
         }
     }
 });
 
-export const { addEvent, editEvent, clearEvents } = EventsSlice.actions;
+export const { addNote, editNote, clearNotes } = NotesSlice.actions;
 
-export default EventsSlice.reducer;
+export default NotesSlice.reducer;
