@@ -15,6 +15,7 @@ import Icon from '@mdi/react';
 type PlayerChipProps = {
     id: Number;
     onDelete?: (note: any) => void;
+    onClick?: (note: any) => void;
 };
 
 function PlayerChip(props: PlayerChipProps) {
@@ -29,7 +30,8 @@ function PlayerChip(props: PlayerChipProps) {
             label="player"
             avatar={<Icon path={mdiFaceManOutline} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     } else if (player.length > 1) {
         console.log("Something weird with getting a player by id");
         return <Chip label="Error" />;
@@ -38,7 +40,8 @@ function PlayerChip(props: PlayerChipProps) {
             label={player[0].name}
             avatar={<Icon path={mdiFaceManOutline} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     }
 }
 
@@ -89,15 +92,23 @@ function TimeChip(props: TimeChipProps) {
 type NoteChipProps = {
     value: ChipSegment;
     onDelete?: (note: any) => void;
+    onClick?: (note: any) => void;
 };
 
 export default function NoteChip(props: NoteChipProps) {
     switch (props.value[0]) {
         case ChipType.Player:
-            return <PlayerChip id={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            return <PlayerChip id={props.value[1]}
+                {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+                {...(props.onClick ? { onClick: props.onClick } : {})}
+            />;
         case ChipType.Role:
-            return <RoleChip role={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            return <RoleChip role={props.value[1]}
+                {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            />;
         case ChipType.Time:
-            return <TimeChip time={props.value[1]} {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            return <TimeChip time={props.value[1]}
+                {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            />;
     }
 }

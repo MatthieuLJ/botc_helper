@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 
 import NoteChip from "./NoteChip.tsx";
-import { NoteSegments, ChipSegment } from "../state/NotesSlice.tsx";
+import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 
 import TextField from "@mui/material/TextField";
+import ChangePlayerChipDialog from "./ChangePlayerChipDialog.tsx";
 
 function getTextWidth(text) {
     const canvas = document.createElement("canvas");
@@ -35,6 +36,8 @@ export default function NoteInput(props: NoteInputProps) {
     const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
     const itemsRef = useRef<Array<HTMLSpanElement | null>>([]);
     const [contentChanged, setContentChanged] = useState(0); // -1 for deleted chip, +1 for inserted chip
+    const [editedChipIndex, setEditedChipIndex] = useState(-1);
+    const [changePlayerChipOpen, setChangePlayerChipOpen] = useState(false);
 
     // when the content changes
     useEffect(() => {
@@ -167,6 +170,17 @@ export default function NoteInput(props: NoteInputProps) {
                             <NoteChip
                                 value={item}
                                 onDelete={() => deleteChip(index)}
+                                onClick={() => {
+                                    setEditedChipIndex(index);
+
+                                    switch (item[0]) {
+                                        case ChipType.Player:
+                                            setChangePlayerChipOpen(true);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }}
                             />
                         </span>
                     ) : (
@@ -190,6 +204,14 @@ export default function NoteInput(props: NoteInputProps) {
                     );
                 })}
             </Box >
+            <ChangePlayerChipDialog
+                open={changePlayerChipOpen}
+                onSelected={(playerIndex: number): void => {
+                    setChangePlayerChipOpen(false);
+                    const newContent = [...content];
+                    newContent.splice(editedChipIndex, 1, [ChipType.Player, playerIndex]);
+                    setContent(newContent);
+                }} />
         </>
     );
 }
