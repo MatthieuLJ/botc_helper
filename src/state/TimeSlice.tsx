@@ -9,8 +9,6 @@ const initialState: TimeState = {
     time: -1
 };
 
-
-
 export const TimeSlice = createSlice({
     name: 'time',
     initialState,

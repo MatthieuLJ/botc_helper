@@ -75,6 +75,7 @@ function RoleChip(props: RoleChipProps) {
 type TimeChipProps = {
     time: number;
     onDelete?: (note: any) => void;
+    onClick?: (note: any) => void;
 };
 
 function TimeChip(props: TimeChipProps) {
@@ -83,12 +84,14 @@ function TimeChip(props: TimeChipProps) {
         return <Chip label={"night " + Math.floor((props.time / 2) + 1)}
             avatar={<Icon path={mdiWeatherNight} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     } else {
         return <Chip label={"day " + Math.floor((props.time / 2) + 1)}
             avatar={<Icon path={mdiWeatherSunny} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     }
 }
 
@@ -113,6 +116,7 @@ export default function NoteChip(props: NoteChipProps) {
         case ChipType.Time:
             return <TimeChip time={props.value[1]}
                 {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+                {...(props.onClick ? { onClick: props.onClick } : {})}
             />;
     }
 }

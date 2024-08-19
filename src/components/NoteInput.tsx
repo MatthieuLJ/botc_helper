@@ -7,6 +7,7 @@ import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 import TextField from "@mui/material/TextField";
 import ChangePlayerChipDialog from "./ChangePlayerChipDialog.tsx";
 import ChangeRoleChipDialog from "./ChangeRoleChipDialog.tsx";
+import ChangeTimeChipDialog from "./ChangeTimeChipDialog.tsx";
 
 function getTextWidth(text) {
     const canvas = document.createElement("canvas");
@@ -40,6 +41,7 @@ export default function NoteInput(props: NoteInputProps) {
     const [editedChipIndex, setEditedChipIndex] = useState(-1);
     const [changePlayerChipOpen, setChangePlayerChipOpen] = useState(false);
     const [changeRoleChipOpen, setChangeRoleChipOpen] = useState(false);
+    const [changeTimeChipOpen, setChangeTimeChipOpen] = useState(false);
 
     // when the content changes
     useEffect(() => {
@@ -182,7 +184,8 @@ export default function NoteInput(props: NoteInputProps) {
                                         case ChipType.Role:
                                             setChangeRoleChipOpen(true);
                                             break;
-                                        default:
+                                        case ChipType.Time:
+                                            setChangeTimeChipOpen(true);
                                             break;
                                     }
                                 }}
@@ -225,6 +228,15 @@ export default function NoteInput(props: NoteInputProps) {
                     newContent.splice(editedChipIndex, 1, [ChipType.Role, role]);
                     setContent(newContent);
                 }} />
+            <ChangeTimeChipDialog
+                open={changeTimeChipOpen}
+                onSelected={(time: number): void => {
+                    setChangeTimeChipOpen(false);
+                    const newContent = [...content];
+                    newContent.splice(editedChipIndex, 1, [ChipType.Time, time]);
+                    setContent(newContent);
+                }}
+            />
         </>
     );
 }
