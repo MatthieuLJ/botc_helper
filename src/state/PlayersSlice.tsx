@@ -1,29 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 type PlayersState = {
-    players: { id: number, name: string, alive: boolean, claims: string[] }[]
+    players: { name: string, alive: boolean, claims: string[] }[]
 }
 
 const initialState: PlayersState = {
     players: [
-        { id: 0, name: "New Player", alive: true, claims: [] },
-        { id: 1, name: "New Player", alive: true, claims: [] },
-        { id: 2, name: "New Player", alive: true, claims: [] },
+        { name: "New Player", alive: true, claims: [] },
+        { name: "New Player", alive: true, claims: [] },
+        { name: "New Player", alive: true, claims: [] },
     ]
-}
-
-const findNextId = (state: PlayersState): number => {
-    const allNumbers: number[] = [];
-    for (const player of state.players) {
-        allNumbers.push(player.id);
-    }
-
-    let result = 0;
-    while (allNumbers.includes(result)) {
-        result++;
-    }
-
-    return result;
 }
 
 export const PlayersSlice = createSlice({
@@ -34,7 +20,6 @@ export const PlayersSlice = createSlice({
             const new_count = action.payload.count;
             while (new_count > state.players.length) {
                 state.players.push({
-                    id: findNextId(state),
                     name: "New Player",
                     alive: true,
                     claims: []
@@ -45,12 +30,10 @@ export const PlayersSlice = createSlice({
             }
         },
         setName: (state, action) => {
-            const index = state.players.findIndex((element) => element.id === action.payload.id);
-            state.players[index].name = action.payload.name;
+            state.players[action.payload.index].name = action.payload.name;
         },
         setClaims: (state, action) => {
-            const index = state.players.findIndex((element) => element.id === action.payload.id);
-            state.players[index].claims = action.payload.claims;
+            state.players[action.payload.index].claims = action.payload.claims;
         },
         resetPlayers: (state) => {
             state.players.forEach((p) => { 

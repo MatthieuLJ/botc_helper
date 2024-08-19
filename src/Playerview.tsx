@@ -27,7 +27,7 @@ function Playerview() {
     const notes_filter: ChipSegment = [ChipType.Player, playerIndex];
 
     useEffect(() => {
-        dispatch(setClaims({ id: player_info.id, claims: playerClaims }));
+        dispatch(setClaims({ index: playerIndex, claims: playerClaims }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, playerClaims]);
 
@@ -41,7 +41,7 @@ function Playerview() {
                 </td>
                 <td onClick={() => { setOpenClaimsDialog(true); }}>
                     {player_info.claims.length === 0 ? "No Claims" :
-                        player_info.claims.map((r) => {
+                        player_info.claims.map((r : string) => {
                             const role = getRole(r);
                             return <img src={role?.icon} alt={role?.name} height="50" width="50" key={role?.name} />;
                         })}</td>

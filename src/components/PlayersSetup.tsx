@@ -15,7 +15,7 @@ function PlayersSetup(props) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const handleClose = () => { setChangingName(false); };
     const acceptNewName = () => {
-        dispatch(setName({ id: currentIndex, name: nameField }));
+        dispatch(setName({ index: currentIndex, name: nameField }));
         setChangingName(false);
     };
 
@@ -25,7 +25,7 @@ function PlayersSetup(props) {
             {players.map((p, index) => <PlayerToken key={p.id} index={index}
                 tapPlayer={() => {
                     setChangingName(true);
-                    setCurrentIndex(players[index].id);
+                    setCurrentIndex(index);
                     setNameField(players[index].name);
                 }} />)}
         </ul>
