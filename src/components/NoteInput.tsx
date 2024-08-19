@@ -6,6 +6,7 @@ import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 
 import TextField from "@mui/material/TextField";
 import ChangePlayerChipDialog from "./ChangePlayerChipDialog.tsx";
+import ChangeRoleChipDialog from "./ChangeRoleChipDialog.tsx";
 
 function getTextWidth(text) {
     const canvas = document.createElement("canvas");
@@ -38,6 +39,7 @@ export default function NoteInput(props: NoteInputProps) {
     const [contentChanged, setContentChanged] = useState(0); // -1 for deleted chip, +1 for inserted chip
     const [editedChipIndex, setEditedChipIndex] = useState(-1);
     const [changePlayerChipOpen, setChangePlayerChipOpen] = useState(false);
+    const [changeRoleChipOpen, setChangeRoleChipOpen] = useState(false);
 
     // when the content changes
     useEffect(() => {
@@ -177,6 +179,9 @@ export default function NoteInput(props: NoteInputProps) {
                                         case ChipType.Player:
                                             setChangePlayerChipOpen(true);
                                             break;
+                                        case ChipType.Role:
+                                            setChangeRoleChipOpen(true);
+                                            break;
                                         default:
                                             break;
                                     }
@@ -210,6 +215,14 @@ export default function NoteInput(props: NoteInputProps) {
                     setChangePlayerChipOpen(false);
                     const newContent = [...content];
                     newContent.splice(editedChipIndex, 1, [ChipType.Player, playerIndex]);
+                    setContent(newContent);
+                }} />
+            <ChangeRoleChipDialog
+                open={changeRoleChipOpen}
+                onSelected={(role: string): void => {
+                    setChangeRoleChipOpen(false);
+                    const newContent = [...content];
+                    newContent.splice(editedChipIndex, 1, [ChipType.Role, role]);
                     setContent(newContent);
                 }} />
         </>

@@ -41,7 +41,7 @@ function Playerview() {
                 </td>
                 <td onClick={() => { setOpenClaimsDialog(true); }}>
                     {player_info.claims.length === 0 ? "No Claims" :
-                        player_info.claims.map((r : string) => {
+                        player_info.claims.map((r: string) => {
                             const role = getRole(r);
                             return <img src={role?.icon} alt={role?.name} height="50" width="50" key={role?.name} />;
                         })}</td>
@@ -55,16 +55,22 @@ function Playerview() {
         </tbody>
     </table>
         <dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
-            <Characters highlights={player_info.claims} closeDialog={(highlights) => {
-
-                if (highlights != null) {
-                    setPlayerClaims(highlights);
-                }
-                setOpenClaimsDialog(false);
-            }} />
+            <Characters
+                highlights={player_info.claims}
+                tapCharacter={(role) => {
+                    const newPlayerClaims = [...playerClaims];
+                    if (newPlayerClaims.includes(role)) {
+                        newPlayerClaims.splice(newPlayerClaims.indexOf(role), 1);
+                    } else {
+                        newPlayerClaims.push(role);
+                    }
+                    setPlayerClaims(newPlayerClaims);
+                }}
+                closeDialog={() => {
+                    setOpenClaimsDialog(false);
+                }} />
         </dialog>
-        {}
-        <div><NoteList filter={notes_filter}/></div>
+        <div><NoteList filter={notes_filter} /></div>
         <button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</button>
     </>;
 }

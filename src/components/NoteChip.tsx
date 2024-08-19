@@ -48,6 +48,7 @@ function PlayerChip(props: PlayerChipProps) {
 type RoleChipProps = {
     role: string;
     onDelete?: (note: any) => void;
+    onClick?: (note: any) => void;
 };
 
 function RoleChip(props: RoleChipProps) {
@@ -59,13 +60,15 @@ function RoleChip(props: RoleChipProps) {
             label={role_info.name}
             avatar={<Avatar alt="" src={role_info.icon} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     } else {
         return <Chip
             label="role"
             avatar={<Icon path={mdiScriptTextOutline} />}
             variant="outlined"
-            {...(props.onDelete ? { onDelete: props.onDelete } : {})} />;
+            {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+            {...(props.onClick ? { onClick: props.onClick } : {})} />;
     }
 }
 
@@ -105,6 +108,7 @@ export default function NoteChip(props: NoteChipProps) {
         case ChipType.Role:
             return <RoleChip role={props.value[1]}
                 {...(props.onDelete ? { onDelete: props.onDelete } : {})}
+                {...(props.onClick ? { onClick: props.onClick } : {})}
             />;
         case ChipType.Time:
             return <TimeChip time={props.value[1]}
