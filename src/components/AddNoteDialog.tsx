@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 import NoteInput from "./NoteInput.tsx";
 
-import { Button, Dialog } from "@mui/material";
+import { Button, Dialog, DialogTitle } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -30,6 +30,7 @@ export default function AddNoteDialog(props: AddNoteDialogProps) {
     }, [initialContent]);
 
     return <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{initialContent.length === 1 && initialContent[0] === "" ? "Add a note" : "Edit a note"}</DialogTitle>
         <NoteInput content={note} setContent={setNote} newChip={newChip} />
         <Accordion>
             <AccordionSummary>
