@@ -19,6 +19,10 @@ const NoteList: React.FC<NoteListProps> = ({ filter = null }) => {
 
     function onCloseNoteDialog(e: NoteSegments) {
         setNoteDialogOpen(false);
+        if ((e.length === 0) ||
+            ((e.length === 1) && (e[0] === ""))) {
+            return;
+        }
         if (selected === -1) {
             dispatch(addNote({ note: e }));
         } else {
@@ -45,7 +49,7 @@ const NoteList: React.FC<NoteListProps> = ({ filter = null }) => {
         <ButtonGroup>
             <Button onClick={() => { setSelected(-1); setNoteDialogOpen(true); }}><Icon path={mdiNotePlusOutline} size={1} /></Button>
             <Button onClick={() => { setNoteDialogOpen(true); }} disabled={selected === -1}><Icon path={mdiNoteEditOutline} size={1} /></Button>
-            <Button onClick={() => { dispatch(deleteNote({id: filtered_notes[selected].id})); setSelected(-1); }} disabled={selected === -1}><Icon path={mdiNoteRemoveOutline} size={1} /></Button>
+            <Button onClick={() => { dispatch(deleteNote({ id: filtered_notes[selected].id })); setSelected(-1); }} disabled={selected === -1}><Icon path={mdiNoteRemoveOutline} size={1} /></Button>
         </ButtonGroup>
         <List>
             {filtered_notes.map((e, index) =>
