@@ -85,9 +85,18 @@ export const NotesSlice = createSlice({
             for (var ev of state) {
                 if (ev.id === action.payload.id) {
                     ev.note = action.payload.note;
+                    break;
                 }
             }
 
+        },
+        deleteNote: (state, action) => {
+            for (var index in state) {
+                if (state[index].id === action.payload.id) {
+                    state.splice(parseInt(index), 1);
+                    break;
+                }
+            }
         },
         clearNotes: (state) => {
             state = [];
@@ -95,6 +104,6 @@ export const NotesSlice = createSlice({
     }
 });
 
-export const { addNote, editNote, clearNotes } = NotesSlice.actions;
+export const { addNote, editNote, deleteNote, clearNotes } = NotesSlice.actions;
 
 export default NotesSlice.reducer;

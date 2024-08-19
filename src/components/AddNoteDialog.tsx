@@ -17,11 +17,12 @@ type AddNoteDialogProps = {
 
 export default function AddNoteDialog(props: AddNoteDialogProps) {
     const { open, onClose, initialContent = [""] } = props;
-    const [note, setNote] = useState<NoteSegments>([]);
+    const [note, setNote] = useState<NoteSegments>([""]);
     const [newChip, setNewChip] = useState<ChipSegment | null>(null);
 
     function handleClose() {
         onClose(note);
+        setNote(initialContent);
     }
 
     useEffect(() => {
