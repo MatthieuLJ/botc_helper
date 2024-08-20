@@ -13,8 +13,6 @@ export default function ChangeTimeChipDialog(props: ChangeTimeChipDialogProps) {
     const [timeOfDay, setTimeOfDay] = useState("night");
     const [dayNumber, setDayNumber] = useState(current_time + 1);
 
-    console.log("Current time is " + current_time);
-
     return <Dialog open={props.open}>
         <DialogTitle>Choose a player</DialogTitle>
         <Box>

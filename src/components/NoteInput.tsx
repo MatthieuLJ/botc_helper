@@ -138,7 +138,6 @@ export default function NoteInput(props: NoteInputProps) {
             newContent[index - 1] =
                 newContent[index - 1] + " " + newContent[index + 1];
             newContent.splice(index, 2);
-            //itemsRef.current[index-1]?.focus();
             setCursorPosition([index - 1, previousLength]);
         } else {
             newContent.splice(index, 1);
@@ -176,7 +175,6 @@ export default function NoteInput(props: NoteInputProps) {
                                 onDelete={() => deleteChip(index)}
                                 onClick={() => {
                                     setEditedChipIndex(index);
-
                                     switch (item[0]) {
                                         case ChipType.Player:
                                             setChangePlayerChipOpen(true);

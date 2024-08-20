@@ -13,7 +13,7 @@ import Icon from '@mdi/react';
 
 
 type PlayerChipProps = {
-    id: Number;
+    index: number;
     onDelete?: (note: any) => void;
     onClick?: (note: any) => void;
 };
@@ -21,23 +21,19 @@ type PlayerChipProps = {
 function PlayerChip(props: PlayerChipProps) {
     // TODO: the console is showing some warning about this selector:
     // Selector unknown returned a different result when called with the same parameters. This can lead to unnecessary rerenders.Selectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization [object Object] 
-    const player = useAppSelector(
-        state =>
-            // TODO: change the type of p based on a type defined in PlayersSlice
-            state.players.players.filter((p: { id: number, name: string, alive: boolean, claims: string[]; }) => p.id === props.id));
-    if (player.length === 0) {
+    const players = useAppSelector(
+        state => state.players.players);
+    if (props.index < 0) {
         return <Chip
             label="player"
             avatar={<Icon path={mdiFaceManOutline} />}
             variant="outlined"
             {...(props.onDelete ? { onDelete: props.onDelete } : {})}
             {...(props.onClick ? { onClick: props.onClick } : {})} />;
-    } else if (player.length > 1) {
-        console.log("Something weird with getting a player by id");
-        return <Chip label="Error" />;
     } else {
+        const player = players[props.index];
         return <Chip
-            label={player[0].name}
+            label={player.name}
             avatar={<Icon path={mdiFaceManOutline} />}
             variant="outlined"
             {...(props.onDelete ? { onDelete: props.onDelete } : {})}
@@ -104,7 +100,7 @@ type NoteChipProps = {
 export default function NoteChip(props: NoteChipProps) {
     switch (props.value[0]) {
         case ChipType.Player:
-            return <PlayerChip id={props.value[1]}
+            return <PlayerChip index={props.value[1]}
                 {...(props.onDelete ? { onDelete: props.onDelete } : {})}
                 {...(props.onClick ? { onClick: props.onClick } : {})}
             />;
