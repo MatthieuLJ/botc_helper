@@ -21,6 +21,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
     const { open, onClose, initialContent = [""] } = props;
     const [note, setNote] = useState<NoteSegments>([""]);
     const [newChip, setNewChip] = useState<ChipSegment | null>(null);
+    const [expandedSection, setExpandedSection] = useState("");
 
     function handleClose(_event, reason) {
         if (reason === "backdropClick") {
@@ -32,6 +33,14 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
         }
     }
 
+    function handleExpand(section: string) {
+        if (section === expandedSection) {
+            setExpandedSection("");
+        } else {
+            setExpandedSection(section);
+        }
+    }
+
     useEffect(() => {
         setNote(initialContent);
     }, [initialContent]);
@@ -40,7 +49,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
         <DialogTitle>{initialContent.length === 1 && initialContent[0] === "" ? "Add a note" : "Edit a note"}</DialogTitle>
         <DialogContent>
             <NoteInput content={note} setContent={setNote} newChip={newChip} />
-            <Accordion>
+            <Accordion expanded={expandedSection === "add_chip"} onChange={() => handleExpand("add_chip")}>
                 <AccordionSummary>
                     Add a chip
                 </AccordionSummary>
@@ -62,7 +71,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                     </Button>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expandedSection === "role_chip"} onChange={() => handleExpand("role_chip")}>
                 <AccordionSummary>
                     Add a note based on a role
                 </AccordionSummary>
@@ -71,7 +80,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                         setNote={setNote} />
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expandedSection === "standard_chip"} onChange={() => handleExpand("standard_chip")}>
                 <AccordionSummary>
                     Add a standard note
                 </AccordionSummary>
