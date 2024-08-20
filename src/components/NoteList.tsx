@@ -7,7 +7,7 @@ import Icon from '@mdi/react';
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import NoteDisplay from "./NoteDisplay.tsx";
 import { getFilteredNotes, ChipSegment, NoteSegments, addNote, editNote, deleteNote } from "../state/NotesSlice.tsx";
-import AddNoteDialog from "./AddNoteDialog.tsx";
+import AddNoteDialog from "./EditNoteDialog.tsx";
 
 type NoteListProps = {
     filter?: ChipSegment;
