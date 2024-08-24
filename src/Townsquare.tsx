@@ -8,10 +8,10 @@ type TownsquareProps = {
 
 function Townsquare(props: TownsquareProps) {
     const players = useAppSelector(state => state.players.players);
-    return <ul>
+    return <div>
         {players.map((p, index : number) => <PlayerToken key={p.id} index={index}
             tapPlayer={() => { props.tapAction(index); }} />)}
-    </ul>;
+    </div>;
 }
 
 export default Townsquare;

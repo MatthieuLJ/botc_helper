@@ -14,10 +14,10 @@ function PlayerToken(props: PlayerTokenProps) {
     const player_info = useAppSelector(state => state.players.players[props.index]);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
-    return <li onClick={() => props.tapPlayer(props.index)}>
-        <Box>
-            <div>
-                <AvatarGroup max={5}>
+    return <div className="flex" onClick={() => props.tapPlayer(props.index)}>
+        <div className="w-fit min-w-10 content-between justify-center">
+            <div className="flex-1">
+                <AvatarGroup max={5} className="justify-center">
                     { player_info.claims.length === 0 ?
                     <Avatar alt="No claim" src={token_background} />
                     :
@@ -28,9 +28,8 @@ function PlayerToken(props: PlayerTokenProps) {
                 </AvatarGroup>
             </div>
             <div>{player_info.name}</div>
-        </Box>
-
-    </li>;
+        </div>
+    </div>;
 }
 
 export default PlayerToken;
