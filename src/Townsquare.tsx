@@ -20,8 +20,6 @@ function Townsquare(props: TownsquareProps) {
         var angle = 360 - 90;
         const dangle = 360 / circleElements.length;
 
-        console.log("towncircle width: " + towncircle.clientWidth);
-
         for (let i = 0; i < circleElements.length; i++) {
             const circle = circleElements[i] as HTMLDivElement;
 
@@ -36,7 +34,7 @@ function Townsquare(props: TownsquareProps) {
         onResize();
     }, []);
 
-    return <div className="relative top bg-gray-500 w-full h-full" ref={circle}>
+    return <div className="relative top w-full h-full" ref={circle}>
         {players.map((p, index: number) =>
             <div className="absolute top-1/2 left-1/2">
                 <PlayerToken key={p.id} index={index}
