@@ -14,13 +14,15 @@ function Playview(props: PlayviewProps) {
     const navigate = useNavigate();
 
     return <div className="flex flex-row">
-        <div className="basis-3/4 aspect-square">
-            <Townsquare tapAction={(index) => { return navigate(`/play/player/${index}`); }} />
-            <div>
-                <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
+        <div className="basis-2/3">
+            <div className="aspect-square">
+                <Townsquare tapAction={(index) => { return navigate(`/play/player/${index}`); }} />
             </div>
+            <span className="top-1/2">
+                <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
+            </span>
         </div>
-        <div className="basis-1/4"><NoteList /></div>
+        <div className="basis-1/3"><NoteList /></div>
 
     </div>;
 }
