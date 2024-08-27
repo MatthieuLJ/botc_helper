@@ -36,8 +36,8 @@ function Townsquare(props: TownsquareProps) {
 
     return <div className="relative top w-full h-full" ref={circle}>
         {players.map((p, index: number) =>
-            <div className="absolute top-1/2 left-1/2">
-                <PlayerToken key={p.id} index={index}
+            <div key={p.name + index} className="absolute top-1/2 left-1/2">
+                <PlayerToken index={index}
                     tapPlayer={() => { props.tapAction(index); }} />
             </div>)}
     </div>;
