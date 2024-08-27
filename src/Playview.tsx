@@ -15,12 +15,13 @@ function Playview(props: PlayviewProps) {
 
     return <div className="flex flex-row">
         <div className="basis-2/3">
-            <div className="aspect-square">
+            <div className="relative aspect-square">
                 <Townsquare tapAction={(index) => { return navigate(`/play/player/${index}`); }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
+                </div>
             </div>
-            <span className="top-1/2">
-                <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
-            </span>
+
         </div>
         <div className="basis-1/3"><NoteList /></div>
 
