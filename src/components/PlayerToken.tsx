@@ -23,7 +23,13 @@ function PlayerToken(props: PlayerTokenProps) {
                         :
                         player_info.claims.map((c) => {
                             const role_info = getRole(c);
-                            return <Avatar alt={c} key={props.index + c } src={role_info?.icon} />;
+                            return <Avatar alt={c} key={props.index + c} src={role_info?.icon}
+                                slotProps={{
+                                    img: {
+                                        className: "bg-[url('/src/img/token_background.png')] bg-cover"
+                                    }
+                                }}
+                            />;
                         })}
                 </AvatarGroup>
             </div>
