@@ -6,6 +6,8 @@ import { setClaims } from "./state/PlayersSlice.tsx";
 import { ScriptContext, ScriptContextType } from "./state/ScriptContext.tsx";
 import NoteList from "./components/NoteList.tsx";
 import { ChipSegment, ChipType } from "./state/NotesSlice.tsx";
+import { Button, Dialog } from "@mui/material";
+import PlayerToken from "./components/PlayerToken.tsx";
 
 function Playerview() {
     const params = useParams();
@@ -31,30 +33,31 @@ function Playerview() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, playerClaims]);
 
-    return <><table>
-        <tbody>
-            <tr>
-                <td rowSpan={2} onClick={() => {
-                    navigate(`/play/player/${prev_index}`);
-                }}>
-                    Previous
-                </td>
-                <td onClick={() => { setOpenClaimsDialog(true); }}>
-                    {player_info.claims.length === 0 ? "No Claims" :
-                        player_info.claims.map((r: string) => {
-                            const role = getRole(r);
-                            return <img src={role?.icon} alt={role?.name} height="50" width="50" key={role?.name} />;
-                        })}</td>
-                <td rowSpan={2} onClick={() => {
-                    navigate(`/play/player/${next_index}`);
-                }}>
-                    Next
-                </td>
-            </tr>
-            <tr><td>{player_info.name}</td></tr>
-        </tbody>
-    </table>
-        <dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
+    return <><div className="flex flex-row">
+        <div className="basis-1/5">
+            <Button onClick={() => {
+                navigate(`/play/player/${prev_index}`);
+            }}>
+                Previous
+            </Button>
+        </div>
+        <div className="basis-3/5">
+        <div>
+            <PlayerToken index={playerIndex} tapPlayer={ () => {setOpenClaimsDialog(true); }}/>
+        </div>
+        </div>
+        <div className="basis-1/5">
+            <Button onClick={() => {
+                navigate(`/play/player/${next_index}`);
+            }}>
+                Next
+            </Button>
+        </div>
+
+    </div >
+
+
+        <Dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
             <Characters
                 highlights={player_info.claims}
                 tapCharacter={(role) => {
@@ -69,9 +72,9 @@ function Playerview() {
                 closeDialog={() => {
                     setOpenClaimsDialog(false);
                 }} />
-        </dialog>
+        </Dialog>
         <div><NoteList filter={notes_filter} /></div>
-        <button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</button>
+        <Button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</Button>
     </>;
 }
 
