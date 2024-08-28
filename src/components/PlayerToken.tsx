@@ -19,7 +19,7 @@ function PlayerToken(props: PlayerTokenProps) {
         backgroundSize: "cover",
     };
 
-    return <div className="flex" key={props.index} onClick={() => props.tapPlayer(props.index)}>
+    return <div className="flex h-fit" key={props.index} onClick={() => props.tapPlayer(props.index)}>
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
                 <AvatarGroup max={5} className="justify-center">
@@ -31,7 +31,7 @@ function PlayerToken(props: PlayerTokenProps) {
                             return <Avatar alt={c} key={props.index + c} src={role_info?.icon}
                                 slotProps={{
                                     img: {
-                                        style: {...token_style}
+                                        style: { ...token_style }
                                     },
                                 }}
                             />;
