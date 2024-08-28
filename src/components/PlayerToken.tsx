@@ -14,6 +14,11 @@ function PlayerToken(props: PlayerTokenProps) {
     const player_info = useAppSelector(state => state.players.players[props.index]);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
 
+    const token_style = {
+        background: `url(${token_background})`,
+        backgroundSize: "cover",
+    };
+
     return <div className="flex" key={props.index} onClick={() => props.tapPlayer(props.index)}>
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
@@ -26,8 +31,8 @@ function PlayerToken(props: PlayerTokenProps) {
                             return <Avatar alt={c} key={props.index + c} src={role_info?.icon}
                                 slotProps={{
                                     img: {
-                                        className: "bg-[url('/src/img/token_background.png')] bg-cover"
-                                    }
+                                        style: {...token_style}
+                                    },
                                 }}
                             />;
                         })}
