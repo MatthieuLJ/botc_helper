@@ -1,6 +1,6 @@
 import React from "react";
 import Townsquare from "../Townsquare.tsx";
-import { Dialog, DialogTitle } from "@mui/material";
+import { Box, Dialog, DialogTitle } from "@mui/material";
 
 type ChangePlayerChipDialogProps = {
     open: boolean,
@@ -11,8 +11,12 @@ export default function ChangePlayerChipDialog(props: ChangePlayerChipDialogProp
 
     return <Dialog open={props.open}>
         <DialogTitle>Choose a player</DialogTitle>
-        <Townsquare tapAction={(index: number): void => {
-            props.onSelected(index);
-        }} />
+        <Box sx={{ width: "500px", height: "500px" }}>
+            <div className="relative aspect-square w-full">
+                <Townsquare tapAction={(index: number): void => {
+                    props.onSelected(index);
+                }} />
+            </div>
+        </Box>
     </Dialog>;
 }
