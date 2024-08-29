@@ -15,19 +15,21 @@ export default function ChangeTimeChipDialog(props: ChangeTimeChipDialogProps) {
 
     return <Dialog open={props.open}>
         <DialogTitle>Choose a player</DialogTitle>
-        <Box>
+        <Box sx={{p:5}}>
             <Select
                 value={timeOfDay}
                 label="Time of Day"
                 onChange={(event) => setTimeOfDay(event.target.value as string)}>
                 <MenuItem value={"night"}>Night</MenuItem>
-                <MenuItem value={"day"}>day</MenuItem>
+                <MenuItem value={"day"}>Day</MenuItem>
             </Select>
             <Slider
                 value={dayNumber}
                 min={1}
                 max={current_time + 1}
+                defaultValue={current_time + 1}
                 marks
+                valueLabelDisplay="on"
                 onChange={(event, newValue) => { if (!Array.isArray(newValue)) setDayNumber(newValue); }} />
             <Button onClick={() => { props.onSelected((dayNumber - 1) * 2 + (timeOfDay === "day" ? 1 : 0)); }}>OK</Button>
         </Box>
