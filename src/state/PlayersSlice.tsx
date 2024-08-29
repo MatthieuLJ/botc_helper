@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export type PlayerInfo = {
+    name: string,
+    alive: boolean,
+    claims: string[];
+};
+
 type PlayersState = {
-    players: { name: string, alive: boolean, claims: string[] }[]
-}
+    players: PlayerInfo[];
+};
 
 const initialState: PlayersState = {
     players: [
@@ -10,7 +16,7 @@ const initialState: PlayersState = {
         { name: "New Player", alive: true, claims: [] },
         { name: "New Player", alive: true, claims: [] },
     ]
-}
+};
 
 export const PlayersSlice = createSlice({
     name: 'players',
@@ -24,7 +30,7 @@ export const PlayersSlice = createSlice({
                     alive: true,
                     claims: []
                 });
-            } 
+            }
             if (new_count < state.players.length) {
                 state.players = state.players.slice(0, new_count);
             }
@@ -35,14 +41,18 @@ export const PlayersSlice = createSlice({
         setClaims: (state, action) => {
             state.players[action.payload.index].claims = action.payload.claims;
         },
+        setAlive: (state, action) => {
+            state.players[action.payload.index].alive = action.payload.alive;
+        },
         resetPlayers: (state) => {
-            state.players.forEach((p) => { 
-                p.alive=true;
-                p.claims=[];})
+            state.players.forEach((p) => {
+                p.alive = true;
+                p.claims = [];
+            });
         }
     }
-})
+});
 
-export const { setCount, setName, setClaims, resetPlayers } = PlayersSlice.actions;
+export const { setCount, setName, setClaims, setAlive, resetPlayers } = PlayersSlice.actions;
 
 export default PlayersSlice.reducer;
