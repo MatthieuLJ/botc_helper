@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PlayerToken from './components/PlayerToken.tsx';
 import { useAppSelector } from './state/hooks.ts';
 
@@ -9,6 +9,7 @@ type TownsquareProps = {
 function Townsquare(props: TownsquareProps) {
     const players = useAppSelector(state => state.players.players);
     const circle = useRef<HTMLDivElement | null>(null);
+    const [tokenWidth, setTokenWidth] = useState(0);
 
     function onResize() {
         const towncircle = circle.current;
@@ -27,6 +28,8 @@ function Townsquare(props: TownsquareProps) {
                 3}px) rotate(-${angle}deg)`;
             angle += dangle;
         }
+
+        setTokenWidth(Math.max(40, towncircle.clientWidth/10));
     }
 
     useEffect(() => {
@@ -38,7 +41,8 @@ function Townsquare(props: TownsquareProps) {
         {players.map((p, index: number) =>
             <div key={p.name + index} className="absolute top-1/2 left-1/2">
                 <PlayerToken index={index}
-                    tapPlayer={() => { props.tapAction(index); }} />
+                    tapPlayer={() => { props.tapAction(index); }}
+                    token_width={tokenWidth} />
             </div>)}
     </div>;
 }

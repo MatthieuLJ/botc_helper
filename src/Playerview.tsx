@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate, useParams } from "react-router-dom";
 import Characters from "./components/Characters.tsx";
@@ -29,12 +29,31 @@ function Playerview() {
 
     const notes_filter: ChipSegment = [ChipType.Player, playerIndex];
 
+    // To control the size of the player token
+    const central_area = useRef<HTMLDivElement | null>(null);
+    const [tokenWidth, setTokenWidth] = useState(0);
+
+    function onResize() {
+        const space = central_area.current;
+        if (space === null) {
+            return;
+        }
+
+        ;
+        setTokenWidth(Math.max(100, space.clientWidth / 3));
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', onResize);
+        onResize();
+    }, []);
+
     useEffect(() => {
         dispatch(setClaims({ index: playerIndex, claims: playerClaims }));
     }, [dispatch, playerClaims]);
 
     return <><div className="h-screen">
-        <div className="flex h-2/3 w-full">
+        <div className="flex h-2/3 w-full" ref={central_area}>
             <div className="basis-1/5 h-full content-center">
                 <Button onClick={() => {
                     navigate(`/play/player/${prev_index}`);
@@ -44,7 +63,11 @@ function Playerview() {
             </div>
             <div className="basis-3/5 content-center">
                 <div className="flex w-full place-content-center h-fit">
-                    <PlayerToken index={playerIndex} tapPlayer={() => { setOpenClaimsDialog(true); }} />
+                    <PlayerToken
+                        index={playerIndex}
+                        token_width={tokenWidth}
+                        tapPlayer={() => { setOpenClaimsDialog(true); }}
+                    />
                 </div>
 
             </div>
