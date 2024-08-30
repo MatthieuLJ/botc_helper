@@ -45,21 +45,26 @@ const NoteList: React.FC<NoteListProps> = ({ filter = null }) => {
         }
     }
 
-    return <><Box>
-        <ButtonGroup>
-            <Button onClick={() => { setSelected(-1); setNoteDialogOpen(true); }}><Icon path={mdiNotePlusOutline} size={1} /></Button>
-            <Button onClick={() => { setNoteDialogOpen(true); }} disabled={selected === -1}><Icon path={mdiNoteEditOutline} size={1} /></Button>
-            <Button onClick={() => { dispatch(deleteNote({ id: filtered_notes[selected].id })); setSelected(-1); }} disabled={selected === -1}><Icon path={mdiNoteRemoveOutline} size={1} /></Button>
-        </ButtonGroup>
-        <List>
-            {filtered_notes.map((e, index) =>
-                <ListItemButton key={e.id}
-                    selected={index === selected}
-                    onClick={() => handleListItemClick(index)}>
-                    <NoteDisplay content={e.note} />
-                </ListItemButton>)}
-        </List>
-    </Box>
+    return <>
+        <div className="flex flex-col max-h-full">
+            <div className="flex-none h-fit">
+                <ButtonGroup>
+                    <Button onClick={() => { setSelected(-1); setNoteDialogOpen(true); }}><Icon path={mdiNotePlusOutline} size={1} /></Button>
+                    <Button onClick={() => { setNoteDialogOpen(true); }} disabled={selected === -1}><Icon path={mdiNoteEditOutline} size={1} /></Button>
+                    <Button onClick={() => { dispatch(deleteNote({ id: filtered_notes[selected].id })); setSelected(-1); }} disabled={selected === -1}><Icon path={mdiNoteRemoveOutline} size={1} /></Button>
+                </ButtonGroup>
+            </div>
+            <div className="flex-shrink overflow-auto">
+                <List>
+                    {filtered_notes.map((e, index) =>
+                        <ListItemButton key={e.id}
+                            selected={index === selected}
+                            onClick={() => handleListItemClick(index)}>
+                            <NoteDisplay content={e.note} />
+                        </ListItemButton>)}
+                </List>
+            </div>
+        </div>
         <AddNoteDialog open={noteDialogOpen} onClose={onCloseNoteDialog}
             initialContent={selected === -1 ? [""] : filtered_notes[selected].note} />
     </>;

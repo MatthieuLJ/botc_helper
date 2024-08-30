@@ -162,7 +162,7 @@ function Playview(props: PlayviewProps) {
                 </div>
             </div>
         </div>
-        <div className="basis-1/3"><NoteList /></div>
+        <div className="basis-1/3 max-h-screen"><NoteList /></div>
 
     </div>;
 }
