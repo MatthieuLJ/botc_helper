@@ -29,7 +29,7 @@ function Townsquare(props: TownsquareProps) {
             angle += dangle;
         }
 
-        setTokenWidth(Math.max(40, towncircle.clientWidth/10));
+        setTokenWidth(Math.max(40, towncircle.clientWidth/8));
     }
 
     useEffect(() => {

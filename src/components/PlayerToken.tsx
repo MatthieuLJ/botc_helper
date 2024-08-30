@@ -4,6 +4,7 @@ import { Avatar, AvatarGroup, Box } from '@mui/material';
 import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
 
 import token_background from '../img/token_background.png';
+import shroud from '../img/shroud.png';
 
 type PlayerTokenProps = {
     index: number,
@@ -19,15 +20,37 @@ function PlayerToken(props: PlayerTokenProps) {
         background: `url(${token_background})`,
         backgroundSize: "cover",
     };
-    
-    var token_sx = {};
+
+    var token_sx = { sx: {} };
     const num_claims_capped = Math.min(5, Math.max(1, player_info.claims.length));
     if (props.token_width) {
         token_sx = {
             sx: {
+                ...token_sx['sx'],
                 '& .MuiAvatar-root': {
                     width: (props.token_width * (1 + num_claims_capped / 10)) / num_claims_capped,
                     height: (props.token_width * (1 + num_claims_capped / 10)) / num_claims_capped,
+                    position: 'relative',
+                }
+            }
+        };
+    }
+    if (!player_info.alive) {
+        token_sx = {
+            sx: {
+                ...token_sx['sx'],
+                '& .MuiAvatar-root:before': {
+                    content: "''",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: "100%",
+                    opacity: 0.8,
+                    display: "block",
+                    color: "#000",
+                    background: `url(${shroud})`,
+                    backgroundSize: "100% 100%"
                 }
             }
         };
@@ -44,7 +67,7 @@ function PlayerToken(props: PlayerTokenProps) {
                     {player_info.claims.length === 0 ?
                         <Avatar alt="No claim"
                             key={props.index * 100}
-                            src={token_background}/>
+                            src={token_background} />
                         :
                         player_info.claims.map((c) => {
                             const role_info = getRole(c);
