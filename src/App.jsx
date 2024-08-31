@@ -5,6 +5,7 @@ import Playview from './Playview.tsx';
 import GameState from './state/GameState.tsx';
 import Playerview from './Playerview.tsx';
 import CheckForSetup from './components/CheckForSetup.tsx';
+import CheckForPlay from './components/CheckForPlay.tsx';
 import { Provider } from 'react-redux';
 import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
@@ -16,7 +17,13 @@ const top_level_router = createBrowserRouter([
   },
   {
     path: "/setup",
-    element: <TownsquareSetup />,
+    element: <CheckForPlay />,
+    children: [
+      {
+        path: "",
+        element: <TownsquareSetup />,
+      }
+    ]
   },
   {
     path: "/play",
