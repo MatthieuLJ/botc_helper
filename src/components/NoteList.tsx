@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Box, List, ListItemButton, ButtonGroup, Button } from '@mui/material';
+import { List, ListItemButton, ButtonGroup, Button } from '@mui/material';
 import { mdiNotePlusOutline, mdiNoteEditOutline, mdiNoteRemoveOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 
@@ -54,17 +54,19 @@ const NoteList: React.FC<NoteListProps> = ({ filter = null }) => {
                     <Button onClick={() => { dispatch(deleteNote({ id: filtered_notes[selected].id })); setSelected(-1); }} disabled={selected === -1}><Icon path={mdiNoteRemoveOutline} size={1} /></Button>
                 </ButtonGroup>
             </div>
-            <div className="flex-shrink overflow-auto">
-                <List>
-                    {filtered_notes.map((e, index) =>
+            <div className="flex-1 overflow-auto">
+                <List sx={{ maxHeight: "100%" }} >
+                {
+                    filtered_notes.map((e, index) =>
                         <ListItemButton key={e.id}
                             selected={index === selected}
                             onClick={() => handleListItemClick(index)}>
                             <NoteDisplay content={e.note} />
-                        </ListItemButton>)}
+                        </ListItemButton>)
+                }
                 </List>
-            </div>
         </div>
+    </div >
         <AddNoteDialog open={noteDialogOpen} onClose={onCloseNoteDialog}
             initialContent={selected === -1 ? [""] : filtered_notes[selected].note} />
     </>;

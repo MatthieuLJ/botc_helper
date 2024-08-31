@@ -81,8 +81,8 @@ function Playview(props: PlayviewProps) {
     }
 
     return <div className="flex flex-row">
-        <div className="basis-2/3">
-            <div className="relative aspect-square">
+        <div className="basis-2/3 h-screen">
+            <div className="relative aspect-square max-h-full">
 
                 <Townsquare tapAction={(index) => { tapPlayer(index); }} />
 

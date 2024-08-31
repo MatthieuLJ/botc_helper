@@ -52,37 +52,41 @@ function Playerview() {
         dispatch(setClaims({ index: playerIndex, claims: playerClaims }));
     }, [dispatch, playerClaims]);
 
-    return <><div className="h-screen">
-        <div className="flex h-2/3 w-full" ref={central_area}>
-            <div className="basis-1/5 h-full content-center">
-                <Button onClick={() => {
-                    navigate(`/play/player/${prev_index}`);
-                }}>
-                    Counter-clockwise
-                </Button>
-            </div>
-            <div className="basis-3/5 content-center">
-                <div className="flex w-full place-content-center h-fit">
-                    <PlayerToken
-                        index={playerIndex}
-                        token_width={tokenWidth}
-                        tapPlayer={() => { setOpenClaimsDialog(true); }}
-                    />
+    return <>
+        <div className="flex h-screen flex-col">
+            <div className="flex flex-grow w-full" ref={central_area}>
+                <div className="basis-1/5 h-full content-center">
+                    <Button onClick={() => {
+                        navigate(`/play/player/${prev_index}`);
+                    }}>
+                        Counter-clockwise
+                    </Button>
                 </div>
+                <div className="basis-3/5 content-center">
+                    <div className="flex w-full place-content-center h-fit">
+                        <PlayerToken
+                            index={playerIndex}
+                            token_width={tokenWidth}
+                            tapPlayer={() => { setOpenClaimsDialog(true); }}
+                        />
+                    </div>
 
+                </div>
+                <div className="basis-1/5 content-center">
+                    <Button onClick={() => {
+                        navigate(`/play/player/${next_index}`);
+                    }}>
+                        Clockwise
+                    </Button>
+                </div>
             </div>
-            <div className="basis-1/5 content-center">
-                <Button onClick={() => {
-                    navigate(`/play/player/${next_index}`);
-                }}>
-                    Clockwise
-                </Button>
+            <div className="w-full h-1/2">
+                <NoteList filter={notes_filter} />
             </div>
-        </div>
-        <div className="w-full h-1/3">
-            <NoteList filter={notes_filter} />
-        </div>
-    </div >
+            <div className="h-fit">
+                <Button id="townsquare" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</Button>
+            </div>
+        </div >
 
         <Dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
             <Characters
@@ -101,7 +105,6 @@ function Playerview() {
                 }} />
         </Dialog>
 
-        <Button id="home" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</Button>
     </>;
 }
 
