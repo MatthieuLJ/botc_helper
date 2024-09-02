@@ -80,16 +80,6 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                         setNote={setNote} />
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expandedSection === "standard_chip"} onChange={() => handleExpand("standard_chip")}>
-                <AccordionSummary>
-                    Add a standard note
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Button>
-                        Move time forward
-                    </Button>
-                </AccordionDetails>
-            </Accordion>
             <ButtonGroup>
                 <Button onClick={() => handleClose(null, null)}><Icon path={mdiCheckBold} size={1} /></Button>
                 <Button onClick={() => handleClose(null, "cancel")}><Icon path={mdiCancel} size={1} /></Button>
