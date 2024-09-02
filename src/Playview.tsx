@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Townsquare from './Townsquare.tsx';
 import NoteList from './components/NoteList.tsx';
 
-import { Button, ButtonGroup, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Button, ButtonGroup, FormControl, FormControlLabel, FormLabel, Menu, MenuItem, Radio, RadioGroup } from '@mui/material';
 import { advanceTime } from './state/TimeSlice.tsx';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
 import { addNote, ChipType, NoteSegments } from './state/NotesSlice.tsx';
-import { mdiCheckBold } from '@mdi/js';
+import { mdiCheckBold, mdiMenu } from '@mdi/js';
 import Icon from "@mdi/react";
 import { PlayerInfo, setAlive } from './state/PlayersSlice.tsx';
 
@@ -80,7 +80,19 @@ function Playview(props: PlayviewProps) {
         }
     }
 
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    function handleMenuClick(e: React.MouseEvent<HTMLButtonElement>) {
+        setAnchorEl(e.currentTarget);
+    }
+
+    function handleResetGame() {
+        dispatch({type: 'reset_game'});
+    }
+
     return <div className="flex flex-row">
+
         <div className="basis-2/3 h-screen">
             <div className="relative aspect-square max-h-full">
 
@@ -92,7 +104,7 @@ function Playview(props: PlayviewProps) {
                             <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
                             <Button onClick={() => { setCurrentState(PlayStates.Nominator); }}>Nomination</Button>
                             <Button onClick={() => { setCurrentState(PlayStates.Vote); }}>Vote</Button>
-                            <Button onClick={() => { setCurrentState(PlayStates.Life_and_Death);}}>Life & Death</Button>
+                            <Button onClick={() => { setCurrentState(PlayStates.Life_and_Death); }}>Life & Death</Button>
                         </ButtonGroup>
                     </div>
                     <div className={currentState === PlayStates.Nominator ? "" : "hidden"}>
@@ -129,7 +141,7 @@ function Playview(props: PlayviewProps) {
                         <FormControl disabled={playerListCache.length == 0 || !players[playerListCache[0]].alive}>
                             <FormLabel>Death reason:</FormLabel>
                             <RadioGroup value={currentDeathReason} >
-                                <FormControlLabel value="execution" control={<Radio onClick={handleDeathReason}/>} label="Execution" />
+                                <FormControlLabel value="execution" control={<Radio onClick={handleDeathReason} />} label="Execution" />
                             </RadioGroup>
                             <Button onClick={() => {
                                 if (playerListCache.length !== 0) {
@@ -150,7 +162,7 @@ function Playview(props: PlayviewProps) {
                                     }
 
                                     dispatch(addNote({ note: e }));
-                                    dispatch(setAlive({index: playerListCache[0], alive:!players[playerListCache[0]].alive}))
+                                    dispatch(setAlive({ index: playerListCache[0], alive: !players[playerListCache[0]].alive }));
                                     setPlayerListCache([]);
                                 }
                                 setCurrentState(PlayStates.Default);
@@ -163,7 +175,19 @@ function Playview(props: PlayviewProps) {
             </div>
         </div>
         <div className="basis-1/3 max-h-screen"><NoteList /></div>
-
+        <div className="absolute top left">
+            <Button
+                onClick={handleMenuClick}>
+                <Icon path={mdiMenu} size={1} />
+            </Button>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={() => { setAnchorEl(null); }}
+            >
+                <MenuItem onClick={handleResetGame}>Reset game</MenuItem>
+            </Menu>
+        </div>
     </div>;
 }
 

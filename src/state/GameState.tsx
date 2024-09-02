@@ -50,6 +50,9 @@ const combinedReducer = combineReducers({
 
 
 function rootReducer(state, action) {
+    if (action.type === 'reset_game') {
+        return combinedReducer(undefined, action);
+    }
     const intermediateState = combinedReducer(state, action);
     const finalState = catchNoteActions(intermediateState, action);
     return finalState;
