@@ -22,7 +22,10 @@ function TownsquareSetup() {
                 disabled={rolesLoading || roles.length === 0}>Show script</button>
             <dialog open={showCharacters}
                 onClose={() => { setShowCharacters(false); }}>
-                <Characters highlights={null} closeDialog={() => { setShowCharacters(false); }} />
+                <Characters
+                    highlights={null}
+                    closeDialog={() => { setShowCharacters(false); }}
+                    tapCharacter={() => {/* could show ability here*/ }} />
             </dialog>
             <p>
                 <button onClick={() => {
