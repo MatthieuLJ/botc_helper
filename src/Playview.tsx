@@ -88,11 +88,10 @@ function Playview(props: PlayviewProps) {
     }
 
     function handleResetGame() {
-        dispatch({type: 'reset_game'});
+        dispatch({ type: 'reset_game' });
     }
 
     return <div className="flex flex-row">
-
         <div className="basis-2/3 h-screen">
             <div className="relative aspect-square max-h-full">
 
