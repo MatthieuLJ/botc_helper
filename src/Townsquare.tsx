@@ -29,13 +29,17 @@ function Townsquare(props: TownsquareProps) {
             angle += dangle;
         }
 
-        setTokenWidth(Math.max(40, towncircle.clientWidth/8));
+        setTokenWidth(Math.max(40, towncircle.clientWidth / 8));
     }
 
     useEffect(() => {
         window.addEventListener('resize', onResize);
         onResize();
     }, []);
+
+    useEffect(() => {
+        onResize();
+    }, [players.length]);
 
     return <div className="relative top w-full h-full" ref={circle}>
         {players.map((p, index: number) =>
