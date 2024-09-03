@@ -45,7 +45,8 @@ function ScriptSetup() {
         <select name="scripts" id="script_select" value={scriptSelectValue}
             onChange={selectScript}>
             {scriptName === "" ? <option value="" key="none" /> : null}
-            {scripts.map((s) => <option value={s.file} key={s.name}>{s.name}</option>)}
+            {scripts.map((s) =>
+                <option value={s.file} key={s.name}>{s.name}</option>)}
         </select>
     </>;
 }

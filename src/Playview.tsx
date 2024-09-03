@@ -100,10 +100,22 @@ function Playview(props: PlayviewProps) {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <div className={currentState === PlayStates.Default ? "" : "hidden"}>
                         <ButtonGroup variant="text" orientation="vertical">
-                            <Button onClick={() => { dispatch(advanceTime()); }}>Move time forward</Button>
-                            <Button onClick={() => { setCurrentState(PlayStates.Nominator); }}>Nomination</Button>
-                            <Button onClick={() => { setCurrentState(PlayStates.Vote); }}>Vote</Button>
-                            <Button onClick={() => { setCurrentState(PlayStates.Life_and_Death); }}>Life & Death</Button>
+                            <Button
+                                onClick={() => { dispatch(advanceTime()); }}>
+                                Move time forward
+                            </Button>
+                            <Button
+                                onClick={() => { setCurrentState(PlayStates.Nominator); }}>
+                                Nomination
+                            </Button>
+                            <Button
+                                onClick={() => { setCurrentState(PlayStates.Vote); }}>
+                                Vote
+                            </Button>
+                            <Button
+                                onClick={() => { setCurrentState(PlayStates.Life_and_Death); }}>
+                                Life & Death
+                            </Button>
                         </ButtonGroup>
                     </div>
                     <div className={currentState === PlayStates.Nominator ? "" : "hidden"}>
@@ -137,10 +149,13 @@ function Playview(props: PlayviewProps) {
                     </div>
                     <div className={currentState === PlayStates.Life_and_Death ? "" : "hidden"}>
                         <p>Who died (or resuscitated)?</p>
-                        <FormControl disabled={playerListCache.length == 0 || !players[playerListCache[0]].alive}>
+                        <FormControl disabled={playerListCache.length == 0 ||
+                            !players[playerListCache[0]].alive}>
                             <FormLabel>Death reason:</FormLabel>
                             <RadioGroup value={currentDeathReason} >
-                                <FormControlLabel value="execution" control={<Radio onClick={handleDeathReason} />} label="Execution" />
+                                <FormControlLabel value="execution"
+                                    control={<Radio onClick={handleDeathReason} />}
+                                    label="Execution" />
                             </RadioGroup>
                             <Button onClick={() => {
                                 if (playerListCache.length !== 0) {
@@ -161,7 +176,10 @@ function Playview(props: PlayviewProps) {
                                     }
 
                                     dispatch(addNote({ note: e }));
-                                    dispatch(setAlive({ index: playerListCache[0], alive: !players[playerListCache[0]].alive }));
+                                    dispatch(setAlive({
+                                        index: playerListCache[0],
+                                        alive: !players[playerListCache[0]].alive
+                                    }));
                                     setPlayerListCache([]);
                                 }
                                 setCurrentState(PlayStates.Default);

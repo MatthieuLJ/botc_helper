@@ -84,11 +84,16 @@ function Playerview() {
                 <NoteList filter={notes_filter} />
             </div>
             <div className="h-fit">
-                <Button id="townsquare" name="townsquare" onClick={() => { return navigate('/play'); }}>Back to townsquare</Button>
+                <Button id="townsquare" name="townsquare"
+                    onClick={() => { return navigate('/play'); }}>
+                    Back to townsquare
+                </Button>
             </div>
         </div >
 
-        <Dialog open={openClaimsDialog} onClose={() => { setOpenClaimsDialog(false); }}>
+        <Dialog
+            open={openClaimsDialog}
+            onClose={() => { setOpenClaimsDialog(false); }}>
             <Characters
                 highlights={player_info.claims}
                 tapCharacter={(role) => {

@@ -21,8 +21,10 @@ function TownsquareSetup() {
         </div>
         <div className="h-1/3">
             <ScriptSetup />
-            <button onClick={() => { setShowCharacters(true); }}
-                disabled={rolesLoading || roles.length === 0}>Show script</button>
+            <Button onClick={() => { setShowCharacters(true); }}
+                disabled={rolesLoading || roles.length === 0}>
+                Show script
+            </Button>
 
             <p>
                 <Button onClick={() => {

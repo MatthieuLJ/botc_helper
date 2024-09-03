@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import Box from "@mui/material/Box";
 
 import NoteChip from "./NoteChip.tsx";
 import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 
+import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+
 import ChangePlayerChipDialog from "./ChangePlayerChipDialog.tsx";
 import ChangeRoleChipDialog from "./ChangeRoleChipDialog.tsx";
 import ChangeTimeChipDialog from "./ChangeTimeChipDialog.tsx";
@@ -35,10 +36,16 @@ type NoteInputProps = {
 
 export default function NoteInput(props: NoteInputProps) {
     const { content, setContent, newChip } = props;
-    const [cursorPosition, setCursorPosition] = useState([-1, -1]); // element index and cursor position
+
+    // element index and cursor position
+    const [cursorPosition, setCursorPosition] = useState([-1, -1]);
     const itemsRef = useRef<Array<HTMLSpanElement | null>>([]);
-    const [contentChanged, setContentChanged] = useState(0); // -1 for deleted chip, +1 for inserted chip
+
+    // -1 for deleted chip, +1 for inserted chip
+    const [contentChanged, setContentChanged] = useState(0);
     const [editedChipIndex, setEditedChipIndex] = useState(-1);
+
+    // When opening dialogs to change chips (TODO: combine into 1)
     const [changePlayerChipOpen, setChangePlayerChipOpen] = useState(false);
     const [changeRoleChipOpen, setChangeRoleChipOpen] = useState(false);
     const [changeTimeChipOpen, setChangeTimeChipOpen] = useState(false);
@@ -57,11 +64,14 @@ export default function NoteInput(props: NoteInputProps) {
                 changed = true;
             }
             for (var i = 0; i < newContent.length - 1; i++) {
-                if (Array.isArray(newContent[i]) && Array.isArray(newContent[i + 1])) {
-                    // insert an empty string to be able to insert text between chips
+                if (Array.isArray(newContent[i]) &&
+                    Array.isArray(newContent[i + 1])) {
+                    // insert an empty string to be able to insert text
+                    // between chips
                     newContent.splice(i + 1, 0, "");
                     changed = true;
-                } else if (!Array.isArray(newContent[i]) && !Array.isArray(newContent[i + 1])) {
+                } else if (!Array.isArray(newContent[i]) &&
+                    !Array.isArray(newContent[i + 1])) {
                     // merge the two strings together
                     newContent[i] = newContent[i] + " " + newContent[i + 1];
                     newContent.splice(i + 1, 1);
@@ -69,6 +79,7 @@ export default function NoteInput(props: NoteInputProps) {
                 }
             }
             if (Array.isArray(newContent[content.length - 1])) {
+                // Finish the note with a string
                 newContent.splice(newContent.length, 0, "");
                 changed = true;
             }
@@ -80,7 +91,8 @@ export default function NoteInput(props: NoteInputProps) {
         if ((!changed) && (contentChanged === -1) && (cursorPosition[0] !== -1)) {
             // we deleted a chip and everything should be stable now, place the
             // cursor where the chip was
-            const inputRef = itemsRef.current[cursorPosition[0]]?.getElementsByTagName("input");
+            const inputRef =
+                itemsRef.current[cursorPosition[0]]?.getElementsByTagName("input");
             if (inputRef !== undefined) {
                 inputRef[0]?.setSelectionRange(cursorPosition[1], cursorPosition[1]);
                 inputRef[0]?.focus();
@@ -89,7 +101,8 @@ export default function NoteInput(props: NoteInputProps) {
         } else if ((!changed) && (contentChanged === 1) && (cursorPosition[0] !== -1)) {
             // we inserted a chip and everything should be stable now, place the
             // cursor right after the new chip
-            const inputRef = itemsRef.current[cursorPosition[0] + 2]?.getElementsByTagName("input");
+            const inputRef =
+                itemsRef.current[cursorPosition[0] + 2]?.getElementsByTagName("input");
             if (inputRef !== undefined) {
                 inputRef[0]?.setSelectionRange(0, 0);
                 inputRef[0]?.focus();
@@ -105,7 +118,8 @@ export default function NoteInput(props: NoteInputProps) {
         if (newChip != null) {
             const newContent = [...content];
             const previousText = newContent[cursorPosition[0]];
-            if ((cursorPosition[0] === -1) || (typeof (previousText) != "string")) {
+            if ((cursorPosition[0] === -1) ||
+                (typeof (previousText) != "string")) {
                 newContent.splice(
                     newContent.length - 1,
                     0,
@@ -149,10 +163,13 @@ export default function NoteInput(props: NoteInputProps) {
     function handleKeyDown(index, event) {
         // Only need to handle if key is backspace or delete while at the start
         // or end of the field
-        if ((event.key === 'Backspace') && (event.target.selectionStart === 0) && (index > 0)) {
+        if ((event.key === 'Backspace') &&
+            (event.target.selectionStart === 0) && (index > 0)) {
             deleteChip(index - 1);
             event.preventDefault();
-        } else if ((event.key === 'Delete') && (event.target.selectionStart === content[index].length) && (index < content.length)) {
+        } else if ((event.key === 'Delete') &&
+            (event.target.selectionStart === content[index].length) &&
+            (index < content.length)) {
             deleteChip(index + 1);
             event.preventDefault();
         }
@@ -169,7 +186,8 @@ export default function NoteInput(props: NoteInputProps) {
             <Box>
                 {props.content.map((item, index) => {
                     return Array.isArray(item) ? (
-                        <span key={index} ref={(el) => itemsRef.current[index] = el}>
+                        <span key={index}
+                            ref={(el) => itemsRef.current[index] = el}>
                             <NoteChip
                                 value={item}
                                 onDelete={() => deleteChip(index)}
@@ -215,7 +233,8 @@ export default function NoteInput(props: NoteInputProps) {
                 onSelected={(playerIndex: number): void => {
                     setChangePlayerChipOpen(false);
                     const newContent = [...content];
-                    newContent.splice(editedChipIndex, 1, [ChipType.Player, playerIndex]);
+                    newContent.splice(editedChipIndex, 1,
+                        [ChipType.Player, playerIndex]);
                     setContent(newContent);
                 }} />
             <ChangeRoleChipDialog
@@ -223,7 +242,8 @@ export default function NoteInput(props: NoteInputProps) {
                 onSelected={(role: string): void => {
                     setChangeRoleChipOpen(false);
                     const newContent = [...content];
-                    newContent.splice(editedChipIndex, 1, [ChipType.Role, role]);
+                    newContent.splice(editedChipIndex, 1,
+                        [ChipType.Role, role]);
                     setContent(newContent);
                 }} />
             <ChangeTimeChipDialog
@@ -231,7 +251,8 @@ export default function NoteInput(props: NoteInputProps) {
                 onSelected={(time: number): void => {
                     setChangeTimeChipOpen(false);
                     const newContent = [...content];
-                    newContent.splice(editedChipIndex, 1, [ChipType.Time, time]);
+                    newContent.splice(editedChipIndex, 1,
+                        [ChipType.Time, time]);
                     setContent(newContent);
                 }}
             />

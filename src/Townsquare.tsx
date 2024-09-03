@@ -24,8 +24,8 @@ function Townsquare(props: TownsquareProps) {
         for (let i = 0; i < circleElements.length; i++) {
             const circle = circleElements[i] as HTMLDivElement;
 
-            circle.style.transform = `translate(-50%,-50%) rotate(${angle}deg) translate(${towncircle.clientWidth /
-                3}px) rotate(-${angle}deg)`;
+            circle.style.transform = `translate(-50%,-50%) rotate(${angle}deg) 
+            translate(${towncircle.clientWidth / 3}px) rotate(-${angle}deg)`;
             angle += dangle;
         }
 

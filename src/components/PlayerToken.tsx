@@ -28,8 +28,10 @@ function PlayerToken(props: PlayerTokenProps) {
             sx: {
                 ...token_sx['sx'],
                 '& .MuiAvatar-root': {
-                    width: (props.token_width * (1 + num_claims_capped / 10)) / num_claims_capped,
-                    height: (props.token_width * (1 + num_claims_capped / 10)) / num_claims_capped,
+                    width: (props.token_width * (1 + num_claims_capped / 10)) /
+                        num_claims_capped,
+                    height: (props.token_width * (1 + num_claims_capped / 10)) /
+                        num_claims_capped,
                     position: 'relative',
                 }
             }
@@ -56,7 +58,10 @@ function PlayerToken(props: PlayerTokenProps) {
         };
     }
 
-    return <div className="flex h-fit" key={props.index} onClick={() => props.tapPlayer(props.index)}>
+    return <div
+        className="flex h-fit"
+        key={props.index}
+        onClick={() => props.tapPlayer(props.index)}>
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
                 <AvatarGroup

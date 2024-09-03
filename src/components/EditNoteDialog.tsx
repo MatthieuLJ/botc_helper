@@ -46,10 +46,14 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
     }, [initialContent]);
 
     return <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{initialContent.length === 1 && initialContent[0] === "" ? "Add a note" : "Edit a note"}</DialogTitle>
+        <DialogTitle>{initialContent.length === 1 && initialContent[0] === "" ?
+            "Add a note" :
+            "Edit a note"}
+        </DialogTitle>
         <DialogContent>
             <NoteInput content={note} setContent={setNote} newChip={newChip} />
-            <Accordion expanded={expandedSection === "add_chip"} onChange={() => handleExpand("add_chip")}>
+            <Accordion expanded={expandedSection === "add_chip"}
+                onChange={() => handleExpand("add_chip")}>
                 <AccordionSummary>
                     Add a chip
                 </AccordionSummary>
@@ -71,7 +75,8 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                     </Button>
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expandedSection === "role_chip"} onChange={() => handleExpand("role_chip")}>
+            <Accordion expanded={expandedSection === "role_chip"}
+                onChange={() => handleExpand("role_chip")}>
                 <AccordionSummary>
                     Add a note based on a role
                 </AccordionSummary>
@@ -81,8 +86,12 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                 </AccordionDetails>
             </Accordion>
             <ButtonGroup>
-                <Button onClick={() => handleClose(null, null)}><Icon path={mdiCheckBold} size={1} /></Button>
-                <Button onClick={() => handleClose(null, "cancel")}><Icon path={mdiCancel} size={1} /></Button>
+                <Button onClick={() => handleClose(null, null)}>
+                    <Icon path={mdiCheckBold} size={1} />
+                </Button>
+                <Button onClick={() => handleClose(null, "cancel")}>
+                    <Icon path={mdiCancel} size={1} />
+                </Button>
             </ButtonGroup>
         </DialogContent>
 

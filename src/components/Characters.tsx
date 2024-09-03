@@ -49,15 +49,19 @@ function Characters(props: CharactersPropType) {
         }
     });
 
-    const TownsFolkRoles = Object.keys(role_infos).filter((r) => role_infos[r].type === CharacterType.Townsfolk);
+    const TownsFolkRoles = Object.keys(role_infos).filter((r) =>
+        role_infos[r].type === CharacterType.Townsfolk);
     const count_townsfolk = TownsFolkRoles.length;
     const first_row_count = Math.ceil(count_townsfolk / 2);
     const TownsFolkRoles1 = TownsFolkRoles.slice(0, first_row_count);
     const TownsFolkRoles2 = TownsFolkRoles.slice(first_row_count + 1);
 
-    const OutsiderRoles = Object.keys(role_infos).filter((r) => role_infos[r].type === CharacterType.Outsider);
-    const MinionRoles = Object.keys(role_infos).filter((r) => role_infos[r].type === CharacterType.Minion);
-    const DemonRoles = Object.keys(role_infos).filter((r) => role_infos[r].type === CharacterType.Demon);
+    const OutsiderRoles = Object.keys(role_infos).filter((r) =>
+        role_infos[r].type === CharacterType.Outsider);
+    const MinionRoles = Object.keys(role_infos).filter((r) =>
+        role_infos[r].type === CharacterType.Minion);
+    const DemonRoles = Object.keys(role_infos).filter((r) =>
+        role_infos[r].type === CharacterType.Demon);
 
     // The same as above with the functionality of being able to add highlights
     return <>

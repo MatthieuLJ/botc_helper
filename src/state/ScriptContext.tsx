@@ -53,7 +53,9 @@ const ScriptProvider = ({ children }) => {
 
     useEffect(() => {
         if (roles.length > 0) {
-            const new_roles = roles.filter((x) => !Object.keys(roleCache).includes(x));
+            const new_roles = roles.filter(
+                (x) => !Object.keys(roleCache).includes(x)
+            );
             if (new_roles.length > 0) {
                 setRolesToLoad(new_roles);
             }
@@ -72,7 +74,8 @@ const ScriptProvider = ({ children }) => {
     }}>
         {children}
         {rolesToLoad.length > 0 ?
-            <div className="h-screen w-screen absolute top-0 left-0 flex items-center justify-center bg-slate-400/50">
+            <div className="h-screen w-screen absolute top-0 left-0 flex 
+            items-center justify-center bg-slate-400/50">
                 <CircularProgress />
             </div>
             :

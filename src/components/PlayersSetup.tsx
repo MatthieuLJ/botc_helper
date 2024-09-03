@@ -37,10 +37,18 @@ function PlayersSetup(props) {
         <Dialog open={changingName} onClose={handleClose}>
             <form method="dialog">
                 <p>Set the player's name</p>
-                <TextField name="name_field" id="player_name_field" type="text" value={nameField}
+                <TextField name="name_field"
+                    id="player_name_field"
+                    type="text"
+                    value={nameField}
                     onChange={(e) => setNameField(e.currentTarget.value)} />
                 <Button onClick={acceptNewName}>OK</Button>
-                <Button onClick={() => { setNameField(""); setChangingName(false); }}>Cancel</Button>
+                <Button onClick={() => {
+                    setNameField("");
+                    setChangingName(false);
+                }}>
+                    Cancel
+                </Button>
             </form>
         </Dialog>
     </div>;

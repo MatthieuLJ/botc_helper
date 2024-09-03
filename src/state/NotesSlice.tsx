@@ -55,7 +55,9 @@ export const getFilteredNotes = (state: NoteList, filter: ChipSegment): NoteList
 export function catchNoteActions(state, action) {
     switch (action.type) {
         case 'time/advanceTime':
-            const start_string = (state.time.time % 2 === 0) ? "The night has fallen on Ravenswoodbluff, it is now " : "It is a new day in Ravenswoodbluff, it is now ";
+            const start_string = (state.time.time % 2 === 0) ?
+                "The night has fallen on Ravenswoodbluff, it is now " :
+                "It is a new day in Ravenswoodbluff, it is now ";
             const new_note = [start_string, [ChipType.Time, state.time.time]];
             const new_state = {
                 ...state,

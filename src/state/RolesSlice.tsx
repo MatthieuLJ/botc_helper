@@ -22,7 +22,9 @@ export const RolesSlice = createSlice({
         },
         addRoles: (state, action) => {
             if (Array.isArray(action.payload.roles)) {
-                const new_roles = action.payload.roles.filter((x) => !state.roles.includes(x));
+                const new_roles = action.payload.roles.filter(
+                    (x) => !state.roles.includes(x)
+                );
                 if (new_roles.length > 0) {
                     state.roles.push(...new_roles);
                 }

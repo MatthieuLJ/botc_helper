@@ -30,7 +30,7 @@ export default function ChangeTimeChipDialog(props: ChangeTimeChipDialogProps) {
                 defaultValue={current_time + 1}
                 marks
                 valueLabelDisplay="on"
-                onChange={(event, newValue) => { if (!Array.isArray(newValue)) setDayNumber(newValue); }} />
+                onChange={(_event, newValue) => { if (!Array.isArray(newValue)) setDayNumber(newValue); }} />
             <Button onClick={() => { props.onSelected((dayNumber - 1) * 2 + (timeOfDay === "day" ? 1 : 0)); }}>OK</Button>
         </Box>
     </Dialog>;

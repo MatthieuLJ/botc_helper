@@ -20,7 +20,10 @@ type PlayerChipProps = {
 
 function PlayerChip(props: PlayerChipProps) {
     // TODO: the console is showing some warning about this selector:
-    // Selector unknown returned a different result when called with the same parameters. This can lead to unnecessary rerenders.Selectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization [object Object] 
+    // Selector unknown returned a different result when called with the same 
+    // parameters. This can lead to unnecessary rerenders.Selectors that return 
+    // a new reference (such as an object or an array) should be memoized: 
+    // https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization [object Object] 
     const players = useAppSelector(
         state => state.players.players);
     if (props.index < 0) {
