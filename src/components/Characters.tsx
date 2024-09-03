@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
 import { CharacterType, roleType } from "../state/role.ts";
 import { useAppSelector } from "../state/hooks.ts";
+import { Button } from "@mui/material";
 
 type CharactersPropType = {
     tapCharacter: (character: string) => void,
@@ -66,7 +67,7 @@ function Characters(props: CharactersPropType) {
     // The same as above with the functionality of being able to add highlights
     return <>
         {closeDialog !== null ?
-            <p onClick={() => { closeDialog(); }}>Close</p>
+            <Button onClick={() => { closeDialog(); }}>Close</Button>
             : <></>}
         <table>
             <tbody>
