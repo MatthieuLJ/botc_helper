@@ -9,7 +9,6 @@ import { advanceTime } from './state/TimeSlice.tsx';
 import { Button, Dialog } from '@mui/material';
 
 function TownsquareSetup() {
-    const { rolesLoading }: ScriptContextType = useContext(ScriptContext);
     const roles = useAppSelector(state => state.roles.roles);
     const [showCharacters, setShowCharacters] = useState(false);
     const navigate = useNavigate();
@@ -22,7 +21,7 @@ function TownsquareSetup() {
         <div className="h-1/3">
             <ScriptSetup />
             <Button onClick={() => { setShowCharacters(true); }}
-                disabled={rolesLoading || roles.length === 0}>
+                disabled={ roles.length === 0}>
                 Show script
             </Button>
 
@@ -31,7 +30,7 @@ function TownsquareSetup() {
                     dispatch(advanceTime());
                     return navigate('/play/townsquare', { replace: true });
                 }}
-                    disabled={rolesLoading || roles.length === 0}>
+                    disabled={ roles.length === 0}>
                     Done
                 </Button>
             </p>
