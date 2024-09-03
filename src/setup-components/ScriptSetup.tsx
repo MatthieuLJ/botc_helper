@@ -27,7 +27,7 @@ function ScriptSetup() {
             return;
         }
         dispatch(setScript({ script: scriptName }));
-        import(`../game_scripts/${scriptName}`)
+        import(/* @vite-ignore */`../game_scripts/${scriptName}`)
             .then(module => {
                 const script = module.default;
                 dispatch(addRoles({ roles: script.slice(1) }));
