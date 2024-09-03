@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { createContext, useState } from 'react';
 import { roleType } from './role.ts';
 import { useAppSelector } from './hooks.ts';

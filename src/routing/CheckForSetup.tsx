@@ -16,7 +16,6 @@ function CheckForSetup() {
         }
     }, [navigate, roles_state.roles.length, roles_state.script, notes.length]);
 
-
     return <Outlet />;
 }
 
