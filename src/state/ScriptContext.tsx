@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { createContext, useState } from 'react';
 import { roleType } from './role.ts';
 import { useAppSelector } from './hooks.ts';
+import { CircularProgress } from '@mui/material';
 
 export type ScriptContextType = {
     getRole: (role: string) => roleType | null;
@@ -70,6 +71,12 @@ const ScriptProvider = ({ children }) => {
         getRole
     }}>
         {children}
+        {rolesToLoad.length > 0 ?
+            <div className="h-screen w-screen absolute top-0 left-0 flex items-center justify-center bg-slate-400/50">
+                <CircularProgress />
+            </div>
+            :
+            <></>}
     </ScriptContext.Provider>;
 };
 
