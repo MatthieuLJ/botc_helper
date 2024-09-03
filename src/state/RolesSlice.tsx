@@ -15,15 +15,22 @@ export const RolesSlice = createSlice({
     initialState,
     reducers: {
         setScript: (state, action) => {
-            state.script = action.payload.script;
+            if (state.script !== action.payload.script) {
+                state.roles = [];
+                state.script = action.payload.script;
+            }
         },
         addRoles: (state, action) => {
             if (Array.isArray(action.payload.roles)) {
-                state.roles.push(...action.payload.roles);
+                const new_roles = action.payload.roles.filter((x) => !state.roles.includes(x));
+                if (new_roles.length > 0) {
+                    state.roles.push(...new_roles);
+                }
             } else {
-                state.roles.push(action.payload.roles);
+                if (state.roles.indexOf(action.payload.roles) !== -1) {
+                    state.roles.push(action.payload.roles);
+                }
             }
-
         },
         clearScript: state => {
             state.script = "";

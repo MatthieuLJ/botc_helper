@@ -26,7 +26,6 @@ function ScriptSetup() {
         if (scriptName === "") {
             return;
         }
-        dispatch(clearScript());
         dispatch(setScript({ script: scriptName }));
         import(`../game_scripts/${scriptName}`)
             .then(module => {

@@ -40,6 +40,15 @@ function loadFromLocalStorage() {
     }
 }
 
+function resetStorage() {
+    try {
+        localStorage.setItem("state_version", "0");
+        localStorage.setItem("persistantState", "");
+    } catch (e) {
+        console.warn(e);
+    }
+}
+
 const combinedReducer = combineReducers({
     players: playerReducer,
     roles: rolesReducer,
@@ -47,10 +56,10 @@ const combinedReducer = combineReducers({
     time: timeReducer
 });
 
-
-
 function rootReducer(state, action) {
     if (action.type === 'reset_game') {
+        // force the state to undefined which will force the initial state
+        resetStorage();
         return combinedReducer(undefined, action);
     }
     const intermediateState = combinedReducer(state, action);
@@ -64,7 +73,7 @@ export const GameState = configureStore({
 }
 );
 
-GameState.subscribe(debounce(() => saveToLocalStorage(GameState.getState()), 2000));
+GameState.subscribe(debounce(() => saveToLocalStorage(GameState.getState()), 200));
 
 export default GameState;
 
