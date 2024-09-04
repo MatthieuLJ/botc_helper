@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useAppSelector } from '../state/hooks.ts';
 import { Avatar, AvatarGroup, Box } from '@mui/material';
 import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
@@ -16,7 +16,7 @@ type PlayerTokenProps = {
 function PlayerToken(props: PlayerTokenProps) {
     const player_info = useAppSelector(state => state.players.players[props.index]);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
-    const { hideInformation} : PlayContextType = useContext(PlayContext);
+    const { hideInformation, playersWithOverlay, overlayImage }: PlayContextType = useContext(PlayContext);
 
     const token_style = {
         background: `url(${token_background})`,
@@ -66,17 +66,33 @@ function PlayerToken(props: PlayerTokenProps) {
         onClick={() => props.tapPlayer(props.index)}>
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
-                <AvatarGroup
-                    max={5}
-                    className="justify-center"
-                    {...token_sx}>
+                {player_info.claims.length === 0 || hideInformation || overlayImage ?
+                    <div className="relative">
+                        <img alt="No claim"
+                            src={token_background}
+                            height={props.token_width}
+                            width={props.token_width} />
+                        {((overlayImage !== null) && playersWithOverlay.includes(props.index)) ?
+                            <img src={overlayImage}
+                                height={props.token_width}
+                                width={props.token_width}
+                                className="absolute top-0 left-0"
+                            /> : <></>}
+                        {(!player_info.alive ?
+                            <img src={shroud}
+                                height={props.token_width}
+                                width={props.token_width}
+                                className="absolute top-0 left-0" />
+                            : <></>
+                        )}
+                    </div>
+                    :
+                    <AvatarGroup
+                        max={5}
+                        className="justify-center"
+                        {...token_sx}>
 
-                    {player_info.claims.length === 0 || hideInformation ?
-                        <Avatar alt="No claim"
-                            key={props.index * 100}
-                            src={token_background} />
-                        :
-                        player_info.claims.map((c) => {
+                        {player_info.claims.map((c: string) => {
                             const role_info = getRole(c);
                             return <Avatar
                                 alt={c}
@@ -89,7 +105,8 @@ function PlayerToken(props: PlayerTokenProps) {
                                 }}
                             />;
                         })}
-                </AvatarGroup>
+                    </AvatarGroup>
+                }
             </div>
             <div>{player_info.name}</div>
         </div>

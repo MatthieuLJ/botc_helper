@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import Counter from "../components/Counter.tsx";
-import PlayerToken from "../components/PlayerToken.tsx";
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import { setName } from '../state/PlayersSlice.tsx';
 import { Button, Dialog, TextField } from "@mui/material";

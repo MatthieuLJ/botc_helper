@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Townsquare from './Townsquare.tsx';
 import NoteList from './components/NoteList.tsx';
 
@@ -11,6 +11,11 @@ import { mdiCheckBold, mdiMenu } from '@mdi/js';
 import Icon from "@mdi/react";
 import { PlayerInfo, setAlive } from './state/PlayersSlice.tsx';
 import { PlayContextProvider } from './state/PlayContext.tsx';
+
+import handBackRight from './img/hand-back-right.png';
+import handPointingRight from './img/hand-pointing-right.png';
+import coffin from './img/coffin.png'
+import medicalBag from './img/medical-bag.png'
 
 type PlayviewProps = {};
 
@@ -33,6 +38,7 @@ function Playview(props: PlayviewProps) {
 
     const [currentState, setCurrentState] = useState<PlayStates>(PlayStates.Default);
     const [playerListCache, setPlayerListCache] = useState<number[]>([]);
+    const [overlayImage, setOverlayImage] = useState<null | JSX.Element>(null);
 
     function tapPlayer(index) {
         switch (currentState) {
@@ -54,10 +60,14 @@ function Playview(props: PlayviewProps) {
                 ];
                 dispatch(addNote({ note: e }));
                 setPlayerListCache([]);
+                setOverlayImage(null);
                 setCurrentState(PlayStates.Default);
                 break;
             case PlayStates.Vote:
-                const current_voters = playerListCache;
+                // We have to construct a new array to make sure the right
+                // components will update when they use it through the context
+                // API
+                const current_voters = [...playerListCache];
                 if (current_voters.includes(index)) {
                     current_voters.splice(current_voters.indexOf(index), 1);
                 } else {
@@ -67,6 +77,7 @@ function Playview(props: PlayviewProps) {
                 break;
             case PlayStates.Life_and_Death:
                 setPlayerListCache([index]);
+                setOverlayImage(players[index].alive ? coffin: medicalBag);
                 break;
         }
     }
@@ -97,7 +108,9 @@ function Playview(props: PlayviewProps) {
     const [HideInformation, setHideInformation] = useState<boolean>(false);
 
     return <div className="flex flex-row">
-        <PlayContextProvider hideInformation={HideInformation}>
+        <PlayContextProvider hideInformation={HideInformation}
+            playersWithOverlay={playerListCache}
+            overlayImage={overlayImage}>
             <div className="relative basis-2/3 h-screen">
                 <div className="relative aspect-square max-h-full">
 
@@ -113,11 +126,17 @@ function Playview(props: PlayviewProps) {
                                     Move time forward
                                 </Button>
                                 <Button
-                                    onClick={() => { setCurrentState(PlayStates.Nominator); }}>
+                                    onClick={() => {
+                                        setCurrentState(PlayStates.Nominator);
+                                        setOverlayImage(handPointingRight);
+                                    }}>
                                     Nomination
                                 </Button>
                                 <Button
-                                    onClick={() => { setCurrentState(PlayStates.Vote); }}>
+                                    onClick={() => {
+                                        setCurrentState(PlayStates.Vote);
+                                        setOverlayImage(handBackRight);
+                                    }}>
                                     Vote
                                 </Button>
                                 <Button
@@ -150,6 +169,7 @@ function Playview(props: PlayviewProps) {
                                 }
                                 dispatch(addNote({ note: e }));
                                 setPlayerListCache([]);
+                                setOverlayImage(null);
                                 setCurrentState(PlayStates.Default);
                             }}>
                                 <Icon path={mdiCheckBold} size={1} />
@@ -189,6 +209,7 @@ function Playview(props: PlayviewProps) {
                                             alive: !players[playerListCache[0]].alive
                                         }));
                                         setPlayerListCache([]);
+                                        setOverlayImage(null);
                                     }
                                     setCurrentState(PlayStates.Default);
                                 }}>
