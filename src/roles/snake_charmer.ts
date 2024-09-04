@@ -11,7 +11,7 @@ const snake_charmer: roleType = {
 
     actions: {
         "Picks": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "snake charmer"],
+            [ChipType.Player, -1], " as the ", [ChipType.Role, "snake_charmer"],
             " picked ", [ChipType.Player, -1]]
     }
 };
