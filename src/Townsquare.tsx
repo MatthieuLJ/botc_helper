@@ -3,8 +3,7 @@ import PlayerToken from './components/PlayerToken.tsx';
 import { useAppSelector } from './state/hooks.ts';
 
 type TownsquareProps = {
-    tapAction: (index: number) => void,
-    hideRoles?: boolean
+    tapAction: (index: number) => void;
 };
 
 function Townsquare(props: TownsquareProps) {
@@ -47,8 +46,7 @@ function Townsquare(props: TownsquareProps) {
             <div key={p.name + index} className="absolute top-1/2 left-1/2">
                 <PlayerToken index={index}
                     tapPlayer={() => { props.tapAction(index); }}
-                    token_width={tokenWidth}
-                    {...(props.hideRoles ? {hideRoles:true} :{})} />
+                    token_width={tokenWidth} />
             </div>)}
     </div>;
 }

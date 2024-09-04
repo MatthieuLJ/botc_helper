@@ -5,17 +5,18 @@ import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
 
 import token_background from '../img/token_background.png';
 import shroud from '../img/shroud.png';
+import { PlayContext, PlayContextType } from '../state/PlayContext.tsx';
 
 type PlayerTokenProps = {
     index: number,
     token_width?: number,
     tapPlayer: (index: number) => void,
-    hideRoles?: boolean,
 };
 
 function PlayerToken(props: PlayerTokenProps) {
     const player_info = useAppSelector(state => state.players.players[props.index]);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
+    const { hideInformation} : PlayContextType = useContext(PlayContext);
 
     const token_style = {
         background: `url(${token_background})`,
@@ -23,7 +24,7 @@ function PlayerToken(props: PlayerTokenProps) {
     };
 
     var token_sx = { sx: {} };
-    const num_claims_capped = props.hideRoles ? 1 : Math.min(5, Math.max(1, player_info.claims.length));
+    const num_claims_capped = hideInformation ? 1 : Math.min(5, Math.max(1, player_info.claims.length));
     if (props.token_width) {
         token_sx = {
             sx: {
@@ -70,7 +71,7 @@ function PlayerToken(props: PlayerTokenProps) {
                     className="justify-center"
                     {...token_sx}>
 
-                    {player_info.claims.length === 0 || props.hideRoles ?
+                    {player_info.claims.length === 0 || hideInformation ?
                         <Avatar alt="No claim"
                             key={props.index * 100}
                             src={token_background} />
