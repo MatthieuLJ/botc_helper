@@ -14,8 +14,8 @@ import { PlayContextProvider } from './state/PlayContext.tsx';
 
 import handBackRight from './img/hand-back-right.png';
 import handPointingRight from './img/hand-pointing-right.png';
-import coffin from './img/coffin.png'
-import medicalBag from './img/medical-bag.png'
+import coffin from './img/coffin.png';
+import medicalBag from './img/medical-bag.png';
 
 type PlayviewProps = {};
 
@@ -77,7 +77,7 @@ function Playview(props: PlayviewProps) {
                 break;
             case PlayStates.Life_and_Death:
                 setPlayerListCache([index]);
-                setOverlayImage(players[index].alive ? coffin: medicalBag);
+                setOverlayImage(players[index].alive ? coffin : medicalBag);
                 break;
         }
     }
@@ -140,7 +140,10 @@ function Playview(props: PlayviewProps) {
                                     Vote
                                 </Button>
                                 <Button
-                                    onClick={() => { setCurrentState(PlayStates.Life_and_Death); }}>
+                                    onClick={() => {
+                                        setCurrentState(PlayStates.Life_and_Death);
+                                        setOverlayImage(coffin);
+                                    }}>
                                     Life & Death
                                 </Button>
                             </ButtonGroup>
