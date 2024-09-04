@@ -9,7 +9,8 @@ import shroud from '../img/shroud.png';
 type PlayerTokenProps = {
     index: number,
     token_width?: number,
-    tapPlayer: (index: number) => void;
+    tapPlayer: (index: number) => void,
+    hideRoles?: boolean,
 };
 
 function PlayerToken(props: PlayerTokenProps) {
@@ -22,7 +23,7 @@ function PlayerToken(props: PlayerTokenProps) {
     };
 
     var token_sx = { sx: {} };
-    const num_claims_capped = Math.min(5, Math.max(1, player_info.claims.length));
+    const num_claims_capped = props.hideRoles ? 1 : Math.min(5, Math.max(1, player_info.claims.length));
     if (props.token_width) {
         token_sx = {
             sx: {
@@ -69,7 +70,7 @@ function PlayerToken(props: PlayerTokenProps) {
                     className="justify-center"
                     {...token_sx}>
 
-                    {player_info.claims.length === 0 ?
+                    {player_info.claims.length === 0 || props.hideRoles ?
                         <Avatar alt="No claim"
                             key={props.index * 100}
                             src={token_background} />

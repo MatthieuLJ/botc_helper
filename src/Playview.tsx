@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Townsquare from './Townsquare.tsx';
 import NoteList from './components/NoteList.tsx';
 
-import { Button, ButtonGroup, FormControl, FormControlLabel, FormLabel, Menu, MenuItem, Radio, RadioGroup } from '@mui/material';
+import { Button, ButtonGroup, FormControl, FormControlLabel, FormGroup, FormLabel, Menu, MenuItem, Radio, RadioGroup, Switch } from '@mui/material';
 import { advanceTime } from './state/TimeSlice.tsx';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
@@ -80,6 +80,7 @@ function Playview(props: PlayviewProps) {
         }
     }
 
+    // For the top left game menu
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -91,11 +92,17 @@ function Playview(props: PlayviewProps) {
         dispatch({ type: 'reset_game' });
     }
 
+    // hiding roles information
+    const [HideInformation, setHideInformation] = useState<boolean>(false);
+
     return <div className="flex flex-row">
-        <div className="basis-2/3 h-screen">
+        <div className="relative basis-2/3 h-screen">
             <div className="relative aspect-square max-h-full">
 
-                <Townsquare tapAction={(index) => { tapPlayer(index); }} />
+                <Townsquare
+                    tapAction={(index) => { tapPlayer(index); }}
+                    hideRoles={HideInformation}
+                />
 
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <div className={currentState === PlayStates.Default ? "" : "hidden"}>
@@ -190,6 +197,14 @@ function Playview(props: PlayviewProps) {
                     </div>
                 </div>
             </div>
+            <FormGroup className="absolute top-0 right-0">
+                <FormControlLabel
+                    control={<Switch onChange={(event: React.ChangeEvent<HTMLInputElement>) => { setHideInformation(event.target.checked); }} />}
+                    label="Hide info"
+                    labelPlacement="start"
+                    value={HideInformation}
+                />
+            </FormGroup>
         </div>
         <div className="basis-1/3 max-h-screen"><NoteList /></div>
         <div className="absolute top left">
