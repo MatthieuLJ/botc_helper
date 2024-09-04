@@ -38,7 +38,7 @@ function Playview(props: PlayviewProps) {
 
     const [currentState, setCurrentState] = useState<PlayStates>(PlayStates.Default);
     const [playerListCache, setPlayerListCache] = useState<number[]>([]);
-    const [overlayImage, setOverlayImage] = useState<null | JSX.Element>(null);
+    const [overlayImage, setOverlayImage] = useState<null | string>(null);
 
     function tapPlayer(index) {
         switch (currentState) {

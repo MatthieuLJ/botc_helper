@@ -4,7 +4,7 @@ import { createContext } from 'react';
 export type PlayContextType = {
   hideInformation: boolean,
   playersWithOverlay: number[],
-  overlayImage: null|JSX.Element,
+  overlayImage: null|string,
 };
 
 const initialState: PlayContextType = {
@@ -18,7 +18,7 @@ const PlayContext = createContext<PlayContextType>(initialState);
 type PlayContextProviderPropsType = {
   hideInformation: boolean,
   playersWithOverlay: number[],
-  overlayImage: null|JSX.Element,
+  overlayImage: null|string,
 };
 
 const PlayContextProvider = (props: PropsWithChildren<PlayContextProviderPropsType>) => {

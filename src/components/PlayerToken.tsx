@@ -73,7 +73,7 @@ function PlayerToken(props: PlayerTokenProps) {
                             height={props.token_width}
                             width={props.token_width} />
                         {((overlayImage !== null) && playersWithOverlay.includes(props.index)) ?
-                            <img src={overlayImage}
+                            <img src={overlayImage as string}
                                 height={props.token_width}
                                 width={props.token_width}
                                 className="absolute top-0 left-0"
