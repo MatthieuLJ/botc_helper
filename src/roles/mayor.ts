@@ -7,8 +7,7 @@ const mayor: roleType = {
     type: CharacterType.Townsfolk,
     ability: "If only 3 players live & no execution occurs, your team wins. " +
         "If you die at night, another player might die instead.",
-
-    actions: {}
+    action: []
 }
 
 export default mayor;

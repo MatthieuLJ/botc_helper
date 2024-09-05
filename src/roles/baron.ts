@@ -6,8 +6,7 @@ const baron: roleType = {
     icon: img,
     type: CharacterType.Minion,
     ability: "There are extra Outsiders in play. [+2 Outsiders]",
-
-    actions: {}
+    action: []
 }
 
 export default baron;

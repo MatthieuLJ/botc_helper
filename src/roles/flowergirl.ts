@@ -7,12 +7,9 @@ const flowergirl: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "Each night*, you learn if a Demon voted today.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "flowergirl"],
-            " learned ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "flowergirl"],
+        " learned ?"]
 };
 
 export default flowergirl;

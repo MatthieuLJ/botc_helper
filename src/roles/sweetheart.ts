@@ -7,12 +7,9 @@ const sweetheart: roleType = {
     icon: img,
     type: CharacterType.Outsider,
     ability: "When you die, 1 player is drunk from now on.",
-
-    actions: {
-        "Die": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "sweetheart"],
-            " died and made ", [ChipType.Player, -1], " drunk"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "sweetheart"],
+        " died and made ", [ChipType.Player, -1], " drunk"]
 };
 
 export default sweetheart;

@@ -14,9 +14,7 @@ interface role {
     icon: string;
     type: CharacterType;
     ability: string;
-    actions: {
-        [action: string]: NoteSegments;
-    }
+    action: NoteSegments;
 }
 
 export type { role as roleType };

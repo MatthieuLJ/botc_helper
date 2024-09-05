@@ -8,12 +8,9 @@ const klutz: roleType = {
     type: CharacterType.Outsider,
     ability: "When you learn that you died, publicly choose 1 alive player: " +
         "if they are evil, your team loses.",
-
-    actions: {
-        "Picks": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "klutz"],
-            " picked ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "klutz"],
+        " picked ", [ChipType.Player, -1]]
 };
 
 export default klutz;

@@ -8,12 +8,9 @@ const witch: roleType = {
     type: CharacterType.Minion,
     ability: "Each night, choose a player: if they nominate tomorrow, they " +
         "die. If just 3 players live, you lose this ability.",
-
-    actions: {
-        "Picks": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "witch"],
-            " cursed ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "witch"],
+        " cursed ", [ChipType.Player, -1]]
 };
 
 export default witch;

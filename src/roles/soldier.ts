@@ -1,4 +1,4 @@
-import { roleType, CharacterType } from '../state/role.ts'
+import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_soldier.png';
 
 const soldier: roleType = {
@@ -6,8 +6,7 @@ const soldier: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "You are safe from the Demon.",
-
-    actions: {}
-}
+    action: []
+};
 
 export default soldier;

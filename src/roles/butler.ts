@@ -8,12 +8,9 @@ const butler: roleType = {
     type: CharacterType.Outsider,
     ability: "Each night, choose a player (not yourself): tomorrow, you may " +
         "only vote if they are voting too.",
-
-    actions: {
-        "ChooseMaster": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "butler"],
-            " chose player ", [ChipType.Player, -1], " as their master "]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "butler"],
+        " chose player ", [ChipType.Player, -1], " as their master "]
 };
 
 export default butler;

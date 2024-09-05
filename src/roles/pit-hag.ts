@@ -8,12 +8,9 @@ const pithag: roleType = {
     type: CharacterType.Minion,
     ability: "Each night*, choose a player & a character they become (if not" +
         " in play). If a Demon is made, deaths tonight are arbitrary.",
-
-    actions: {
-        "Kill": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "pit hag"],
-            " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "pit hag"],
+        " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]]
 };
 
 export default pithag;

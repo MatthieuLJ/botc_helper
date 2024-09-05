@@ -7,12 +7,9 @@ const oracle: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "Each night*, you learn how many dead players are evil.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "oracle"],
-            " learned a ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "oracle"],
+        " learned a ?"]
 };
 
 export default oracle;

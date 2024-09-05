@@ -6,8 +6,7 @@ const saint: roleType = {
     icon: img,
     type: CharacterType.Outsider,
     ability: "If you die by execution, your team loses.",
-
-    actions: {}
+    action: []
 };
 
 export default saint;

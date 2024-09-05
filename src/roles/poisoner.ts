@@ -8,12 +8,9 @@ const poisoner: roleType = {
     type: CharacterType.Minion,
     ability: "Each night, choose a player: they are poisoned tonight and " +
         "tomorrow day.",
-
-    actions: {
-        "Poison": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "poisoner"],
-            " poisoned ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "poisoner"],
+        " poisoned ", [ChipType.Player, -1]]
 };
 
 export default poisoner;

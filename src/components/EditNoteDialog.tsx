@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NoteSegments, ChipSegment, ChipType } from "../state/NotesSlice.tsx";
 import NoteInput from "./NoteInput.tsx";
 
@@ -7,9 +7,10 @@ import { Button, ButtonGroup, Dialog, DialogContent, DialogTitle } from "@mui/ma
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Actionbox from "./Actionbox.tsx";
 import Icon from "@mdi/react";
 import { mdiCancel, mdiCheckBold } from "@mdi/js";
+import Characters from "./Characters.tsx";
+import { ScriptContext, ScriptContextType } from "../state/ScriptContext.tsx";
 
 type EditNoteDialogProps = {
     open: boolean,
@@ -22,6 +23,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
     const [note, setNote] = useState<NoteSegments>([""]);
     const [newChip, setNewChip] = useState<ChipSegment | null>(null);
     const [expandedSection, setExpandedSection] = useState("");
+    const { getRole }: ScriptContextType = useContext(ScriptContext);
 
     function handleClose(_event, reason) {
         if (reason === "backdropClick") {
@@ -81,8 +83,13 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
                     Add a note based on a role
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Actionbox
-                        setNote={setNote} />
+                    <Characters
+                        tapCharacter={function (character: string): void {
+                            const role = getRole(character);
+                            if (role !== null) {
+                                setNote(getRole(character)!.action);
+                            }
+                        }} />
                 </AccordionDetails>
             </Accordion>
             <ButtonGroup>

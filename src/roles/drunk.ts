@@ -7,8 +7,7 @@ const drunk: roleType = {
     type: CharacterType.Outsider,
     ability: "You do not know you are the Drunk. You think you are a Townsfolk"
         + " character, but you are not.",
-
-    actions: {}
+    action: []
 };
 
 export default drunk;

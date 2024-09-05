@@ -7,12 +7,9 @@ const chef: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "You start knowing how many pairs of evil players there are.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "chef"],
-            " learned a ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "chef"],
+        " learned a ?"]
 };
 
 export default chef;

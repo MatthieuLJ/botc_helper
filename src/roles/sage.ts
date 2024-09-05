@@ -7,13 +7,10 @@ const sage: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "If the Demon kills you, you learn that it is 1 of 2 players.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "sage"],
-            " died and learned that the demon is either ", [ChipType.Player, -1],
-            " or ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "sage"],
+        " died and learned that the demon is either ", [ChipType.Player, -1],
+        " or ", [ChipType.Player, -1]]
 };
 
 export default sage;

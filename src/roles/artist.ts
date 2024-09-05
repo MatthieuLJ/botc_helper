@@ -8,12 +8,9 @@ const artist: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Once per game, during the day, privately ask the Storyteller " +
         "any yes/no question.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "artist"],
-            " learn that "]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "artist"],
+        " learn that "]
 };
 
 export default artist;

@@ -8,12 +8,9 @@ const mathematician: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Each night, you learn how many players' abilities worked " +
         "abnormally (since dawn) due to another character's ability.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "mathematician"],
-            " learned a ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "mathematician"],
+        " learned a ?"]
 };
 
 export default mathematician;

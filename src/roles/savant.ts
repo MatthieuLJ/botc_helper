@@ -8,12 +8,9 @@ const savant: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Each day, you may visit the Storyteller to learn 2 things in " +
         "private: 1 is true & 1 is false.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "savant"],
-            " learned that either ? or ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "savant"],
+        " learned that either ? or ?"]
 };
 
 export default savant;

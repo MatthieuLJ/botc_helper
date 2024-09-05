@@ -1,4 +1,4 @@
-import { roleType, CharacterType } from '../state/role.ts'
+import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_mutant.png';
 
 const mutant: roleType = {
@@ -7,8 +7,7 @@ const mutant: roleType = {
     type: CharacterType.Outsider,
     ability: 'If you are "mad" about being an Outsider, you might be ' +
         'executed.',
-
-    actions: {}
-}
+    action: []
+};
 
 export default mutant;

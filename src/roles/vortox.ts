@@ -8,12 +8,9 @@ const vortox: roleType = {
     type: CharacterType.Demon,
     ability: "Each night*, choose a player, they die. Townsfolk abilities " +
         "yield false info. Each day, if no-one is executed, evil wins.",
-
-    actions: {
-        "Kill": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "Vortox"],
-            " killed player ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "Vortox"],
+        " killed player ", [ChipType.Player, -1]]
 };
 
 export default vortox;

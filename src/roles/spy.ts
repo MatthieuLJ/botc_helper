@@ -1,4 +1,4 @@
-import { roleType, CharacterType } from '../state/role.ts'
+import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_spy.png';
 
 const spy: roleType = {
@@ -7,8 +7,7 @@ const spy: roleType = {
     type: CharacterType.Minion,
     ability: "Each night, you see the Grimoire. You might register as good & "
         + "as a Townsfolk or Outsider, even if dead.",
-
-    actions: {}
-}
+    action: []
+};
 
 export default spy;

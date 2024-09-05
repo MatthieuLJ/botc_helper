@@ -8,13 +8,10 @@ const cerenovus: roleType = {
     type: CharacterType.Minion,
     ability: 'Each night, choose a player & a good character: they are "mad"' +
         ' they are this character tomorrow, or might be executed.',
-
-    actions: {
-        "MakeMad": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "cerenovus"],
-            " chose player ", [ChipType.Player, -1], " to be mad as the ",
-            [ChipType.Role, ""]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "cerenovus"],
+        " chose player ", [ChipType.Player, -1], " to be mad as the ",
+        [ChipType.Role, ""]]
 };
 
 export default cerenovus;

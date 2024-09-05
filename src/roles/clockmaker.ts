@@ -8,12 +8,9 @@ const clockmaker: roleType = {
     type: CharacterType.Townsfolk,
     ability: "You start knowing how many steps from the Demon to its nearest" +
         " Minion.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "clockmaker"],
-            " learned a ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "clockmaker"],
+        " learned a ?"]
 };
 
 export default clockmaker;

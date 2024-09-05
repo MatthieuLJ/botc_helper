@@ -8,14 +8,11 @@ const barber: roleType = {
     type: CharacterType.Outsider,
     ability: "If you died today or tonight, the Demon may choose 2 players " +
         "(not another Demon) to swap characters.",
-
-    actions: {
-        "Die": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "barber"],
-            " died, players ", [ChipType.Player, -1], " and ",
-            [ChipType.Player, -1], " swapped roles"
-        ]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "barber"],
+        " died, players ", [ChipType.Player, -1], " and ",
+        [ChipType.Player, -1], " swapped roles"
+    ]
 };
 
 export default barber;

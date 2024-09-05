@@ -8,12 +8,9 @@ const fanggu: roleType = {
     type: CharacterType.Demon,
     ability: "Each night*, choose a player: they die. The 1st Outsider this " +
         "kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
-
-    actions: {
-        "Kill": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "Fang Gu"],
-            " killed player ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "Fang Gu"],
+        " killed player ", [ChipType.Player, -1]]
 };
 
 export default fanggu;

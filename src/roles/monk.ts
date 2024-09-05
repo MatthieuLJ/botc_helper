@@ -8,12 +8,9 @@ const monk: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Each night*, choose a player (not yourself): they are safe from "
         + "the Demon tonight.",
-
-    actions: {
-        "Protect": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "monk"],
-            " protected ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "monk"],
+        " protected ", [ChipType.Player, -1]]
 };
 
 export default monk;

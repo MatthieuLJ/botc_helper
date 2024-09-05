@@ -7,12 +7,9 @@ const town_crier: roleType = {
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "Each night*, you learn if a Minion nominated today.",
-
-    actions: {
-        "Learn": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "town crier"],
-            " learned ?"]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "town crier"],
+        " learned ?"]
 };
 
 export default town_crier;

@@ -8,12 +8,9 @@ const snake_charmer: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Each night, choose an alive player: a chosen Demon swaps " +
         "characters & alignments with you & is then poisoned.",
-
-    actions: {
-        "Picks": ["On", [ChipType.Time, -1], ", player ",
-            [ChipType.Player, -1], " as the ", [ChipType.Role, "snake_charmer"],
-            " picked ", [ChipType.Player, -1]]
-    }
+    action: ["On", [ChipType.Time, -1], ", player ",
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "snake_charmer"],
+        " picked ", [ChipType.Player, -1]]
 };
 
 export default snake_charmer;
