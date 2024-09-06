@@ -7,3 +7,5 @@ The Pandemonium institute. The terms of use are [here](https://bloodontheclockto
 
 A number of other icons used for this projects are coming from
 [pictogrammers](https://pictogrammers.com/) and are released under [this license](https://pictogrammers.com/docs/general/license/)
+
+The clocktower icon (favicon) from from [game-icons.net](https://game-icons.net/1x1/caro-asercion/clock-tower.html)
