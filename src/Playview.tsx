@@ -107,17 +107,16 @@ function Playview(props: PlayviewProps) {
     // hiding roles information
     const [HideInformation, setHideInformation] = useState<boolean>(false);
 
-    return <div className="flex flex-row">
+    return <div className="flex flex-col lg:flex-row landscape:flex-row h-screen w-screen">
         <PlayContextProvider hideInformation={HideInformation}
             playersWithOverlay={playerListCache}
             overlayImage={overlayImage}>
-            <div className="relative basis-2/3 h-screen">
-                <div className="relative aspect-square max-h-full">
+            <div className="relative flex w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 lanscape:w-3/5 justify-center">
+                <div className="relative aspect-square max-w-full">
 
                     <Townsquare
                         tapAction={(index) => { tapPlayer(index); }}
                     />
-
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <div className={currentState === PlayStates.Default ? "" : "hidden"}>
                             <ButtonGroup variant="text" orientation="vertical">
@@ -231,7 +230,9 @@ function Playview(props: PlayviewProps) {
                     />
                 </FormGroup>
             </div>
-            <div className="basis-1/3 max-h-screen"><NoteList /></div>
+            <div className="basis-2/5 overflow-auto lg:max-h-screen landscape:max-h-screen">
+                <NoteList />
+            </div>
             <div className="absolute top left">
                 <Button
                     onClick={handleMenuClick}>

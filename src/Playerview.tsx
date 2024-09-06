@@ -53,42 +53,46 @@ function Playerview() {
     }, [dispatch, playerClaims]);
 
     return <>
-        <div className="flex h-screen flex-col">
-            <div className="flex flex-grow w-full" ref={central_area}>
-                <div className="basis-1/5 h-full content-center">
-                    <Button onClick={() => {
-                        navigate(`/play/player/${prev_index}`);
-                    }}>
-                        Counter-clockwise
-                    </Button>
-                </div>
-                <div className="basis-3/5 content-center">
-                    <div className="flex w-full place-content-center h-fit">
-                        <PlayerToken
-                            index={playerIndex}
-                            token_width={tokenWidth}
-                            tapPlayer={() => { setOpenClaimsDialog(true); }}
-                        />
+        <div className="flex flex-col lg:flex-row landscape:flex-row h-screen  w-screen">
+            <div className="flex flex-col w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 landscape:w-3/5">
+                <div className="flex flex-grow w-full" ref={central_area}>
+                    <div className="basis-1/5 h-full content-center">
+                        <Button onClick={() => {
+                            navigate(`/play/player/${prev_index}`);
+                        }}>
+                            Counter-clockwise
+                        </Button>
                     </div>
+                    <div className="basis-3/5 content-center">
+                        <div className="flex w-full place-content-center h-fit">
+                            <PlayerToken
+                                index={playerIndex}
+                                token_width={tokenWidth}
+                                tapPlayer={() => { setOpenClaimsDialog(true); }}
+                            />
+                        </div>
 
+                    </div>
+                    <div className="basis-1/5 content-center">
+                        <Button onClick={() => {
+                            navigate(`/play/player/${next_index}`);
+                        }}>
+                            Clockwise
+                        </Button>
+                    </div>
                 </div>
-                <div className="basis-1/5 content-center">
-                    <Button onClick={() => {
-                        navigate(`/play/player/${next_index}`);
-                    }}>
-                        Clockwise
+                <div className="h-fit">
+                    <Button id="townsquare" name="townsquare"
+                        onClick={() => { return navigate('/play'); }}>
+                        Back to townsquare
                     </Button>
                 </div>
             </div>
-            <div className="w-full h-1/2">
+
+            <div className="basis-2/5 lg:max-h-screen landscape:max-h-screen">
                 <NoteList filter={notes_filter} />
             </div>
-            <div className="h-fit">
-                <Button id="townsquare" name="townsquare"
-                    onClick={() => { return navigate('/play'); }}>
-                    Back to townsquare
-                </Button>
-            </div>
+
         </div >
 
         <Dialog
