@@ -44,7 +44,9 @@ const top_level_router = createBrowserRouter([
       }
     ]
   }
-]);
+], {
+  basename: "/botc-notes/",
+});
 
 function App() {
   return (

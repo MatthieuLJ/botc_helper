@@ -1,6 +1,7 @@
 {
   "name": "botc-helper",
   "version": "0.1.0",
+  "homepage": "https://matthieulj.github.io/botc-notes/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -24,7 +25,10 @@
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d build -r https://github.com/matthieulj/botc-notes"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +52,7 @@
     "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
     "vite": "^5.4.2"
