@@ -1,3 +1,5 @@
+# Introduction
+
 This project is a React based single page web application built using Vite.
 
 It is meant to help BoTC players taking notes while playing the game in person.
@@ -9,3 +11,12 @@ A number of other icons used for this projects are coming from
 [pictogrammers](https://pictogrammers.com/) and are released under [this license](https://pictogrammers.com/docs/general/license/)
 
 The clocktower icon (favicon) from from [game-icons.net](https://game-icons.net/1x1/caro-asercion/clock-tower.html)
+
+# Maintenance
+
+## Update packages
+
+```
+ncu -u
+npm install
+```
