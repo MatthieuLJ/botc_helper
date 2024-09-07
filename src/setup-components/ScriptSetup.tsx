@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import scripts from '../game_scripts/scripts.ts';
+import available_scripts from '../game_scripts/scripts.ts';
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
-import { addRoles, clearScript, setScript } from "../state/RolesSlice.tsx";
-import { resetPlayers } from "../state/PlayersSlice.tsx";
-import { clearNotes } from "../state/NotesSlice.tsx";
-import { resetTime } from "../state/TimeSlice.tsx";
+import { addRoles, setScript } from "../state/RolesSlice.tsx";
 
 function ScriptSetup() {
     // To choose a script
@@ -27,12 +24,12 @@ function ScriptSetup() {
             return;
         }
         dispatch(setScript({ script: scriptName }));
-        import(/* @vite-ignore */`../game_scripts/${scriptName}`)
+        import(`../game_scripts/${scriptName}.ts`)
             .then(module => {
                 const script = module.default;
                 dispatch(addRoles({ roles: script.slice(1) }));
             })
-            .catch(error => console.log('Error loading script!'));
+            .catch(error => console.log('Error loading script!', error));
     }, [dispatch, scriptName]);
 
     // Check if we need to show the warning when the selection changes
@@ -45,7 +42,7 @@ function ScriptSetup() {
         <select name="scripts" id="script_select" value={scriptSelectValue}
             onChange={selectScript}>
             {scriptName === "" ? <option value="" key="none" /> : null}
-            {scripts.map((s) =>
+            {available_scripts.map((s) =>
                 <option value={s.file} key={s.name}>{s.name}</option>)}
         </select>
     </>;
