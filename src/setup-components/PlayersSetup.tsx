@@ -21,16 +21,17 @@ function PlayersSetup(props) {
     };
 
     return <div className="flex flex-col h-full">
-        <div className="flex-none h-fit">
-            <Counter />
-        </div>
-        <div className="flex w-full flex-grow place-content-center max-h-full">
+
+        <div className="relative flex w-full flex-grow place-content-center max-h-full">
             <div className="aspect-square max-h-full max-w-full">
                 <Townsquare tapAction={function (index: number): void {
                     setChangingName(true);
                     setCurrentIndex(index);
                     setNameField(players[index].name);
                 }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <Counter />
+                </div>
             </div>
         </div>
         <Dialog open={changingName} onClose={handleClose}>
