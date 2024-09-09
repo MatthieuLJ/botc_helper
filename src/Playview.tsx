@@ -107,7 +107,7 @@ function Playview(props: PlayviewProps) {
     // hiding roles information
     const [HideInformation, setHideInformation] = useState<boolean>(false);
 
-    return <div className="flex flex-col lg:flex-row landscape:flex-row h-screen w-screen">
+    return <div className="flex flex-col lg:flex-row landscape:flex-row h-dvh w-screen">
         <PlayContextProvider hideInformation={HideInformation}
             playersWithOverlay={playerListCache}
             overlayImage={overlayImage}>

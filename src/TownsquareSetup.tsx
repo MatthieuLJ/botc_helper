@@ -13,7 +13,7 @@ function TownsquareSetup() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    return <div className="h-screen">
+    return <div className="h-dvh">
         <div className="h-2/3">
             <PlayersSetup />
         </div>

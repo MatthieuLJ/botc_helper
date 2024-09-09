@@ -53,7 +53,7 @@ function Playerview() {
     }, [dispatch, playerClaims]);
 
     return <>
-        <div className="flex flex-col lg:flex-row landscape:flex-row h-screen  w-screen">
+        <div className="flex flex-col lg:flex-row landscape:flex-row h-dvh  w-screen">
             <div className="flex flex-col w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 landscape:w-3/5">
                 <div className="flex flex-grow w-full" ref={central_area}>
                     <div className="basis-1/5 h-full content-center">
