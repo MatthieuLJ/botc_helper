@@ -111,7 +111,7 @@ function Playview(props: PlayviewProps) {
         <PlayContextProvider hideInformation={HideInformation}
             playersWithOverlay={playerListCache}
             overlayImage={overlayImage}>
-            <div className="relative flex w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 lanscape:w-3/5 justify-center">
+            <div className="relative flex w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 landscape:w-3/5 justify-center">
                 <div className="relative aspect-square max-w-full">
 
                     <Townsquare
