@@ -12,6 +12,7 @@ A number of other icons used for this projects are coming from
 
 The clocktower icon (favicon) from from [game-icons.net](https://game-icons.net/1x1/caro-asercion/clock-tower.html)
 
+Halo effect from [Joesalotofthings on DeviantArt](https://www.deviantart.com/joesalotofthings/art/Frosty-Halo-01Stp2Misc01-Special-Effect-PNG-867818893)
 # Maintenance
 
 ## Update packages
