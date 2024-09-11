@@ -30,7 +30,7 @@ function CharactersRow(props: CharactersRowPropType) {
             if (role_info === null) {
                 return <></>;
             }
-            return <div className="grow-0 h-[50px] w-[50px] relative"
+            return <div className="grow-0 h-[4em] w-[4em] relative"
                 onClick={() => {
                     props.tapCharacter(r);
                 }}>

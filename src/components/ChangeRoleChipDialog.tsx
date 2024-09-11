@@ -10,7 +10,7 @@ type ChangeRoleChipDialogProps = {
 export default function ChangeRoleChipDialog(props: ChangeRoleChipDialogProps) {
 
     return <Dialog open={props.open}>
-        <DialogTitle>Choose a player</DialogTitle>
+        <DialogTitle>Choose a role</DialogTitle>
         <Characters
             tapCharacter={(role: string): void => {
                 props.onSelected(role);
