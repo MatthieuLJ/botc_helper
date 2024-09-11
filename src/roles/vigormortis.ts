@@ -10,7 +10,8 @@ const vigormortis: roleType = {
         "their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "Vogormortis"],
-        " killed player ", [ChipType.Player, -1]]
+        " killed player ", [ChipType.Player, -1]],
+    canCauseDeath: true,
 };
 
 export default vigormortis;

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Townsquare from './Townsquare.tsx';
 import NoteList from './components/NoteList.tsx';
 
-import { Button, ButtonGroup, FormControl, FormControlLabel, FormGroup, FormLabel, Menu, MenuItem, Radio, RadioGroup, Switch } from '@mui/material';
+import { Button, FormControl, FormControlLabel, FormGroup, FormLabel, Menu, MenuItem, Select, SelectChangeEvent, Switch } from '@mui/material';
 import { advanceTime } from './state/TimeSlice.tsx';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
 import { addNote, ChipType, NoteSegments } from './state/NotesSlice.tsx';
-import { mdiCheckBold, mdiMenu } from '@mdi/js';
+import { mdiCancel, mdiCheckBold, mdiMenu } from '@mdi/js';
 import Icon from "@mdi/react";
 import { PlayerInfo, setAlive } from './state/PlayersSlice.tsx';
 import { PlayContextProvider } from './state/PlayContext.tsx';
@@ -16,6 +16,8 @@ import handBackRight from './img/hand-back-right.png';
 import handPointingRight from './img/hand-pointing-right.png';
 import coffin from './img/coffin.png';
 import medicalBag from './img/medical-bag.png';
+
+import { ScriptContext, ScriptContextType } from './state/ScriptContext.tsx';
 
 type PlayviewProps = {};
 
@@ -44,6 +46,7 @@ function Playview(props: PlayviewProps) {
         setActionMenuAnchor(e.currentTarget);
     }
 
+    // State and handle when tapping players depending on the state
     const [currentState, setCurrentState] = useState<PlayStates>(PlayStates.Default);
     const [playerListCache, setPlayerListCache] = useState<number[]>([]);
     const [overlayImage, setOverlayImage] = useState<null | string>(null);
@@ -90,14 +93,18 @@ function Playview(props: PlayviewProps) {
         }
     }
 
+    // Current death reason
     const [currentDeathReason, setCurrentDeathReason] = useState<string>("");
+    const { getRole }: ScriptContextType = useContext(ScriptContext);
+    const script_name = useAppSelector(
+        state => state.roles.script);
+    const roles_causing_death: string[] = useAppSelector(
+        state => state.roles.roles.filter(
+            (role) => getRole(role)?.canCauseDeath ?? false)
+    );
 
-    function handleDeathReason(event) {
-        if (event.target.value === currentDeathReason) {
-            setCurrentDeathReason("");
-        } else {
-            setCurrentDeathReason(event.target.value);
-        }
+    function handleDeathReason(event: SelectChangeEvent) {
+        setCurrentDeathReason(event.target.value);
     }
 
     // For the top left game menu
@@ -206,41 +213,66 @@ function Playview(props: PlayviewProps) {
                             <FormControl disabled={playerListCache.length == 0 ||
                                 !players[playerListCache[0]].alive}>
                                 <FormLabel>Death reason:</FormLabel>
-                                <RadioGroup value={currentDeathReason} >
-                                    <FormControlLabel value="execution"
-                                        control={<Radio onClick={handleDeathReason} />}
-                                        label="Execution" />
-                                </RadioGroup>
-                                <Button onClick={() => {
-                                    if (playerListCache.length !== 0) {
-                                        const e: NoteSegments = [
-                                            "On",
-                                            [ChipType.Time, current_time],
-                                            ", ",
-                                            [ChipType.Player, playerListCache[0]],
-                                        ];
-                                        if (players[playerListCache[0]].alive) {
-                                            var death = "died";
-                                            if (currentDeathReason === "execution") {
-                                                death += " by execution.";
-                                            }
-                                            e.push(death);
-                                        } else {
-                                            e.push("came back to life");
-                                        }
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="death_reason"
+                                    value={currentDeathReason}
+                                    label="Death Reason"
+                                    onChange={handleDeathReason}
+                                >
+                                    <MenuItem value={" "}></MenuItem>
+                                    <MenuItem value={"execution"}>Execution</MenuItem>
+                                    {roles_causing_death.map((role) =>
+                                        <MenuItem value={role}>{role}</MenuItem>
+                                    )}
+                                </Select>
 
-                                        dispatch(addNote({ note: e }));
-                                        dispatch(setAlive({
-                                            index: playerListCache[0],
-                                            alive: !players[playerListCache[0]].alive
-                                        }));
+
+                                <div className="flex flex-row">
+                                    <Button onClick={() => {
+                                        if (playerListCache.length !== 0) {
+                                            const e: NoteSegments = [
+                                                "On",
+                                                [ChipType.Time, current_time],
+                                                ", ",
+                                                [ChipType.Player, playerListCache[0]],
+                                            ];
+                                            if (players[playerListCache[0]].alive) {
+                                                var death = "died";
+                                                if (currentDeathReason === "execution") {
+                                                    death += " by execution.";
+                                                    e.push(death);
+                                                } else if (currentDeathReason === "") {
+                                                    e.push(death);
+                                                } else {
+                                                    death += " by the ";
+                                                    e.push(death);
+                                                    e.push([ChipType.Role, currentDeathReason]);
+                                                }
+                                            } else {
+                                                e.push("came back to life");
+                                            }
+
+                                            dispatch(addNote({ note: e }));
+                                            dispatch(setAlive({
+                                                index: playerListCache[0],
+                                                alive: !players[playerListCache[0]].alive
+                                            }));
+                                            setPlayerListCache([]);
+                                            setOverlayImage(null);
+                                        }
+                                        setCurrentState(PlayStates.Default);
+                                    }}>
+                                        <Icon path={mdiCheckBold} size={1} />
+                                    </Button>
+                                    <Button onClick={() => {
                                         setPlayerListCache([]);
                                         setOverlayImage(null);
-                                    }
-                                    setCurrentState(PlayStates.Default);
-                                }}>
-                                    <Icon path={mdiCheckBold} size={1} />
-                                </Button>
+                                        setCurrentState(PlayStates.Default);
+                                    }}>
+                                        <Icon path={mdiCancel} size={1} />
+                                    </Button>
+                                </div>
                             </FormControl>
                         </div>
                     </div>

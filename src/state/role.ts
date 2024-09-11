@@ -15,6 +15,7 @@ interface role {
     type: CharacterType;
     ability: string;
     action: NoteSegments;
+    canCauseDeath?: boolean;
 }
 
 export type { role as roleType };

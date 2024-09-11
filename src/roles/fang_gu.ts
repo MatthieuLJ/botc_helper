@@ -10,7 +10,8 @@ const fanggu: roleType = {
         "kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "Fang Gu"],
-        " killed player ", [ChipType.Player, -1]]
+        " killed player ", [ChipType.Player, -1]],
+    canCauseDeath: true,
 };
 
 export default fanggu;

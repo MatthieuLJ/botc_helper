@@ -10,7 +10,8 @@ const pithag: roleType = {
         " in play). If a Demon is made, deaths tonight are arbitrary.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "pit hag"],
-        " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]]
+        " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]],
+    canCauseDeath: true,
 };
 
 export default pithag;

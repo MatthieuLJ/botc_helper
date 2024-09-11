@@ -10,7 +10,8 @@ const vortox: roleType = {
         "yield false info. Each day, if no-one is executed, evil wins.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "Vortox"],
-        " killed player ", [ChipType.Player, -1]]
+        " killed player ", [ChipType.Player, -1]],
+    canCauseDeath: true,
 };
 
 export default vortox;

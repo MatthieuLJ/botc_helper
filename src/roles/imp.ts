@@ -10,7 +10,8 @@ const imp: roleType = {
         "this way, a Minion becomes the Imp.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "Imp"],
-        " killed player ", [ChipType.Player, -1]]
+        " killed player ", [ChipType.Player, -1]],
+    canCauseDeath: true,
 };
 
 export default imp;

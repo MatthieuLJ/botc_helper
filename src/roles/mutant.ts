@@ -7,7 +7,8 @@ const mutant: roleType = {
     type: CharacterType.Outsider,
     ability: 'If you are "mad" about being an Outsider, you might be ' +
         'executed.',
-    action: []
+    action: [],
+    canCauseDeath: true,
 };
 
 export default mutant;
