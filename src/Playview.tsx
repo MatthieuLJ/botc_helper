@@ -18,6 +18,7 @@ import coffin from './img/coffin.png';
 import medicalBag from './img/medical-bag.png';
 
 import { ScriptContext, ScriptContextType } from './state/ScriptContext.tsx';
+import NoteChip from './components/NoteChip.tsx';
 
 type PlayviewProps = {};
 
@@ -133,8 +134,10 @@ function Playview(props: PlayviewProps) {
                         tapAction={(index) => { tapPlayer(index); }}
                     />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <div className={currentState === PlayStates.Default ? "" : "hidden"}>
-
+                        <div className={currentState === PlayStates.Default ?
+                            "flex flex-col justify-center " :
+                            "hidden"}>
+                            <NoteChip value={[ChipType.Time, current_time]} />
                             <Button onClick={handleActionMenuClick}>Action</Button>
                             <Menu
                                 open={actionMenuOpen}
@@ -149,7 +152,10 @@ function Playview(props: PlayviewProps) {
                                     horizontal: 'center',
                                 }}>
                                 <MenuItem
-                                    onClick={() => { dispatch(advanceTime()); }}>
+                                    onClick={() => {
+                                        dispatch(advanceTime());
+                                        setActionMenuAnchor(null);
+                                    }}>
                                     Move time forward
                                 </MenuItem>
                                 <MenuItem
