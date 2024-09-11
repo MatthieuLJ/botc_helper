@@ -36,6 +36,14 @@ function Playview(props: PlayviewProps) {
         Life_and_Death
     }
 
+    // Menu of actions
+    const [actionMenuAnchor, setActionMenuAnchor] = useState<null | HTMLElement>(null);
+    const actionMenuOpen = Boolean(actionMenuAnchor);
+
+    function handleActionMenuClick(e: React.MouseEvent<HTMLButtonElement>) {
+        setActionMenuAnchor(e.currentTarget);
+    }
+
     const [currentState, setCurrentState] = useState<PlayStates>(PlayStates.Default);
     const [playerListCache, setPlayerListCache] = useState<number[]>([]);
     const [overlayImage, setOverlayImage] = useState<null | string>(null);
@@ -93,11 +101,11 @@ function Playview(props: PlayviewProps) {
     }
 
     // For the top left game menu
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const [topMenuAnchor, setTopMenuAnchor] = React.useState<null | HTMLElement>(null);
+    const topMenuOpen = Boolean(topMenuAnchor);
 
-    function handleMenuClick(e: React.MouseEvent<HTMLButtonElement>) {
-        setAnchorEl(e.currentTarget);
+    function handleTopMenuClick(e: React.MouseEvent<HTMLButtonElement>) {
+        setTopMenuAnchor(e.currentTarget);
     }
 
     function handleResetGame() {
@@ -119,33 +127,49 @@ function Playview(props: PlayviewProps) {
                     />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <div className={currentState === PlayStates.Default ? "" : "hidden"}>
-                            <ButtonGroup variant="text" orientation="vertical">
-                                <Button
+
+                            <Button onClick={handleActionMenuClick}>Action</Button>
+                            <Menu
+                                open={actionMenuOpen}
+                                onClose={() => setActionMenuAnchor(null)}
+                                anchorEl={actionMenuAnchor}
+                                anchorOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'center',
+                                }}>
+                                <MenuItem
                                     onClick={() => { dispatch(advanceTime()); }}>
                                     Move time forward
-                                </Button>
-                                <Button
+                                </MenuItem>
+                                <MenuItem
                                     onClick={() => {
                                         setCurrentState(PlayStates.Nominator);
                                         setOverlayImage(handPointingRight);
+                                        setActionMenuAnchor(null);
                                     }}>
                                     Nomination
-                                </Button>
-                                <Button
+                                </MenuItem>
+                                <MenuItem
                                     onClick={() => {
                                         setCurrentState(PlayStates.Vote);
                                         setOverlayImage(handBackRight);
+                                        setActionMenuAnchor(null);
                                     }}>
                                     Vote
-                                </Button>
-                                <Button
+                                </MenuItem>
+                                <MenuItem
                                     onClick={() => {
                                         setCurrentState(PlayStates.Life_and_Death);
                                         setOverlayImage(coffin);
+                                        setActionMenuAnchor(null);
                                     }}>
                                     Life & Death
-                                </Button>
-                            </ButtonGroup>
+                                </MenuItem>
+                            </Menu>
                         </div>
                         <div className={currentState === PlayStates.Nominator ? "" : "hidden"}>
                             <p>Who nominated?</p>
@@ -235,19 +259,19 @@ function Playview(props: PlayviewProps) {
             </div>
             <div className="absolute top left">
                 <Button
-                    onClick={handleMenuClick}>
+                    onClick={handleTopMenuClick}>
                     <Icon path={mdiMenu} size={1} />
                 </Button>
                 <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={() => { setAnchorEl(null); }}
+                    anchorEl={topMenuAnchor}
+                    open={topMenuOpen}
+                    onClose={() => { setTopMenuAnchor(null); }}
                 >
                     <MenuItem onClick={handleResetGame}>Reset game</MenuItem>
                 </Menu>
             </div>
-        </PlayContextProvider>
-    </div>;
+        </PlayContextProvider >
+    </div >;
 }
 
 export default Playview;
