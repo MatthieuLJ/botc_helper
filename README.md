@@ -13,6 +13,11 @@ A number of other icons used for this projects are coming from
 The clocktower icon (favicon) from from [game-icons.net](https://game-icons.net/1x1/caro-asercion/clock-tower.html)
 
 Halo effect from [Joesalotofthings on DeviantArt](https://www.deviantart.com/joesalotofthings/art/Frosty-Halo-01Stp2Misc01-Special-Effect-PNG-867818893)
+
+This project uses [rafgraph/spa-github-pages](https://github.com/rafgraph/spa-github-pages)
+to support reloading any URL on the site and make sure github supports a single
+page application 
+
 # Maintenance
 
 ## Update packages
