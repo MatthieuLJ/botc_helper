@@ -266,6 +266,7 @@ function Playview(props: PlayviewProps) {
                                             }));
                                             setPlayerListCache([]);
                                             setOverlayImage(null);
+                                            setCurrentDeathReason("");
                                         }
                                         setCurrentState(PlayStates.Default);
                                     }}>

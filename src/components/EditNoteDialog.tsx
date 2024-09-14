@@ -29,6 +29,7 @@ export default function EditNoteDialog(props: EditNoteDialogProps) {
         if (reason === "backdropClick") {
             return;
         }
+        setNewChip(null);
         onClose(note);
         if (reason !== "cancel") {
             setNote(initialContent);
