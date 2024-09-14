@@ -64,7 +64,7 @@ function Characters(props: CharactersPropType) {
         role_infos[r].type === CharacterType.Townsfolk);
     const count_townsfolk = TownsFolkRoles.length;
     const first_row_count = Math.ceil(count_townsfolk / 2);
-    const TownsFolkRoles1 = TownsFolkRoles.slice(0, first_row_count - 1);
+    const TownsFolkRoles1 = TownsFolkRoles.slice(0, first_row_count);
     const TownsFolkRoles2 = TownsFolkRoles.slice(first_row_count);
     const OutsiderRoles = Object.keys(role_infos).filter((r) =>
         role_infos[r].type === CharacterType.Outsider);
