@@ -10,7 +10,7 @@ const klutz: roleType = {
         "if they are evil, your team loses.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "klutz"],
-        " picked ", [ChipType.Player, -1]]
+        " picked ", [ChipType.Player, -1], " "]
 };
 
 export default klutz;

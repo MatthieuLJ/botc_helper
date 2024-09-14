@@ -10,7 +10,7 @@ const undertaker: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "undertaker"],
         " learned that ", [ChipType.Player, -1], " is ",
-        [ChipType.Role, ""],]
+        [ChipType.Role, ""]," "]
 };
 
 export default undertaker;

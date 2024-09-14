@@ -10,7 +10,7 @@ const poisoner: roleType = {
         "tomorrow day.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "poisoner"],
-        " poisoned ", [ChipType.Player, -1]]
+        " poisoned ", [ChipType.Player, -1], " "]
 };
 
 export default poisoner;

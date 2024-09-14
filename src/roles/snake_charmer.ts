@@ -10,7 +10,7 @@ const snake_charmer: roleType = {
         "characters & alignments with you & is then poisoned.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "snake_charmer"],
-        " picked ", [ChipType.Player, -1]]
+        " picked ", [ChipType.Player, -1], " "]
 };
 
 export default snake_charmer;

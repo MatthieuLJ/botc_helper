@@ -10,7 +10,7 @@ const slayer: roleType = {
         + "they are executed immediately.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "slayer"],
-        " shot ", [ChipType.Player, -1]],
+        " shot ", [ChipType.Player, -1], " "],
     canCauseDeath: true,
 };
 

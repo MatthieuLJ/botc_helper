@@ -11,7 +11,7 @@ const ravenkeeper: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "ravenkeeper"],
         " died and learned that ", [ChipType.Player, -1], " is the ",
-        [ChipType.Role, ""]]
+        [ChipType.Role, ""], " "]
 };
 
 export default ravenkeeper;

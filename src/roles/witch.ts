@@ -10,7 +10,7 @@ const witch: roleType = {
         "die. If just 3 players live, you lose this ability.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "witch"],
-        " cursed ", [ChipType.Player, -1]],
+        " cursed ", [ChipType.Player, -1], " "],
     canCauseDeath: true,
 };
 

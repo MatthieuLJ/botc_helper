@@ -11,7 +11,7 @@ const cerenovus: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "cerenovus"],
         " chose player ", [ChipType.Player, -1], " to be mad as the ",
-        [ChipType.Role, ""]],
+        [ChipType.Role, ""], " "],
     canCauseDeath: true,
 };
 

@@ -3,7 +3,7 @@ import { roleType, CharacterType } from '../state/role.ts';
 import img from './images/icon_seamstress.png';
 
 const seamstress: roleType = {
-    name: "Washerwoman",
+    name: "Seamstress",
     icon: img,
     type: CharacterType.Townsfolk,
     ability: "Once per game, at night, choose 2 players (not yourself): you " +

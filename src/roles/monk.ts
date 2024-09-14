@@ -10,7 +10,7 @@ const monk: roleType = {
         + "the Demon tonight.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "monk"],
-        " protected ", [ChipType.Player, -1]]
+        " protected ", [ChipType.Player, -1], " "]
 };
 
 export default monk;

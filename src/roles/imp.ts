@@ -9,7 +9,7 @@ const imp: roleType = {
     ability: "Each night*, choose a player: they die. If you kill yourself " +
         "this way, a Minion becomes the Imp.",
     action: ["On", [ChipType.Time, -1], ", player ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, "Imp"],
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "imp"],
         " killed player ", [ChipType.Player, -1]],
     canCauseDeath: true,
 };

@@ -9,8 +9,8 @@ const vortox: roleType = {
     ability: "Each night*, choose a player, they die. Townsfolk abilities " +
         "yield false info. Each day, if no-one is executed, evil wins.",
     action: ["On", [ChipType.Time, -1], ", player ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, "Vortox"],
-        " killed player ", [ChipType.Player, -1]],
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "vortox"],
+        " killed player ", [ChipType.Player, -1], " "],
     canCauseDeath: true,
 };
 

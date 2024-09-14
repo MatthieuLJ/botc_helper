@@ -8,7 +8,7 @@ const town_crier: roleType = {
     type: CharacterType.Townsfolk,
     ability: "Each night*, you learn if a Minion nominated today.",
     action: ["On", [ChipType.Time, -1], ", player ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, "town crier"],
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "town_crier"],
         " learned ?"]
 };
 

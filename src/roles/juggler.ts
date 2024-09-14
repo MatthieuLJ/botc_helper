@@ -15,7 +15,7 @@ const juggler: roleType = {
         [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " and ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, ""]]
+        [ChipType.Player, -1], " as the ", [ChipType.Role, ""], " "]
 };
 
 export default juggler;

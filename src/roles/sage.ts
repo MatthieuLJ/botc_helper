@@ -10,7 +10,7 @@ const sage: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "sage"],
         " died and learned that the demon is either ", [ChipType.Player, -1],
-        " or ", [ChipType.Player, -1]]
+        " or ", [ChipType.Player, -1], " "]
 };
 
 export default sage;

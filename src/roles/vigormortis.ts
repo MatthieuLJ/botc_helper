@@ -9,8 +9,8 @@ const vigormortis: roleType = {
     ability: "Each night*, choose a player: they die. Minions you kill keep " +
         "their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
     action: ["On", [ChipType.Time, -1], ", player ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, "Vogormortis"],
-        " killed player ", [ChipType.Player, -1]],
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "vigormortis"],
+        " killed player ", [ChipType.Player, -1], " "],
     canCauseDeath: true,
 };
 

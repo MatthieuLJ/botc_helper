@@ -10,7 +10,7 @@ const investigator: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "investigator"],
         " learned that either ", [ChipType.Player, -1], " or ",
-        [ChipType.Player, -1], " is the ", [ChipType.Role, ""]]
+        [ChipType.Player, -1], " is the ", [ChipType.Role, ""], " "]
 };
 
 export default investigator;

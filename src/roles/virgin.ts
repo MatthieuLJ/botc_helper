@@ -10,7 +10,7 @@ const virgin: roleType = {
         + " they are executed immediately.",
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "virgin"],
-        " was nominated by ", [ChipType.Player, -1]],
+        " was nominated by ", [ChipType.Player, -1], " "],
     canCauseDeath: true,
 };
 

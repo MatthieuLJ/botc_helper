@@ -11,7 +11,7 @@ const dreamer: roleType = {
     action: ["On", [ChipType.Time, -1], ", player ",
         [ChipType.Player, -1], " as the ", [ChipType.Role, "dreamer"],
         " learned that player ", [ChipType.Player, -1], " is either ",
-        [ChipType.Role, ""], " or ", [ChipType.Role, ""]]
+        [ChipType.Role, ""], " or ", [ChipType.Role, ""], " "]
 };
 
 export default dreamer;

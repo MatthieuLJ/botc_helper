@@ -9,8 +9,8 @@ const pithag: roleType = {
     ability: "Each night*, choose a player & a character they become (if not" +
         " in play). If a Demon is made, deaths tonight are arbitrary.",
     action: ["On", [ChipType.Time, -1], ", player ",
-        [ChipType.Player, -1], " as the ", [ChipType.Role, "pit hag"],
-        " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""]],
+        [ChipType.Player, -1], " as the ", [ChipType.Role, "pithag"],
+        " changed ", [ChipType.Player, -1], " into ", [ChipType.Role, ""], " "],
     canCauseDeath: true,
 };
 
