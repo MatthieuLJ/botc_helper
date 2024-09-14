@@ -10,12 +10,12 @@ type ChangeTimeChipDialogProps = {
 export default function ChangeTimeChipDialog(props: ChangeTimeChipDialogProps) {
     const current_time: number = useAppSelector(
         state => state.time.time);
-    const [timeOfDay, setTimeOfDay] = useState("night");
+    const [timeOfDay, setTimeOfDay] = useState(current_time % 2 === 0 ? "night" : "day");
     const [dayNumber, setDayNumber] = useState(current_time + 1);
 
     return <Dialog open={props.open}>
         <DialogTitle>Choose a player</DialogTitle>
-        <Box sx={{p:5}}>
+        <Box sx={{ p: 5 }}>
             <Select
                 value={timeOfDay}
                 label="Time of Day"
@@ -26,7 +26,7 @@ export default function ChangeTimeChipDialog(props: ChangeTimeChipDialogProps) {
             <Slider
                 value={dayNumber}
                 min={1}
-                max={current_time + 1}
+                max={Math.floor((current_time + 1) / 2)}
                 defaultValue={current_time + 1}
                 marks
                 valueLabelDisplay="on"
