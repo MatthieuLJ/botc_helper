@@ -4,7 +4,7 @@ import Counter from "../components/Counter.tsx";
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
 import { setName } from '../state/PlayersSlice.tsx';
 import { Button, Dialog, TextField } from "@mui/material";
-import Townsquare from "../Townsquare.tsx";
+import Townsquare from "../components/Townsquare.tsx";
 
 function PlayersSetup() {
     const players = useAppSelector(state => state.players.players);

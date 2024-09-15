@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TownsquareSetup from './TownsquareSetup.tsx';
+import TownsquareSetup from './setup-components/TownsquareSetup.tsx';
 import Playview from './Playview.tsx';
 import GameState from './state/GameState.tsx';
 import Playerview from './Playerview.tsx';

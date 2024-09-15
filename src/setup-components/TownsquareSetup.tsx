@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { PlayersSetup } from './setup-components/PlayersSetup.tsx';
-import { ScriptSetup } from './setup-components/ScriptSetup.tsx';
-import Characters from './components/Characters.tsx';
+import { PlayersSetup } from './PlayersSetup.tsx';
+import { ScriptSetup } from './ScriptSetup.tsx';
+import Characters from '../components/Characters.tsx';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from './state/hooks.ts';
-import { advanceTime } from './state/TimeSlice.tsx';
+import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
+import { advanceTime } from '../state/TimeSlice.tsx';
 import { Button, Dialog } from '@mui/material';
 
 function TownsquareSetup() {

@@ -1,5 +1,5 @@
 import React from "react";
-import Townsquare from "../Townsquare.tsx";
+import Townsquare from "./Townsquare.tsx";
 import { Box, Dialog, DialogTitle } from "@mui/material";
 
 type ChangePlayerChipDialogProps = {

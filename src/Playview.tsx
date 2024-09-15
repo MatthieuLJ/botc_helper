@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import Townsquare from './Townsquare.tsx';
+import Townsquare from './components/Townsquare.tsx';
 import NoteList from './components/NoteList.tsx';
 
 import { Button, FormControl, FormControlLabel, FormGroup, FormLabel, Menu, MenuItem, Select, SelectChangeEvent, Switch } from '@mui/material';
