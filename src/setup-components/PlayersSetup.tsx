@@ -21,7 +21,7 @@ function PlayersSetup() {
         setRedrawTownsquare(!redrawTownsquare);
     };
     const [redrawTownsquare, setRedrawTownsquare] = useState(false);
-    const input = useRef(null);
+    const input = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
