@@ -4,14 +4,15 @@ import { useAppSelector } from '../state/hooks.ts';
 
 type TownsquareProps = {
     tapAction: (index: number) => void;
-    redraw ?: boolean;
+    redraw?: boolean;
+    canDrag?: boolean;
 };
 
 function Townsquare(props: TownsquareProps) {
     const players = useAppSelector(state => state.players.players);
     const circle = useRef<HTMLDivElement | null>(null);
     const [tokenWidth, setTokenWidth] = useState(0);
-
+    
     function onResize() {
         const towncircle = circle.current;
         if (towncircle === null) {
@@ -40,16 +41,22 @@ function Townsquare(props: TownsquareProps) {
 
     useEffect(() => {
         onResize();
-    }, [players.length, props.redraw]);
+    }, [players, props.redraw]);
 
     return <div className="relative top w-full h-full" ref={circle}>
-        {players.map((p, index: number) =>
-            <div key={p.name + index} className="absolute top-1/2 left-1/2">
-                <PlayerToken index={index}
-                    tapPlayer={() => { props.tapAction(index); }}
-                    token_width={tokenWidth} />
-            </div>)}
+        
+            {players.map((p, index: number) =>
+                <div key={p.name + index} className="absolute top-1/2 left-1/2">
+                    <PlayerToken index={index}
+                        tapPlayer={() => { props.tapAction(index); }}
+                        token_width={tokenWidth} 
+                        canDrag={props?.canDrag}/>
+                </div>)}
     </div>;
+}
+
+export const draggableItemTypes = {
+    TOKEN: 'token'
 }
 
 export default Townsquare;
