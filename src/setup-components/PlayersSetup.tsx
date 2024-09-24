@@ -18,9 +18,7 @@ function PlayersSetup() {
     const acceptNewName = () => {
         dispatch(setName({ index: currentIndex, name: nameField }));
         setChangingName(false);
-        setRedrawTownsquare(!redrawTownsquare);
     };
-    const [redrawTownsquare, setRedrawTownsquare] = useState(false);
     const input = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -41,7 +39,6 @@ function PlayersSetup() {
                     setCurrentIndex(index);
                     setNameField(players[index].name);
                 }}
-                    redraw={redrawTownsquare}
                     canDrag={true} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <Counter />

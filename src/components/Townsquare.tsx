@@ -4,7 +4,6 @@ import { useAppSelector } from '../state/hooks.ts';
 
 type TownsquareProps = {
     tapAction: (index: number) => void;
-    redraw?: boolean;
     canDrag?: boolean;
 };
 
@@ -41,10 +40,9 @@ function Townsquare(props: TownsquareProps) {
 
     useEffect(() => {
         onResize();
-    }, [players, props.redraw]);
+    }, [players]);
 
     return <div className="relative top w-full h-full" ref={circle}>
-        
             {players.map((p, index: number) =>
                 <div key={p.name + index} className="absolute top-1/2 left-1/2">
                     <PlayerToken index={index}
