@@ -17,12 +17,14 @@ function Counter(props: CounterProps) {
         dispatch(setCount({ count: numPlayers }));
     }, [dispatch, numPlayers]);
 
-    return <ButtonGroup>
-        <Button onClick={() => setNumPlayers(numPlayers - 1)}
-            disabled={numPlayers <= MINIMUM_PLAYER_NUMBER}>-</Button>
-        <Button onClick={() => setNumPlayers(numPlayers + 1)}
-            disabled={numPlayers >= MAXIMUM_PLAYER_NUMBER}>+</Button>
-    </ButtonGroup>;
+    return <div id="counter">
+        <ButtonGroup>
+            <Button onClick={() => setNumPlayers(numPlayers - 1)}
+                disabled={numPlayers <= MINIMUM_PLAYER_NUMBER}>-</Button>
+            <Button onClick={() => setNumPlayers(numPlayers + 1)}
+                disabled={numPlayers >= MAXIMUM_PLAYER_NUMBER}>+</Button>
+        </ButtonGroup>
+    </div>;
 }
 
 export default Counter;

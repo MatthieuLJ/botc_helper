@@ -101,6 +101,7 @@ function PlayerToken(props: PlayerTokenProps) {
         ref={drag_ref}>
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
+                <div className="token">
                 {player_info.claims.length === 0 || hideInformation || overlayImage ?
                     <div className="relative">
                         <img alt="No claim"
@@ -142,6 +143,7 @@ function PlayerToken(props: PlayerTokenProps) {
                         })}
                     </AvatarGroup>
                 }
+                </div>
             </div>
             <div>{player_info.name}</div>
         </div>

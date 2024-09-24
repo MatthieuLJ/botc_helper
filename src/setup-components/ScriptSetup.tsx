@@ -38,14 +38,15 @@ function ScriptSetup() {
         setScriptName(e.target.value);
     };
 
-    return <><label htmlFor="script_select">Choose a script</label>
+    return <div id="script_setup">
+        <label htmlFor="script_select">Choose a script</label>
         <select name="scripts" id="script_select" value={scriptSelectValue}
             onChange={selectScript}>
             {scriptName === "" ? <option value="" key="none" /> : null}
             {available_scripts.map((s) =>
                 <option value={s.file} key={s.name}>{s.name}</option>)}
         </select>
-    </>;
+    </div>;
 }
 
 export { ScriptSetup };
