@@ -9,8 +9,6 @@ import CheckForPlay from './routing/CheckForPlay.tsx';
 import { Provider } from 'react-redux';
 import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { DndProvider } from 'react-dnd-multi-backend'
-import { HTML5toTouch } from 'rdndmb-html5-to-touch'
 
 
 const top_level_router = createBrowserRouter([
@@ -55,14 +53,12 @@ function App() {
   return (
     <React.StrictMode>
       <Provider store={GameState}>
-        <DndProvider options={HTML5toTouch} >
-          <ScriptProvider>
-            <div className="App">
-              <RouterProvider router={top_level_router}>
-              </RouterProvider>
-            </div>
-          </ScriptProvider>
-        </DndProvider>
+        <ScriptProvider>
+          <div className="App">
+            <RouterProvider router={top_level_router}>
+            </RouterProvider>
+          </div>
+        </ScriptProvider>
       </Provider>
     </React.StrictMode>
   );

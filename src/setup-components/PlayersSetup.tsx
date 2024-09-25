@@ -6,6 +6,8 @@ import { setName } from '../state/PlayersSlice.tsx';
 import { Button, Dialog, TextField } from "@mui/material";
 import Townsquare from "../components/Townsquare.tsx";
 
+
+
 function PlayersSetup() {
     const players = useAppSelector(state => state.players.players);
     const dispatch = useAppDispatch();
@@ -39,10 +41,11 @@ function PlayersSetup() {
                     setCurrentIndex(index);
                     setNameField(players[index].name);
                 }}
-                    canDrag={true} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <Counter />
-                </div>
+                    canDrag={true}>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <Counter />
+                    </div>
+                </Townsquare>
             </div>
         </div>
         <Dialog open={changingName} onClose={handleClose} disableRestoreFocus>

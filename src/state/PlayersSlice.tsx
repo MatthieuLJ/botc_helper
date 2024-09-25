@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { WritableDraft } from 'immer';
 
 export type PlayerInfo = {
     name: string,
@@ -18,6 +17,43 @@ const initialState: PlayersState = {
         { name: "New Player", alive: true, claims: [] },
     ]
 };
+
+export function rotate_array(array: any[], from: number, to: number) {
+    const len = array.length;
+    if (to == from)
+        return;
+
+    // clockwise means the one token moves clockwise
+    // all tokens in between move in the opposite
+    // direction
+    const clockwise = (len + from - to) % len > len / 2;
+
+    if (clockwise) {
+        // reverse to treat all cases as one and reverse back at the end
+        array.reverse();
+        from = len - 1 - from;
+        to = len - 1 - to;
+    }
+
+    if (from < to) {
+        // the end of the array needs to shift to the start
+        array.splice(0, 0, array.pop());
+        from++;
+        to++;
+    }
+
+    const item = array[from];
+    array.splice(from, 1);
+    if (to > from) {
+        to = (len + to - 1) % len;
+    }
+    array.splice(to, 0, item);
+
+    if (clockwise) {
+        // reverse back
+        array.reverse();
+    }
+}
 
 export const PlayersSlice = createSlice({
     name: 'players',
@@ -46,44 +82,8 @@ export const PlayersSlice = createSlice({
             state.players[action.payload.index].alive = action.payload.alive;
         },
         movePlayer: (state, action) => {
-            const num_players = state.players.length;
-            let from_index = action.payload.from;
-            let to_index = action.payload.to;
-            if (to_index == from_index)
-                return;
+            rotate_array(state.players, action.payload.from, action.payload.to);
 
-            // clockwise means the one token moves clockwise
-            // all tokens in between move in the opposite
-            // direction
-            const clockwise = (num_players + from_index - to_index) % num_players
-                > num_players / 2;
-
-            if (clockwise) {
-                // reverse to treat all cases as one and reverse back at the end
-                state.players.reverse();
-                from_index = num_players - 1 - from_index;
-                to_index = num_players - 1 - to_index;
-            }
-
-            if (from_index < to_index) {
-                // the end of the array needs to shift to the start
-                state.players.splice(0, 0,
-                    state.players.pop() as WritableDraft<PlayerInfo>);
-                from_index++;
-                to_index++;
-            }
-
-            const moving_player: PlayerInfo = state.players[from_index];
-            state.players.splice(from_index, 1);
-            if (to_index > from_index) {
-                to_index = (num_players + to_index - 1) % num_players;
-            }
-            state.players.splice(to_index, 0, moving_player);
-
-            if (clockwise) {
-                // reverse back
-                state.players.reverse();
-            }
 
         },
         resetPlayers: (state) => {

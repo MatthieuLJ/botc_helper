@@ -1,14 +1,12 @@
 import React, { useContext, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
+import { useAppSelector } from '../state/hooks.ts';
 import { Avatar, AvatarGroup } from '@mui/material';
 import { ScriptContext, ScriptContextType } from '../state/ScriptContext.tsx';
 
 import token_background from '../img/token_background.png';
 import shroud from '../img/shroud.png';
 import { PlayContext, PlayContextType } from '../state/PlayContext.tsx';
-import { draggableItemTypes } from './Townsquare.tsx';
-import { useDrag, useDrop } from 'react-dnd';
-import { movePlayer } from '../state/PlayersSlice.tsx';
+import { useSortable } from '@dnd-kit/sortable';
 
 type PlayerTokenProps = {
     index: number,
@@ -22,40 +20,12 @@ function PlayerToken(props: PlayerTokenProps) {
     const { getRole }: ScriptContextType = useContext(ScriptContext);
     const { hideInformation, playersWithOverlay, overlayImage }: PlayContextType = useContext(PlayContext);
 
-    const dispatch = useAppDispatch();
-
-    const drag_ref = useRef<HTMLDivElement>(null);
-    const [{ isDragging }, drag] = useDrag(() => ({
-        type: draggableItemTypes.TOKEN,
-        collect: (monitor) => ({
-            isDragging: !!monitor.isDragging()
-        }),
-        canDrag: () => { return props?.canDrag !== undefined ? props.canDrag : false; },
-        item: () => { return { index: props.index }; }
-    }));
-    const [, drop] = useDrop({
-        accept: draggableItemTypes.TOKEN,
-        hover(item: { index; }, monitor) {
-            if (!drag_ref.current) {
-                return;
-            }
-            const hoverIndex = props.index;
-            const dragIndex = item.index;
-            if (hoverIndex === dragIndex) {
-                return;
-            }
-            dispatch(movePlayer({ from: dragIndex, to: hoverIndex }));
-            item.index = hoverIndex;
-        }
-
-    });
-
     const token_style = {
         background: `url(${token_background})`,
         backgroundSize: "cover",
     };
 
-    var token_sx = { sx: {} };
+    let token_sx = { sx: {} };
     const num_claims_capped = hideInformation ? 1 : Math.min(5, Math.max(1, player_info.claims.length));
     if (props.token_width) {
         token_sx = {
@@ -92,13 +62,23 @@ function PlayerToken(props: PlayerTokenProps) {
         };
     }
 
-    drag(drop(drag_ref));
-
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+        id: props.index+1,
+        data: {
+            index: props.index
+        }
+    });
+    const dragged_style = transform ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        zIndex: '100000',
+        transition
+    } : undefined;
+    
     return <div
-        className="flex h-fit"
+        className="flex h-fit touch-none"
         key={props.index}
         onClick={() => props.tapPlayer(props.index)}
-        ref={drag_ref}>
+        ref={setNodeRef} style={dragged_style} {...listeners} {...attributes} > 
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
                 <div className="token">
