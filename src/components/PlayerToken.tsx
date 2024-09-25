@@ -14,7 +14,7 @@ type PlayerTokenProps = {
     index: number,
     token_width?: number,
     tapPlayer: (index: number) => void,
-    canDrag?: boolean
+    canDrag?: boolean;
 };
 
 function PlayerToken(props: PlayerTokenProps) {
@@ -35,16 +35,16 @@ function PlayerToken(props: PlayerTokenProps) {
     }));
     const [, drop] = useDrop({
         accept: draggableItemTypes.TOKEN,
-        hover(item: {index}, monitor) {
+        hover(item: { index; }, monitor) {
             if (!drag_ref.current) {
                 return;
             }
             const hoverIndex = props.index;
             const dragIndex = item.index;
             if (hoverIndex === dragIndex) {
-                return
+                return;
             }
-            dispatch(movePlayer({from:dragIndex, to:hoverIndex}));
+            dispatch(movePlayer({ from: dragIndex, to: hoverIndex }));
             item.index = hoverIndex;
         }
 
@@ -102,47 +102,47 @@ function PlayerToken(props: PlayerTokenProps) {
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
                 <div className="token">
-                {player_info.claims.length === 0 || hideInformation || overlayImage ?
-                    <div className="relative">
-                        <img alt="No claim"
-                            src={token_background}
-                            height={props.token_width}
-                            width={props.token_width} />
-                        {((overlayImage !== null) && playersWithOverlay.includes(props.index)) ?
-                            <img src={overlayImage as string}
+                    {player_info.claims.length === 0 || hideInformation || overlayImage ?
+                        <div className="relative">
+                            <img alt="No claim"
+                                src={token_background}
                                 height={props.token_width}
-                                width={props.token_width}
-                                className="absolute top-0 left-0"
-                            /> : <></>}
-                        {(!player_info.alive ?
-                            <img src={shroud}
-                                height={props.token_width}
-                                width={props.token_width}
-                                className="absolute top-0 left-0" />
-                            : <></>
-                        )}
-                    </div>
-                    :
-                    <AvatarGroup
-                        max={5}
-                        className="justify-center"
-                        {...token_sx}>
+                                width={props.token_width} />
+                            {((overlayImage !== null) && playersWithOverlay.includes(props.index)) ?
+                                <img src={overlayImage as string}
+                                    height={props.token_width}
+                                    width={props.token_width}
+                                    className="absolute top-0 left-0"
+                                /> : <></>}
+                            {(!player_info.alive ?
+                                <img src={shroud}
+                                    height={props.token_width}
+                                    width={props.token_width}
+                                    className="absolute top-0 left-0" />
+                                : <></>
+                            )}
+                        </div>
+                        :
+                        <AvatarGroup
+                            max={5}
+                            className="justify-center"
+                            {...token_sx}>
 
-                        {player_info.claims.map((c: string) => {
-                            const role_info = getRole(c);
-                            return <Avatar
-                                alt={c}
-                                key={props.index + c}
-                                src={role_info?.icon}
-                                slotProps={{
-                                    img: {
-                                        style: { ...token_style }
-                                    },
-                                }}
-                            />;
-                        })}
-                    </AvatarGroup>
-                }
+                            {player_info.claims.map((c: string) => {
+                                const role_info = getRole(c);
+                                return <Avatar
+                                    alt={c}
+                                    key={props.index + c}
+                                    src={role_info?.icon}
+                                    slotProps={{
+                                        img: {
+                                            style: { ...token_style }
+                                        },
+                                    }}
+                                />;
+                            })}
+                        </AvatarGroup>
+                    }
                 </div>
             </div>
             <div>{player_info.name}</div>
