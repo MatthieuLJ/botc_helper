@@ -117,12 +117,10 @@ function Townsquare(props: TownsquareProps) {
     );
 
     function onTokenDragStart({ active }: DragStartEvent) {
-        console.log("Start drag !", active.data.current?.index);
         setDragId(active.data.current?.index);
     }
 
     function onTokenDragEnd({ active, over }: DragEndEvent) {
-        console.log("On DragEnd,", active.id, over?.data.current?.index);
         if (over)
             dispatch(movePlayer({ from: active.data.current?.index, to: over.data.current?.index }));
         setDragId(-1);
@@ -134,11 +132,6 @@ function Townsquare(props: TownsquareProps) {
         height: tokenWidth,
         width: tokenWidth
     };
-    //<div style={empty_circle_style}></div>
-
-    // touch-action https://docs.dndkit.com/api-documentation/draggable#recommendations
-
-    console.log("redrawing?");
 
     return <DndContext
         sensors={sensors}

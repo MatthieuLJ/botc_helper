@@ -67,7 +67,8 @@ function PlayerToken(props: PlayerTokenProps) {
         id: props.canDrag ? props.index + 1 : 0,
         data: {
             index: props.index
-        }
+        },
+        disabled: !props?.canDrag
     });
     const dragged_style = transform ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
