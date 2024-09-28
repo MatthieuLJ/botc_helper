@@ -67,7 +67,7 @@ function Playerview() {
                         <div className="flex w-full place-content-center h-fit">
                             <PlayerToken
                                 index={playerIndex}
-                                token_width={tokenWidth}
+                                tokenWidth={tokenWidth}
                                 tapPlayer={() => { setOpenClaimsDialog(true); }}
                             />
                         </div>

@@ -10,7 +10,7 @@ import { useSortable } from '@dnd-kit/sortable';
 
 type PlayerTokenProps = {
     index: number,
-    token_width?: number,
+    tokenWidth?: number,
     tapPlayer: (index: number) => void,
     canDrag?: boolean;
 };
@@ -18,7 +18,8 @@ type PlayerTokenProps = {
 function PlayerToken(props: PlayerTokenProps) {
     const player_info = useAppSelector(state => state.players.players[props.index]);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
-    const { hideInformation, playersWithOverlay, overlayImage }: PlayContextType = useContext(PlayContext);
+    const { hideInformation, playersWithOverlay, overlayImage }: PlayContextType
+        = useContext(PlayContext);
 
     const token_style = {
         background: `url(${token_background})`,
@@ -27,14 +28,14 @@ function PlayerToken(props: PlayerTokenProps) {
 
     let token_sx = { sx: {} };
     const num_claims_capped = hideInformation ? 1 : Math.min(5, Math.max(1, player_info.claims.length));
-    if (props.token_width) {
+    if (props.tokenWidth) {
         token_sx = {
             sx: {
                 ...token_sx['sx'],
                 '& .MuiAvatar-root': {
-                    width: (props.token_width * (1 + num_claims_capped / 10)) /
+                    width: (props.tokenWidth * (1 + num_claims_capped / 10)) /
                         num_claims_capped,
-                    height: (props.token_width * (1 + num_claims_capped / 10)) /
+                    height: (props.tokenWidth * (1 + num_claims_capped / 10)) /
                         num_claims_capped,
                     position: 'relative',
                 }
@@ -63,7 +64,7 @@ function PlayerToken(props: PlayerTokenProps) {
     }
 
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-        id: props.index+1,
+        id: props.canDrag ? props.index + 1 : 0,
         data: {
             index: props.index
         }
@@ -73,12 +74,12 @@ function PlayerToken(props: PlayerTokenProps) {
         zIndex: '100000',
         transition
     } : undefined;
-    
+
     return <div
         className="flex h-fit touch-none"
         key={props.index}
         onClick={() => props.tapPlayer(props.index)}
-        ref={setNodeRef} style={dragged_style} {...listeners} {...attributes} > 
+        ref={setNodeRef} style={dragged_style} {...listeners} {...attributes} >
         <div className="w-fit min-w-10 content-between justify-center">
             <div className="flex-1">
                 <div className="token">
@@ -86,20 +87,21 @@ function PlayerToken(props: PlayerTokenProps) {
                         <div className="relative">
                             <img alt="No claim"
                                 src={token_background}
-                                height={props.token_width}
-                                width={props.token_width} />
-                            {((overlayImage !== null) && playersWithOverlay.includes(props.index)) ?
+                                height={props.tokenWidth}
+                                width={props.tokenWidth} />
+                            {((overlayImage !== null) &&
+                                playersWithOverlay.includes(props.index)) ?
                                 <img src={overlayImage as string}
-                                    height={props.token_width}
-                                    width={props.token_width}
+                                    height={props.tokenWidth}
+                                    width={props.tokenWidth}
                                     className="absolute top-0 left-0"
                                 /> : <></>}
-                            {(!player_info.alive ?
-                                <img src={shroud}
-                                    height={props.token_width}
-                                    width={props.token_width}
+                            {(player_info.alive ?
+                                <></>
+                                : <img src={shroud}
+                                    height={props.tokenWidth}
+                                    width={props.tokenWidth}
                                     className="absolute top-0 left-0" />
-                                : <></>
                             )}
                         </div>
                         :

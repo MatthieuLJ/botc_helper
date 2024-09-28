@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import PlayerToken from './PlayerToken.tsx';
 import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
-import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, KeyboardSensor, MouseSensor, rectIntersection, TouchSensor, UniqueIdentifier, useSensor, useSensors } from '@dnd-kit/core';
+import { closestCenter, DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, MouseSensor, TouchSensor, UniqueIdentifier, useSensor, useSensors } from '@dnd-kit/core';
 import { movePlayer, rotate_array } from '../state/PlayersSlice.tsx';
-import { SortableContext, SortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, SortingStrategy, useSortable } from '@dnd-kit/sortable';
 
 type TownsquareProps = {
     tapAction: (index: number) => void;
@@ -31,6 +31,36 @@ const arrayRotateSortingStrategy: SortingStrategy = ({
         scaleY: newRect.height / oldRect.height,
     };
 };
+
+type PlayerPlaceholderProps = {
+    index: number,
+    tokenWidth: number;
+};
+
+function PlayerPlaceholder(props : PlayerPlaceholderProps) {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+        id: props.index + 1,
+        data: {
+            index: props.index
+        }
+    });
+    const dragged_style = transform ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        zIndex: '100000',
+        borderRadius: "50%",
+        border: "2px dashed black",
+        height: props.tokenWidth,
+        width: props.tokenWidth,
+        transition
+    } : undefined;
+
+    return <div
+        className="flex h-fit touch-none"
+        key={props.index}
+        ref={setNodeRef} style={dragged_style} {...listeners} {...attributes} >
+    </div>;
+
+}
 
 function Townsquare(props: TownsquareProps) {
     const players = useAppSelector(state => state.players.players);
@@ -114,20 +144,32 @@ function Townsquare(props: TownsquareProps) {
         sensors={sensors}
         onDragStart={onTokenDragStart}
         onDragEnd={onTokenDragEnd}
+        collisionDetection={closestCenter}
     >
         <SortableContext items={players.map((_, i) => i + 1)}
-            strategy={arrayRotateSortingStrategy}>
+            strategy={arrayRotateSortingStrategy} >
             <div className="h-full w-full" ref={circle}>
                 {players.map((_, p_index) =>
+
                     <div key={p_index} className="absolute top-1/2 left-1/2">
-                        <PlayerToken index={p_index}
-                            tapPlayer={() => { props.tapAction(p_index); }}
-                            token_width={tokenWidth}
-                            canDrag={props?.canDrag} />
+                        {dragId == p_index ?
+                            <PlayerPlaceholder index={p_index} tokenWidth={tokenWidth} />
+                            :
+                            <PlayerToken index={p_index}
+                                tapPlayer={() => { props.tapAction(p_index); }}
+                                tokenWidth={tokenWidth}
+                                canDrag={props?.canDrag} />
+                        }
                     </div>)}
             </div>
             {props.children}
         </SortableContext>
+        <DragOverlay>
+            {dragId==-1 ? null : <PlayerToken index={dragId as number}
+                tapPlayer={() => { props.tapAction(dragId as number); }}
+                tokenWidth={tokenWidth}
+                canDrag={false} />}
+        </DragOverlay>
     </DndContext>;
 }
 
