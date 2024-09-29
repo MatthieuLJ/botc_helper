@@ -10,7 +10,7 @@ type TownsquareProps = {
     tapAction: (index: number) => void;
     canDrag?: boolean;
     canRemove?: boolean;
-    children: ReactNode;
+    children?: ReactNode;
 };
 
 const arrayRotateSortingStrategy: SortingStrategy = ({
@@ -171,7 +171,7 @@ function Townsquare(props: TownsquareProps) {
         </div>
         <div className={props?.canRemove && dragId !== -1 ?
             "invisible" : "visible"}>
-            {props.children}
+            {props?.children}
         </div>
 
         <DragOverlay>

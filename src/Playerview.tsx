@@ -76,7 +76,7 @@ function Playerview() {
         dispatch(setClaims({ index: playerIndex, claims: playerClaims }));
     }, [dispatch, playerClaims]);
 
-    return <>
+    return <div className="h-dvh">
         <Joyride steps={joyride_steps}
             showSkipButton
             continuous
@@ -144,7 +144,7 @@ function Playerview() {
                 }} />
         </Dialog>
 
-    </>;
+    </div>;
 }
 
 export default Playerview;
