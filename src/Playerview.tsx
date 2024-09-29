@@ -37,7 +37,7 @@ function Playerview() {
         {
             target: '#player_token',
             content: "This shows the current claim for that player, tap on the" +
-                "token to change them"
+                " token to change them"
         },
         {
             target: '#note_list',

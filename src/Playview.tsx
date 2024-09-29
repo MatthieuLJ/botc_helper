@@ -66,7 +66,7 @@ function Playview() {
         {
             target: '#top_menu',
             content: "This menu will let you reset the game and go back to setup" +
-                "(WARNING: it will reset EVERYTHING)"
+                " (WARNING: it will reset EVERYTHING)"
         },
         {
             target: '.token',
