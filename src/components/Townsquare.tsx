@@ -108,7 +108,13 @@ function Townsquare(props: TownsquareProps) {
             tolerance: 5,
         },
     });
-    const touchSensor = useSensor(TouchSensor);
+    const touchSensor = useSensor(TouchSensor, {
+        // Press delay of 250ms, with tolerance of 5px of movement
+        activationConstraint: {
+            delay: 200,
+            tolerance: 5,
+        },
+    });
     const keyboardSensor = useSensor(KeyboardSensor);
 
     const sensors = useSensors(
@@ -117,7 +123,7 @@ function Townsquare(props: TownsquareProps) {
         keyboardSensor,
     );
 
-    
+
     function onTokenDragStart({ active }: DragStartEvent) {
         setDragId(active.data.current?.index);
     }
@@ -129,7 +135,7 @@ function Townsquare(props: TownsquareProps) {
             return;
 
         if (over.id === 'trash') {
-            dispatch(removePlayer({index: active.data.current?.index}));
+            dispatch(removePlayer({ index: active.data.current?.index }));
             return;
         }
         dispatch(movePlayer({ from: active.data.current?.index, to: over.data.current?.index }));
