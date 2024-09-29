@@ -1,13 +1,15 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import PlayerToken from './PlayerToken.tsx';
 import { useAppDispatch, useAppSelector } from '../state/hooks.ts';
-import { closestCenter, DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, MouseSensor, TouchSensor, UniqueIdentifier, useSensor, useSensors } from '@dnd-kit/core';
-import { movePlayer, rotate_array } from '../state/PlayersSlice.tsx';
+import { closestCenter, DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, MouseSensor, TouchSensor, UniqueIdentifier, useDroppable, useSensor, useSensors } from '@dnd-kit/core';
+import { movePlayer, removePlayer, rotate_array } from '../state/PlayersSlice.tsx';
 import { SortableContext, SortingStrategy, useSortable } from '@dnd-kit/sortable';
+import Trash from './Trash.tsx';
 
 type TownsquareProps = {
     tapAction: (index: number) => void;
     canDrag?: boolean;
+    canRemove?: boolean;
     children: ReactNode;
 };
 
@@ -16,8 +18,8 @@ const arrayRotateSortingStrategy: SortingStrategy = ({
 }) => {
     const indices = Array.from({ length: rects.length }, (_, index) => index);
 
-
     rotate_array(indices, activeIndex, overIndex);
+
     const oldRect = rects[index];
     const newRect = rects[indices.indexOf(index)];
 
@@ -37,7 +39,7 @@ type PlayerPlaceholderProps = {
     tokenWidth: number;
 };
 
-function PlayerPlaceholder(props : PlayerPlaceholderProps) {
+function PlayerPlaceholder(props: PlayerPlaceholderProps) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
         id: props.index + 1,
         data: {
@@ -59,7 +61,6 @@ function PlayerPlaceholder(props : PlayerPlaceholderProps) {
         key={props.index}
         ref={setNodeRef} style={dragged_style} {...listeners} {...attributes} >
     </div>;
-
 }
 
 function Townsquare(props: TownsquareProps) {
@@ -116,22 +117,23 @@ function Townsquare(props: TownsquareProps) {
         keyboardSensor,
     );
 
+    
     function onTokenDragStart({ active }: DragStartEvent) {
         setDragId(active.data.current?.index);
     }
 
     function onTokenDragEnd({ active, over }: DragEndEvent) {
-        if (over)
-            dispatch(movePlayer({ from: active.data.current?.index, to: over.data.current?.index }));
         setDragId(-1);
-    }
 
-    const empty_circle_style = {
-        borderRadius: "50%",
-        border: "2px dashed black",
-        height: tokenWidth,
-        width: tokenWidth
-    };
+        if (!over)
+            return;
+
+        if (over.id === 'trash') {
+            dispatch(removePlayer({index: active.data.current?.index}));
+            return;
+        }
+        dispatch(movePlayer({ from: active.data.current?.index, to: over.data.current?.index }));
+    }
 
     return <DndContext
         sensors={sensors}
@@ -139,7 +141,7 @@ function Townsquare(props: TownsquareProps) {
         onDragEnd={onTokenDragEnd}
         collisionDetection={closestCenter}
     >
-        <SortableContext items={players.map((_, i) => i + 1)}
+        <SortableContext items={players.map((_, i: number) => i + 1)}
             strategy={arrayRotateSortingStrategy} >
             <div className="h-full w-full" ref={circle}>
                 {players.map((_, p_index) =>
@@ -155,15 +157,24 @@ function Townsquare(props: TownsquareProps) {
                         }
                     </div>)}
             </div>
-            {props.children}
         </SortableContext>
+
+        <div className={props?.canRemove && dragId !== -1 ?
+            "visible" : "invisible"}>
+            <Trash />
+        </div>
+        <div className={props?.canRemove && dragId !== -1 ?
+            "invisible" : "visible"}>
+            {props.children}
+        </div>
+
         <DragOverlay>
-            {dragId==-1 ? null : <PlayerToken index={dragId as number}
-                tapPlayer={() => { props.tapAction(dragId as number); }}
+            {dragId == -1 ? null : <PlayerToken index={dragId as number}
+                tapPlayer={() => { }}
                 tokenWidth={tokenWidth}
                 canDrag={false} />}
         </DragOverlay>
-    </DndContext>;
+    </DndContext >;
 }
 
 export default Townsquare;

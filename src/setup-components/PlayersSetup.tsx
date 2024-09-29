@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import Counter from "../components/Counter.tsx";
 import { useAppDispatch, useAppSelector } from "../state/hooks.ts";
-import { setName } from '../state/PlayersSlice.tsx';
+import { addPlayer, setName } from '../state/PlayersSlice.tsx';
 import { Button, Dialog, TextField } from "@mui/material";
 import Townsquare from "../components/Townsquare.tsx";
+import Icon from '@mdi/react';
+import { mdiPlusCircleOutline } from "@mdi/js";
 
 
 
@@ -41,13 +42,17 @@ function PlayersSetup() {
                     setCurrentIndex(index);
                     setNameField(players[index].name);
                 }}
-                    canDrag={true}>
+                    canDrag={true}
+                    canRemove={true}>
+
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <Counter />
+                        <Button onClick={() => { dispatch(addPlayer({})); }} >
+                            <Icon path={mdiPlusCircleOutline} size={2} />
+                        </Button>
                     </div>
                 </Townsquare>
             </div>
-        </div>
+        </div >
         <Dialog open={changingName} onClose={handleClose} disableRestoreFocus>
             <form method="dialog">
                 <p>Set the player's name</p>
@@ -71,7 +76,7 @@ function PlayersSetup() {
                 </Button>
             </form>
         </Dialog>
-    </div>;
+    </div >;
 }
 
 export { PlayersSetup };

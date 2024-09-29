@@ -16,10 +16,24 @@ type PlayerTokenProps = {
 };
 
 function PlayerToken(props: PlayerTokenProps) {
-    const player_info = useAppSelector(state => state.players.players[props.index]);
+    const players = useAppSelector(state => state.players.players);
     const { getRole }: ScriptContextType = useContext(ScriptContext);
     const { hideInformation, playersWithOverlay, overlayImage }: PlayContextType
         = useContext(PlayContext);
+
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+        id: props.canDrag ? props.index + 1 : 0,
+        data: {
+            index: props.index
+        },
+        disabled: !props?.canDrag
+    });
+
+    if (props.index >= players.length) {
+        return <></>;
+    }
+
+    const player_info = players[props.index];
 
     const token_style = {
         background: `url(${token_background})`,
@@ -63,13 +77,7 @@ function PlayerToken(props: PlayerTokenProps) {
         };
     }
 
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-        id: props.canDrag ? props.index + 1 : 0,
-        data: {
-            index: props.index
-        },
-        disabled: !props?.canDrag
-    });
+
     const dragged_style = transform ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
         zIndex: '100000',

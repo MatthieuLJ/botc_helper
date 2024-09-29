@@ -59,18 +59,15 @@ export const PlayersSlice = createSlice({
     name: 'players',
     initialState,
     reducers: {
-        setCount: (state, action) => {
-            const new_count = action.payload.count;
-            while (new_count > state.players.length) {
-                state.players.push({
-                    name: "New Player",
-                    alive: true,
-                    claims: []
-                });
-            }
-            if (new_count < state.players.length) {
-                state.players = state.players.slice(0, new_count);
-            }
+        addPlayer: (state, _) => {
+            state.players.push({
+                name: "New Player",
+                alive: true,
+                claims: []
+            });
+        },
+        removePlayer: (state, action) => {
+            state.players.splice(action.payload.index, 1);
         },
         setName: (state, action) => {
             state.players[action.payload.index].name = action.payload.name;
@@ -95,6 +92,7 @@ export const PlayersSlice = createSlice({
     }
 });
 
-export const { setCount, setName, setClaims, setAlive, resetPlayers, movePlayer } = PlayersSlice.actions;
+export const { addPlayer, removePlayer, setName, setClaims, setAlive,
+    resetPlayers, movePlayer } = PlayersSlice.actions;
 
 export default PlayersSlice.reducer;
