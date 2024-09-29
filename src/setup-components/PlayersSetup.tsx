@@ -7,8 +7,6 @@ import Townsquare from "../components/Townsquare.tsx";
 import Icon from '@mdi/react';
 import { mdiPlusCircleOutline } from "@mdi/js";
 
-
-
 function PlayersSetup() {
     const players = useAppSelector(state => state.players.players);
     const dispatch = useAppDispatch();
@@ -46,7 +44,7 @@ function PlayersSetup() {
                     canRemove={true}>
 
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <Button onClick={() => { dispatch(addPlayer({})); }} >
+                        <Button id="add_player" onClick={() => { dispatch(addPlayer({})); }} >
                             <Icon path={mdiPlusCircleOutline} size={2} />
                         </Button>
                     </div>

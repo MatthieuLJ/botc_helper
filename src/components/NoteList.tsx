@@ -47,7 +47,7 @@ const NoteList: React.FC<NoteListProps> = ({ filter = null }) => {
 
     return <>
         <div className="flex flex-col max-h-full">
-            <div className="flex-none h-fit">
+            <div id="note_buttons" className="flex-none h-fit">
                 <ButtonGroup>
                     <Button onClick={() => {
                         setSelected(-1);

@@ -7,6 +7,8 @@ import NoteList from "./components/NoteList.tsx";
 import { ChipSegment, ChipType } from "./state/NotesSlice.tsx";
 import { Button, Dialog } from "@mui/material";
 import PlayerToken from "./components/PlayerToken.tsx";
+import Joyride, { ACTIONS, CallBackProps, STATUS } from "react-joyride";
+import { setTutorialStage } from "./state/SettingsSlice.tsx";
 
 function Playerview() {
     const params = useParams();
@@ -29,6 +31,29 @@ function Playerview() {
 
     const notes_filter: ChipSegment = [ChipType.Player, playerIndex];
 
+    // For the tutorial
+    const tutorialStage = useAppSelector(state => state.settings.tutorialStage);
+    const joyride_steps = [
+        {
+            target: '#player_token',
+            content: "This shows the current claim for that player, tap on the" +
+                "token to change them"
+        },
+        {
+            target: '#note_list',
+            content: "Those are the notes related to that player"
+        }
+    ];
+
+    const handleJoyrideCallback = (data: CallBackProps) => {
+        const { action, status } = data;
+
+        if ([ACTIONS.CLOSE as string, ACTIONS.STOP, ACTIONS.SKIP].includes(action) ||
+            [STATUS.FINISHED as string, STATUS.SKIPPED].includes(status)) {
+            dispatch(setTutorialStage({ stage: 3 }));
+        }
+    };
+
     // To control the size of the player token
     const central_area = useRef<HTMLDivElement | null>(null);
     const [tokenWidth, setTokenWidth] = useState(0);
@@ -39,7 +64,6 @@ function Playerview() {
             return;
         }
 
-        ;
         setTokenWidth(Math.max(100, space.clientWidth / 3));
     }
 
@@ -53,6 +77,11 @@ function Playerview() {
     }, [dispatch, playerClaims]);
 
     return <>
+        <Joyride steps={joyride_steps}
+            showSkipButton
+            continuous
+            callback={handleJoyrideCallback}
+            run={tutorialStage < 3} />
         <div className="flex flex-col lg:flex-row landscape:flex-row h-dvh  w-screen">
             <div className="flex flex-col w-full h-3/5 lg:h-full landscape:h-full lg:w-3/5 landscape:w-3/5">
                 <div className="flex flex-grow w-full" ref={central_area}>
@@ -64,7 +93,8 @@ function Playerview() {
                         </Button>
                     </div>
                     <div className="basis-3/5 content-center">
-                        <div className="flex w-full place-content-center h-fit">
+                        <div id="player_token"
+                            className="flex w-full place-content-center h-fit">
                             <PlayerToken
                                 index={playerIndex}
                                 tokenWidth={tokenWidth}
@@ -89,7 +119,7 @@ function Playerview() {
                 </div>
             </div>
 
-            <div className="basis-2/5 lg:max-h-screen landscape:max-h-screen">
+            <div id="note_list" className="basis-2/5 lg:max-h-screen landscape:max-h-screen">
                 <NoteList filter={notes_filter} />
             </div>
 

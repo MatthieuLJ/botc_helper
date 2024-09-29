@@ -4,8 +4,9 @@ import playerReducer from './PlayersSlice.tsx';
 import rolesReducer from './RolesSlice.tsx';
 import notesReducer, { catchNoteActions } from './NotesSlice.tsx';
 import timeReducer from './TimeSlice.tsx';
+import settingsReducer from './SettingsSlice.tsx';
 
-const state_version = 1;
+const state_version = 2;
 
 // convert object to string and store in localStorage
 function saveToLocalStorage(state) {
@@ -53,7 +54,8 @@ const combinedReducer = combineReducers({
     players: playerReducer,
     roles: rolesReducer,
     notes: notesReducer,
-    time: timeReducer
+    time: timeReducer,
+    settings: settingsReducer,
 });
 
 function rootReducer(state, action) {
