@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 botc-helper-0.1.0.tgz
 package-lock.json
+
+/.VSCodeCounter
