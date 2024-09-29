@@ -19,13 +19,8 @@ function getTextWidth(text) {
     }
 
     context.font = getComputedStyle(document.body).font;
-    /*
-    console.log(
-        "Computed for " + text + " is " + context.measureText(text).width
-    );
-    */
 
-    return (10 + context.measureText(text).width).toString() + "px";
+    return `${(10 + context.measureText(text).width).toString()}px`;
 }
 
 type NoteInputProps = {
@@ -63,7 +58,7 @@ export default function NoteInput(props: NoteInputProps) {
                 newContent.splice(0, 0, "");
                 changed = true;
             }
-            for (var i = 0; i < newContent.length - 1; i++) {
+            for (let i = 0; i < newContent.length - 1; i++) {
                 if (Array.isArray(newContent[i]) &&
                     Array.isArray(newContent[i + 1])) {
                     // insert an empty string to be able to insert text
@@ -160,15 +155,18 @@ export default function NoteInput(props: NoteInputProps) {
         setContent(newContent);
     }
 
-    function handleKeyDown(index, event) {
+    function handleKeyDown(index: number, event: React.KeyboardEvent<HTMLInputElement>) {
         // Only need to handle if key is backspace or delete while at the start
         // or end of the field
+        const field: HTMLInputElement = event.target as HTMLInputElement;
+        if (!field)
+            return;
         if ((event.key === 'Backspace') &&
-            (event.target.selectionStart === 0) && (index > 0)) {
+            (field.selectionStart === 0) && (index > 0)) {
             deleteChip(index - 1);
             event.preventDefault();
         } else if ((event.key === 'Delete') &&
-            (event.target.selectionStart === content[index].length) &&
+            (field.selectionStart === content[index].length) &&
             (index < content.length)) {
             deleteChip(index + 1);
             event.preventDefault();
@@ -221,8 +219,8 @@ export default function NoteInput(props: NoteInputProps) {
                                 if (e.target.selectionStart != null)
                                     setCursorPosition([index, e.target.selectionStart]);
                             }}
-                            onKeyDown={(e) => {
-                                handleKeyDown(index, e);
+                            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                                handleKeyDown(index, event);
                             }}
                         />
                     );
