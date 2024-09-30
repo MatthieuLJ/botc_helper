@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import TownsquareSetup from './setup-components/TownsquareSetup.tsx';
-import Playview from './Playview.tsx';
 import GameState from './state/GameState.tsx';
-import Playerview from './Playerview.tsx';
 import CheckForSetup from './routing/CheckForSetup.tsx';
 import CheckForPlay from './routing/CheckForPlay.tsx';
 import { Provider } from 'react-redux';
@@ -22,7 +19,10 @@ const top_level_router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <TownsquareSetup />,
+        lazy: async () => {
+          let { TownsquareSetup } = await import("./setup-components/TownsquareSetup.tsx");
+          return { Component: TownsquareSetup };
+        }
       }
     ]
   },
@@ -37,11 +37,17 @@ const top_level_router = createBrowserRouter([
       },
       {
         path: "townsquare",
-        element: <Playview />
+        lazy: async () => {
+          let { Playview } = await import("./Playview.tsx");
+          return { Component: Playview };
+        }
       },
       {
         path: "player/:playerIndex",
-        element: <Playerview />
+        lazy: async () => {
+          let { Playerview } = await import("./Playerview.tsx");
+          return { Component: Playerview };
+        },
       }
     ]
   }
