@@ -70,6 +70,7 @@ export default function TownCenter(props: TownCenterPropsType) {
           horizontal: 'center',
         }}>
         <MenuItem
+          key="time"
           onClick={() => {
             dispatch(advanceTime());
             setActionMenuAnchor(null);
@@ -77,6 +78,7 @@ export default function TownCenter(props: TownCenterPropsType) {
           Move time forward
         </MenuItem>
         <MenuItem
+          key="nomination"
           onClick={() => {
             props.setCurrentState(PlayStates.Nominator);
             props.setOverlayImage(handPointingRight);
@@ -85,6 +87,7 @@ export default function TownCenter(props: TownCenterPropsType) {
           Nomination
         </MenuItem>
         <MenuItem
+          key="vote"
           onClick={() => {
             props.setCurrentState(PlayStates.Vote);
             props.setOverlayImage(handBackRight);
@@ -93,6 +96,7 @@ export default function TownCenter(props: TownCenterPropsType) {
           Vote
         </MenuItem>
         <MenuItem
+          key="lifendeath"
           onClick={() => {
             props.setCurrentState(PlayStates.Life_and_Death);
             props.setOverlayImage(coffin);
