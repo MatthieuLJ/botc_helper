@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
 import GameState from './state/GameState.tsx';
 import CheckForSetup from './routing/CheckForSetup.tsx';
@@ -7,6 +7,9 @@ import { Provider } from 'react-redux';
 import { ScriptProvider } from './state/ScriptContext.tsx';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
+const TownsquareSetup = lazy(() => import('./setup-components/TownsquareSetup.tsx'));
+const Playview = lazy(() => import('./Playview.tsx'));
+const Playerview = lazy(() => import('./Playerview.tsx'));
 
 const top_level_router = createBrowserRouter([
   {
@@ -19,10 +22,10 @@ const top_level_router = createBrowserRouter([
     children: [
       {
         path: "",
-        lazy: async () => {
-          let { TownsquareSetup } = await import("./setup-components/TownsquareSetup.tsx");
-          return { Component: TownsquareSetup };
-        }
+        element:
+          <Suspense fallback={<div>Loading...</div>}>
+            <TownsquareSetup />
+          </Suspense>
       }
     ]
   },
@@ -37,17 +40,17 @@ const top_level_router = createBrowserRouter([
       },
       {
         path: "townsquare",
-        lazy: async () => {
-          let { Playview } = await import("./Playview.tsx");
-          return { Component: Playview };
-        }
+        element:
+          <Suspense fallback={<div>Loading...</div>}>
+            <Playview />
+          </Suspense>
       },
       {
         path: "player/:playerIndex",
-        lazy: async () => {
-          let { Playerview } = await import("./Playerview.tsx");
-          return { Component: Playerview };
-        },
+        element:
+          <Suspense fallback={<div>Loading...</div>}>
+            <Playerview />
+          </Suspense>
       }
     ]
   }
