@@ -5,10 +5,10 @@ import NoteList from './components/NoteList.tsx';
 import { Button, FormControlLabel, FormGroup, Menu, MenuItem, Switch } from '@mui/material';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { addNote, ChipType, NoteSegments } from './state/NotesSlice.tsx';
+import { addNote, ChipType, clearNotes, NoteSegments } from './state/NotesSlice.tsx';
 import { mdiMenu } from '@mdi/js';
 import Icon from "@mdi/react";
-import { PlayerInfo } from './state/PlayersSlice.tsx';
+import { PlayerInfo, resetPlayers } from './state/PlayersSlice.tsx';
 import { PlayContextProvider } from './state/PlayContext.tsx';
 
 import coffin from './img/coffin.png';
@@ -17,6 +17,7 @@ import medicalBag from './img/medical-bag.png';
 import Joyride, { ACTIONS, CallBackProps, Placement, STATUS } from 'react-joyride';
 import { setTutorialStage } from './state/SettingsSlice.tsx';
 import TownCenter from './components/TownCenter.tsx';
+import { clearScript } from './state/RolesSlice.tsx';
 
 export enum PlayStates {
     Default,
@@ -139,7 +140,9 @@ function Playview() {
     }
 
     function handleResetGame() {
-        dispatch({ type: 'reset_game' });
+        dispatch(resetPlayers());
+        dispatch(clearNotes());
+        dispatch(clearScript());
     }
 
     // hiding roles information

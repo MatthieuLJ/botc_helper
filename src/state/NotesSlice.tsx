@@ -101,7 +101,7 @@ export const NotesSlice = createSlice({
             }
         },
         clearNotes: (state) => {
-            state = [];
+            state.splice(0, state.length);
         }
     }
 });
