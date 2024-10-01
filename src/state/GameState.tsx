@@ -6,7 +6,10 @@ import notesReducer, { catchNoteActions } from './NotesSlice.tsx';
 import timeReducer from './TimeSlice.tsx';
 import settingsReducer from './SettingsSlice.tsx';
 
-const state_version = 2;
+const state_version = 3;
+// 1 = base version
+// 2 = added settings section
+// 3 = added tags to notes
 
 // convert object to string and store in localStorage
 function saveToLocalStorage(state) {

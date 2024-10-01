@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { PlayStates } from "../Playview";
 import NoteChip from "./NoteChip";
-import { addNote, ChipType, NoteSegments } from "../state/NotesSlice";
+import { addNote, ChipType, NoteSegments, NoteTagType } from "../state/NotesSlice";
 import { Button, FormControl, FormLabel, Menu, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 import handBackRight from '../img/hand-back-right.png';
@@ -130,7 +130,7 @@ export default function TownCenter(props: TownCenterPropsType) {
             }
           }
         }
-        dispatch(addNote({ note: e }));
+        dispatch(addNote({ note: e, tag: NoteTagType.Vote }));
         props.setPlayerListCache([]);
         props.setOverlayImage(null);
         props.setCurrentState(PlayStates.Default);
@@ -182,7 +182,10 @@ export default function TownCenter(props: TownCenterPropsType) {
                 e.push("came back to life");
               }
 
-              dispatch(addNote({ note: e }));
+              dispatch(addNote({
+                note: e,
+                tag: NoteTagType.LifeDeath
+              }));
               dispatch(setAlive({
                 index: props.playerListCache[0],
                 alive: !players[props.playerListCache[0]].alive

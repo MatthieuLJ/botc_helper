@@ -5,7 +5,7 @@ import NoteList from './components/NoteList.tsx';
 import { Button, FormControlLabel, FormGroup, Menu, MenuItem, Switch } from '@mui/material';
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { addNote, ChipType, clearNotes, NoteSegments } from './state/NotesSlice.tsx';
+import { addNote, ChipType, clearNotes, NoteSegments, NoteTagType } from './state/NotesSlice.tsx';
 import { mdiMenu } from '@mdi/js';
 import Icon from "@mdi/react";
 import { PlayerInfo, resetPlayers } from './state/PlayersSlice.tsx';
@@ -108,7 +108,7 @@ function Playview() {
                     [ChipType.Player, index],
                     ""
                 ];
-                dispatch(addNote({ note: e }));
+                dispatch(addNote({ note: e, tag: NoteTagType.Nomination}));
                 setPlayerListCache([]);
                 setOverlayImage(null);
                 setCurrentState(PlayStates.Default);

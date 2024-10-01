@@ -12,7 +12,16 @@ export type ChipSegment = ([ChipType.Player, number] |
 
 export type NoteSegments = (string | ChipSegment)[];
 
-export type NoteList = { id: number, note: NoteSegments; }[];
+export enum NoteTagType {
+    Nomination,
+    Vote,
+    Time,
+    LifeDeath,
+}
+
+export type NoteTag = NoteTagType | null;
+
+export type NoteList = { id: number, note: NoteSegments; tag: NoteTag }[];
 
 const initialState: NoteList = [];
 
@@ -63,7 +72,7 @@ export function catchNoteActions(state, action) {
                 ...state,
                 notes:
                     [...state.notes,
-                    { id: findNextId(state.notes), note: new_note }
+                    { id: findNextId(state.notes), note: new_note, tag: NoteTagType.Time }
                     ]
             };
             return new_state;
@@ -80,7 +89,8 @@ export const NotesSlice = createSlice({
         addNote: (state, action) => {
             state.push({
                 id: findNextId(state),
-                note: action.payload.note
+                note: action.payload.note,
+                tag: action.payload?.tag
             });
         },
         editNote: (state, action) => {
