@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 const TownsquareSetup = lazy(() => import('./setup-components/TownsquareSetup.tsx'));
 const Playview = lazy(() => import('./Playview.tsx'));
 const Playerview = lazy(() => import('./Playerview.tsx'));
+const Timeline = lazy(() => import('./Timeline.tsx'));
 
 const top_level_router = createBrowserRouter([
   {
@@ -50,6 +51,13 @@ const top_level_router = createBrowserRouter([
         element:
           <Suspense fallback={<div>Loading...</div>}>
             <Playerview />
+          </Suspense>
+      },
+      {
+        path: "timeline",
+        element:
+          <Suspense fallback={<div>Loading...</div>}>
+            <Timeline />
           </Suspense>
       }
     ]

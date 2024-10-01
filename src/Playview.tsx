@@ -6,7 +6,7 @@ import { Button, FormControlLabel, FormGroup, Menu, MenuItem, Switch } from '@mu
 import { useAppDispatch, useAppSelector } from './state/hooks.ts';
 import { useNavigate } from 'react-router-dom';
 import { addNote, ChipType, clearNotes, NoteSegments, NoteTagType } from './state/NotesSlice.tsx';
-import { mdiMenu } from '@mdi/js';
+import { mdiMenu, mdiTimelineQuestionOutline } from '@mdi/js';
 import Icon from "@mdi/react";
 import { PlayerInfo, resetPlayers } from './state/PlayersSlice.tsx';
 import { PlayContextProvider } from './state/PlayContext.tsx';
@@ -108,7 +108,7 @@ function Playview() {
                     [ChipType.Player, index],
                     ""
                 ];
-                dispatch(addNote({ note: e, tag: NoteTagType.Nomination}));
+                dispatch(addNote({ note: e, tag: NoteTagType.Nomination }));
                 setPlayerListCache([]);
                 setOverlayImage(null);
                 setCurrentState(PlayStates.Default);
@@ -181,6 +181,12 @@ function Playview() {
                             value={HideInformation}
                         />
                     </FormGroup>
+                    <div id="timeline" className="absolute bottom-0 left-0">
+                        <Button
+                            onClick={() => navigate("/play/timeline")}>
+                            <Icon path={mdiTimelineQuestionOutline} size={1} />
+                        </Button>
+                    </div>
                 </div>
                 <div id="note_list" className="basis-2/5 overflow-auto lg:max-h-screen landscape:max-h-screen">
                     <NoteList />
@@ -198,6 +204,7 @@ function Playview() {
                         <MenuItem onClick={handleResetGame}>Reset game</MenuItem>
                     </Menu>
                 </div>
+
             </PlayContextProvider >
         </div >
     </div>;
