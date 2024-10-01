@@ -79,6 +79,7 @@ export default function TownCenter(props: TownCenterPropsType) {
         </MenuItem>
         <MenuItem
           key="nomination"
+          disabled={current_time % 2 === 0}
           onClick={() => {
             props.setCurrentState(PlayStates.Nominator);
             props.setOverlayImage(handPointingRight);
@@ -88,6 +89,7 @@ export default function TownCenter(props: TownCenterPropsType) {
         </MenuItem>
         <MenuItem
           key="vote"
+          disabled={current_time % 2 === 0}
           onClick={() => {
             props.setCurrentState(PlayStates.Vote);
             props.setOverlayImage(handBackRight);
