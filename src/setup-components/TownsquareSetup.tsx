@@ -8,6 +8,7 @@ import { advanceTime } from '../state/TimeSlice.tsx';
 import { Button, Dialog } from '@mui/material';
 import Joyride, { ACTIONS, CallBackProps, Placement } from 'react-joyride';
 import { setTutorialStage } from '../state/SettingsSlice.tsx';
+import { addNote, NoteSegments } from '../state/NotesSlice.tsx';
 
 function TownsquareSetup() {
     const roles = useAppSelector(state => state.roles.roles);
@@ -15,6 +16,8 @@ function TownsquareSetup() {
     const [showCharacters, setShowCharacters] = useState(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const num_players = useAppSelector(
+        state => state.players.players.length);
 
     const joyride_steps = [
         {
@@ -48,9 +51,39 @@ function TownsquareSetup() {
         const { action } = data;
 
         if ([ACTIONS.CLOSE as string, ACTIONS.STOP, ACTIONS.SKIP].includes(action)) {
-            dispatch(setTutorialStage({stage: 1}));
+            dispatch(setTutorialStage({ stage: 1 }));
         }
     };
+
+    const player_distribution = [, , , , ,
+        [3, 0, 1, 1],
+        [3, 1, 1, 1],
+        [5, 0, 1, 1],
+        [5, 1, 1, 1],
+        [5, 2, 1, 1],
+        [7, 0, 2, 1],
+        [7, 1, 2, 1],
+        [7, 2, 2, 1],
+        [9, 0, 3, 1],
+        [9, 1, 3, 1],
+        [9, 2, 3, 1]
+    ];
+
+    function addPlayerCountNote(): string | null {
+
+        if ((num_players < 5) || (num_players > 15))
+            return null;
+        const note: string = "This is a " + num_players + " game, base count is " +
+            player_distribution[num_players]?.at(0) + " townsfolks, " +
+            player_distribution[num_players]?.at(1) + " outsider" +
+            ((player_distribution[num_players]?.at(1) ?? 0) > 1 ? "s" : "") + ", " +
+            player_distribution[num_players]?.at(2) + " minion" +
+            ((player_distribution[num_players]?.at(2) ?? 0) > 1 ? "s" : "") + ", and " +
+            player_distribution[num_players]?.at(3) + " demon.";
+
+        console.log(note);
+        return note;
+    }
 
     return <div className="h-dvh">
         <Joyride steps={joyride_steps}
@@ -70,6 +103,11 @@ function TownsquareSetup() {
 
             <p id="go_play">
                 <Button onClick={() => {
+                    const note = addPlayerCountNote();
+                    if (note != null) {
+                        const e: NoteSegments = [note];
+                        dispatch(addNote({ note: e }));
+                    }
                     dispatch(advanceTime());
                     return navigate('/play/townsquare', { replace: true });
                 }}
