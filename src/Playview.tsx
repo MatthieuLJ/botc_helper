@@ -71,6 +71,11 @@ function Playview() {
                 " (WARNING: it will reset EVERYTHING)"
         },
         {
+            target: '#timeline',
+            content: "This button will show you a timeline with only information" +
+                " about nominations, votes, and life/death of players for each day"
+        },
+        {
             target: '.token',
             content: "Those represent players, you can tap on them to see more details"
         }
