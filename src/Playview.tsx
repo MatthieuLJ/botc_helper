@@ -18,6 +18,7 @@ import Joyride, { ACTIONS, CallBackProps, Placement, STATUS } from 'react-joyrid
 import { setTutorialStage } from './state/SettingsSlice.tsx';
 import TownCenter from './components/TownCenter.tsx';
 import { clearScript } from './state/RolesSlice.tsx';
+import { resetTime } from './state/TimeSlice.tsx';
 
 export enum PlayStates {
     Default,
@@ -143,6 +144,7 @@ function Playview() {
         dispatch(resetPlayers());
         dispatch(clearNotes());
         dispatch(clearScript());
+        dispatch(resetTime());
     }
 
     // hiding roles information
